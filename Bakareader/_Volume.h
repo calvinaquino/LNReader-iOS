@@ -7,6 +7,7 @@
 extern const struct VolumeAttributes {
 	__unsafe_unretained NSString *order;
 	__unsafe_unretained NSString *title;
+	__unsafe_unretained NSString *url;
 } VolumeAttributes;
 
 extern const struct VolumeRelationships {
@@ -19,6 +20,7 @@ extern const struct VolumeFetchedProperties {
 
 @class Chapter;
 @class Novel;
+
 
 
 
@@ -60,9 +62,19 @@ extern const struct VolumeFetchedProperties {
 
 
 
-@property (nonatomic, strong) Chapter *chapters;
+@property (nonatomic, strong) NSString* url;
 
-//- (BOOL)validateChapters:(id*)value_ error:(NSError**)error_;
+
+
+//- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSSet *chapters;
+
+- (NSMutableSet*)chaptersSet;
 
 
 
@@ -78,6 +90,11 @@ extern const struct VolumeFetchedProperties {
 @end
 
 @interface _Volume (CoreDataGeneratedAccessors)
+
+- (void)addChapters:(NSSet*)value_;
+- (void)removeChapters:(NSSet*)value_;
+- (void)addChaptersObject:(Chapter*)value_;
+- (void)removeChaptersObject:(Chapter*)value_;
 
 @end
 
@@ -99,9 +116,15 @@ extern const struct VolumeFetchedProperties {
 
 
 
+- (NSString*)primitiveUrl;
+- (void)setPrimitiveUrl:(NSString*)value;
 
-- (Chapter*)primitiveChapters;
-- (void)setPrimitiveChapters:(Chapter*)value;
+
+
+
+
+- (NSMutableSet*)primitiveChapters;
+- (void)setPrimitiveChapters:(NSMutableSet*)value;
 
 
 

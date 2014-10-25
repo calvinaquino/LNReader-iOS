@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Novel, Volume, Chapter;
+
 @interface CoreDataController : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -16,7 +18,15 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (CoreDataController *)sharedInstance;
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
++ (NSManagedObjectContext *)context;
++ (void)saveContext;
+
++ (Novel *)newNovel;
++ (Volume *)newVolume;
++ (Chapter *)newChapter;
+
++ (NSArray *)allNovels;
++ (NSArray *)allVolumesForNovel:(Novel *)novel;
++ (NSArray *)allChaptersForVolume:(Volume *)volume;
 
 @end

@@ -84,7 +84,41 @@
     return _managedObjectContext;
 }
 
++ (NSManagedObjectContext *)context {
+    return [CoreDataController sharedInstance].managedObjectContext;
+}
+
+#pragma mark - Database Manipulation
+
++ (Chapter *)newChapter {
+    return [Chapter insertInManagedObjectContext:[CoreDataController context]];
+}
+
++ (Novel *)newNovel {
+    return [Novel insertInManagedObjectContext:[CoreDataController context]];
+}
+
++ (Volume *)newVolume {
+    return [Volume insertInManagedObjectContext:[CoreDataController context]];
+}
+
++ (NSArray *)allNovels {
+    return nil;
+}
+
++ (NSArray *)allChaptersForVolume:(Volume *)volume {
+    return nil;
+}
+
++ (NSArray *)allVolumesForNovel:(Novel *)novel {
+    return nil;
+}
+
 #pragma mark - Core Data Saving support
+
++ (void)saveContext {
+    [[CoreDataController sharedInstance] saveContext];
+}
 
 - (void)saveContext {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;

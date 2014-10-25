@@ -8,6 +8,7 @@ extern const struct ChapterAttributes {
 	__unsafe_unretained NSString *content;
 	__unsafe_unretained NSString *order;
 	__unsafe_unretained NSString *title;
+	__unsafe_unretained NSString *url;
 } ChapterAttributes;
 
 extern const struct ChapterRelationships {
@@ -18,6 +19,7 @@ extern const struct ChapterFetchedProperties {
 } ChapterFetchedProperties;
 
 @class Volume;
+
 
 
 
@@ -70,6 +72,16 @@ extern const struct ChapterFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* url;
+
+
+
+//- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) Volume *volume;
 
 //- (BOOL)validateVolume:(id*)value_ error:(NSError**)error_;
@@ -104,6 +116,12 @@ extern const struct ChapterFetchedProperties {
 
 - (NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveUrl;
+- (void)setPrimitiveUrl:(NSString*)value;
 
 
 

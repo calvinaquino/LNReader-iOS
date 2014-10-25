@@ -6,6 +6,7 @@
 const struct VolumeAttributes VolumeAttributes = {
 	.order = @"order",
 	.title = @"title",
+	.url = @"url",
 };
 
 const struct VolumeRelationships VolumeRelationships = {
@@ -87,8 +88,24 @@ const struct VolumeFetchedProperties VolumeFetchedProperties = {
 
 
 
+@dynamic url;
+
+
+
+
+
+
 @dynamic chapters;
 
+	
+- (NSMutableSet*)chaptersSet {
+	[self willAccessValueForKey:@"chapters"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"chapters"];
+  
+	[self didAccessValueForKey:@"chapters"];
+	return result;
+}
 	
 
 @dynamic novel;

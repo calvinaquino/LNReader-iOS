@@ -4,12 +4,12 @@
 #import "_Novel.h"
 
 const struct NovelAttributes NovelAttributes = {
-	.btUrlTitle = @"btUrlTitle",
 	.coverImageName = @"coverImageName",
 	.favorite = @"favorite",
 	.lastUpdated = @"lastUpdated",
 	.synopsis = @"synopsis",
 	.title = @"title",
+	.url = @"url",
 };
 
 const struct NovelRelationships NovelRelationships = {
@@ -53,13 +53,6 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic btUrlTitle;
-
-
 
 
 
@@ -118,8 +111,24 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 
 
 
+@dynamic url;
+
+
+
+
+
+
 @dynamic volumes;
 
+	
+- (NSMutableSet*)volumesSet {
+	[self willAccessValueForKey:@"volumes"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"volumes"];
+  
+	[self didAccessValueForKey:@"volumes"];
+	return result;
+}
 	
 
 

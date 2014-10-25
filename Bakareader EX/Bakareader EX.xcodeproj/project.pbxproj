@@ -21,6 +21,15 @@
 		983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079619FC3C0E0056D0A9 /* Chapter.m */; };
 		983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079819FC3C0E0056D0A9 /* Novel.m */; };
 		983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079A19FC3C0E0056D0A9 /* Volume.m */; };
+		983A07AA19FC3EDC0056D0A9 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07A519FC3EDC0056D0A9 /* TFHpple.m */; };
+		983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07A719FC3EDC0056D0A9 /* TFHppleElement.m */; };
+		983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07A919FC3EDC0056D0A9 /* XPathQuery.m */; };
+		983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */; };
+		983A07B219FC3F960056D0A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07B119FC3F960056D0A9 /* Constants.m */; };
+		983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07B519FC40A90056D0A9 /* RXMLElement.m */; };
+		983A07B819FC41BA0056D0A9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A07B719FC41BA0056D0A9 /* libz.dylib */; };
+		983A07BA19FC41C70056D0A9 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A07B919FC41C70056D0A9 /* libxml2.dylib */; };
+		983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +80,22 @@
 		983A079819FC3C0E0056D0A9 /* Novel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Novel.m; path = ../../Bakareader/Novel.m; sourceTree = "<group>"; };
 		983A079919FC3C0E0056D0A9 /* Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Volume.h; path = ../../Bakareader/Volume.h; sourceTree = "<group>"; };
 		983A079A19FC3C0E0056D0A9 /* Volume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Volume.m; path = ../../Bakareader/Volume.m; sourceTree = "<group>"; };
+		983A07A419FC3EDC0056D0A9 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		983A07A519FC3EDC0056D0A9 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		983A07A619FC3EDC0056D0A9 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		983A07A719FC3EDC0056D0A9 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		983A07A819FC3EDC0056D0A9 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		983A07A919FC3EDC0056D0A9 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		983A07AD19FC3F120056D0A9 /* BakaTsukiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaTsukiParser.h; sourceTree = "<group>"; };
+		983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaTsukiParser.m; sourceTree = "<group>"; };
+		983A07B019FC3F960056D0A9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		983A07B119FC3F960056D0A9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		983A07B419FC40A90056D0A9 /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
+		983A07B519FC40A90056D0A9 /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
+		983A07B719FC41BA0056D0A9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		983A07B919FC41C70056D0A9 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		983A07BB19FC42510056D0A9 /* NSString+containsCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+containsCategory.h"; sourceTree = "<group>"; };
+		983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+containsCategory.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983A07BA19FC41C70056D0A9 /* libxml2.dylib in Frameworks */,
+				983A07B819FC41BA0056D0A9 /* libz.dylib in Frameworks */,
 				983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +141,8 @@
 		983A074D19FC2F400056D0A9 /* Bakareader EX */ = {
 			isa = PBXGroup;
 			children = (
+				983A07B019FC3F960056D0A9 /* Constants.h */,
+				983A07B119FC3F960056D0A9 /* Constants.m */,
 				983A075219FC2F400056D0A9 /* AppDelegate.h */,
 				983A075319FC2F400056D0A9 /* AppDelegate.m */,
 				983A077719FC30A50056D0A9 /* ViewControllers */,
@@ -177,6 +206,10 @@
 		983A077E19FC34F60056D0A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				983A07B919FC41C70056D0A9 /* libxml2.dylib */,
+				983A07B719FC41BA0056D0A9 /* libz.dylib */,
+				983A07B319FC40900056D0A9 /* RaptureXML */,
+				983A07A319FC3EAF0056D0A9 /* Hpple */,
 				983A078719FC35410056D0A9 /* PKRevealController */,
 			);
 			name = Frameworks;
@@ -201,6 +234,8 @@
 		983A078A19FC35AC0056D0A9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				983A07BB19FC42510056D0A9 /* NSString+containsCategory.h */,
+				983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */,
 				983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */,
 			);
 			name = Categories;
@@ -236,8 +271,32 @@
 		983A07A219FC3CA00056D0A9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				983A07AD19FC3F120056D0A9 /* BakaTsukiParser.h */,
+				983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		983A07A319FC3EAF0056D0A9 /* Hpple */ = {
+			isa = PBXGroup;
+			children = (
+				983A07A419FC3EDC0056D0A9 /* TFHpple.h */,
+				983A07A519FC3EDC0056D0A9 /* TFHpple.m */,
+				983A07A619FC3EDC0056D0A9 /* TFHppleElement.h */,
+				983A07A719FC3EDC0056D0A9 /* TFHppleElement.m */,
+				983A07A819FC3EDC0056D0A9 /* XPathQuery.h */,
+				983A07A919FC3EDC0056D0A9 /* XPathQuery.m */,
+			);
+			name = Hpple;
+			sourceTree = "<group>";
+		};
+		983A07B319FC40900056D0A9 /* RaptureXML */ = {
+			isa = PBXGroup;
+			children = (
+				983A07B419FC40A90056D0A9 /* RXMLElement.h */,
+				983A07B519FC40A90056D0A9 /* RXMLElement.m */,
+			);
+			name = RaptureXML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,11 +415,18 @@
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
+				983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */,
+				983A07B219FC3F960056D0A9 /* Constants.m in Sources */,
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
+				983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */,
+				983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */,
+				983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
 				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
 				983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */,
 				983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */,
+				983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */,
+				983A07AA19FC3EDC0056D0A9 /* TFHpple.m in Sources */,
 				983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */,
 				983A075A19FC2F400056D0A9 /* ViewController.m in Sources */,
 				983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */,
@@ -470,6 +536,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
@@ -484,6 +555,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";

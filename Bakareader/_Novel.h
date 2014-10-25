@@ -5,12 +5,12 @@
 
 
 extern const struct NovelAttributes {
-	__unsafe_unretained NSString *btUrlTitle;
 	__unsafe_unretained NSString *coverImageName;
 	__unsafe_unretained NSString *favorite;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *synopsis;
 	__unsafe_unretained NSString *title;
+	__unsafe_unretained NSString *url;
 } NovelAttributes;
 
 extern const struct NovelRelationships {
@@ -37,16 +37,6 @@ extern const struct NovelFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (NovelID*)objectID;
-
-
-
-
-
-@property (nonatomic, strong) NSString* btUrlTitle;
-
-
-
-//- (BOOL)validateBtUrlTitle:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -106,9 +96,19 @@ extern const struct NovelFetchedProperties {
 
 
 
-@property (nonatomic, strong) Volume *volumes;
+@property (nonatomic, strong) NSString* url;
 
-//- (BOOL)validateVolumes:(id*)value_ error:(NSError**)error_;
+
+
+//- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSSet *volumes;
+
+- (NSMutableSet*)volumesSet;
 
 
 
@@ -118,15 +118,14 @@ extern const struct NovelFetchedProperties {
 
 @interface _Novel (CoreDataGeneratedAccessors)
 
+- (void)addVolumes:(NSSet*)value_;
+- (void)removeVolumes:(NSSet*)value_;
+- (void)addVolumesObject:(Volume*)value_;
+- (void)removeVolumesObject:(Volume*)value_;
+
 @end
 
 @interface _Novel (CoreDataGeneratedPrimitiveAccessors)
-
-
-- (NSString*)primitiveBtUrlTitle;
-- (void)setPrimitiveBtUrlTitle:(NSString*)value;
-
-
 
 
 - (NSString*)primitiveCoverImageName;
@@ -162,9 +161,15 @@ extern const struct NovelFetchedProperties {
 
 
 
+- (NSString*)primitiveUrl;
+- (void)setPrimitiveUrl:(NSString*)value;
 
-- (Volume*)primitiveVolumes;
-- (void)setPrimitiveVolumes:(Volume*)value;
+
+
+
+
+- (NSMutableSet*)primitiveVolumes;
+- (void)setPrimitiveVolumes:(NSMutableSet*)value;
 
 
 @end

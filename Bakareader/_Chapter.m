@@ -7,6 +7,7 @@ const struct ChapterAttributes ChapterAttributes = {
 	.content = @"content",
 	.order = @"order",
 	.title = @"title",
+	.url = @"url",
 };
 
 const struct ChapterRelationships ChapterRelationships = {
@@ -88,6 +89,13 @@ const struct ChapterFetchedProperties ChapterFetchedProperties = {
 
 
 @dynamic title;
+
+
+
+
+
+
+@dynamic url;
 
 
 

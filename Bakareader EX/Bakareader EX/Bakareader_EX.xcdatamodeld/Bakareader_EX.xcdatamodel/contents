@@ -4,26 +4,28 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="volume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="chapters" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Novel" representedClassName="Novel" syncable="YES">
-        <attribute name="btUrlTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coverImageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="synopsis" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="volumes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="novel" inverseEntity="Volume" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="novel" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="chapters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="volume" inverseEntity="Chapter" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chapter" inverseName="volume" inverseEntity="Chapter" syncable="YES"/>
         <relationship name="novel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Novel" inverseName="volumes" inverseEntity="Novel" syncable="YES"/>
     </entity>
     <elements>
         <element name="Novel" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="Chapter" positionX="-54" positionY="-9" width="128" height="103"/>
-        <element name="Volume" positionX="-36" positionY="9" width="128" height="103"/>
+        <element name="Chapter" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="Volume" positionX="-36" positionY="9" width="128" height="118"/>
     </elements>
 </model>
