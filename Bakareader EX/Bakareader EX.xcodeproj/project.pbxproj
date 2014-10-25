@@ -15,6 +15,12 @@
 		983A076E19FC2F400056D0A9 /* Bakareader_EXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */; };
 		983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A077A19FC30D00056D0A9 /* CoreDataController.m */; };
 		983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A078619FC353C0056D0A9 /* libPKRevealController.a */; };
+		983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079019FC3C0E0056D0A9 /* _Chapter.m */; };
+		983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079219FC3C0E0056D0A9 /* _Novel.m */; };
+		983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079419FC3C0E0056D0A9 /* _Volume.m */; };
+		983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079619FC3C0E0056D0A9 /* Chapter.m */; };
+		983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079819FC3C0E0056D0A9 /* Novel.m */; };
+		983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079A19FC3C0E0056D0A9 /* Volume.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,18 @@
 		983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PKRevealController.xcodeproj; path = ../PKRevealController/Source/PKRevealController.xcodeproj; sourceTree = "<group>"; };
 		983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PKRevealController.h"; path = "../../PKRevealController/Source/PKRevealController/Categories/UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
 		983A078C19FC36070056D0A9 /* PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PKRevealController.h; path = ../../PKRevealController/Source/PKRevealController/PKRevealController.h; sourceTree = "<group>"; };
+		983A078F19FC3C0E0056D0A9 /* _Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Chapter.h; path = ../../Bakareader/_Chapter.h; sourceTree = "<group>"; };
+		983A079019FC3C0E0056D0A9 /* _Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Chapter.m; path = ../../Bakareader/_Chapter.m; sourceTree = "<group>"; };
+		983A079119FC3C0E0056D0A9 /* _Novel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Novel.h; path = ../../Bakareader/_Novel.h; sourceTree = "<group>"; };
+		983A079219FC3C0E0056D0A9 /* _Novel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Novel.m; path = ../../Bakareader/_Novel.m; sourceTree = "<group>"; };
+		983A079319FC3C0E0056D0A9 /* _Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Volume.h; path = ../../Bakareader/_Volume.h; sourceTree = "<group>"; };
+		983A079419FC3C0E0056D0A9 /* _Volume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Volume.m; path = ../../Bakareader/_Volume.m; sourceTree = "<group>"; };
+		983A079519FC3C0E0056D0A9 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chapter.h; path = ../../Bakareader/Chapter.h; sourceTree = "<group>"; };
+		983A079619FC3C0E0056D0A9 /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chapter.m; path = ../../Bakareader/Chapter.m; sourceTree = "<group>"; };
+		983A079719FC3C0E0056D0A9 /* Novel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Novel.h; path = ../../Bakareader/Novel.h; sourceTree = "<group>"; };
+		983A079819FC3C0E0056D0A9 /* Novel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Novel.m; path = ../../Bakareader/Novel.m; sourceTree = "<group>"; };
+		983A079919FC3C0E0056D0A9 /* Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Volume.h; path = ../../Bakareader/Volume.h; sourceTree = "<group>"; };
+		983A079A19FC3C0E0056D0A9 /* Volume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Volume.m; path = ../../Bakareader/Volume.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +119,7 @@
 				983A077719FC30A50056D0A9 /* ViewControllers */,
 				983A077819FC30AC0056D0A9 /* CoreData */,
 				983A078A19FC35AC0056D0A9 /* Categories */,
-				983A075E19FC2F400056D0A9 /* Images.xcassets */,
+				983A07A219FC3CA00056D0A9 /* Utils */,
 				983A074E19FC2F400056D0A9 /* Supporting Files */,
 			);
 			path = "Bakareader EX";
@@ -110,6 +128,7 @@
 		983A074E19FC2F400056D0A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				983A075E19FC2F400056D0A9 /* Images.xcassets */,
 				983A074F19FC2F400056D0A9 /* Info.plist */,
 				983A075019FC2F400056D0A9 /* main.m */,
 				983A077C19FC32A70056D0A9 /* PrefixHeader.pch */,
@@ -147,19 +166,12 @@
 		983A077819FC30AC0056D0A9 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				983A077D19FC34D90056D0A9 /* DataModel */,
+				983A078E19FC3BE30056D0A9 /* Model */,
 				983A077919FC30D00056D0A9 /* CoreDataController.h */,
 				983A077A19FC30D00056D0A9 /* CoreDataController.m */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
-		983A077D19FC34D90056D0A9 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
 				983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */,
 			);
-			name = DataModel;
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		983A077E19FC34F60056D0A9 /* Frameworks */ = {
@@ -192,6 +204,40 @@
 				983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		983A078E19FC3BE30056D0A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				983A07A119FC3C110056D0A9 /* Entities */,
+				983A079519FC3C0E0056D0A9 /* Chapter.h */,
+				983A079619FC3C0E0056D0A9 /* Chapter.m */,
+				983A079719FC3C0E0056D0A9 /* Novel.h */,
+				983A079819FC3C0E0056D0A9 /* Novel.m */,
+				983A079919FC3C0E0056D0A9 /* Volume.h */,
+				983A079A19FC3C0E0056D0A9 /* Volume.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		983A07A119FC3C110056D0A9 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				983A078F19FC3C0E0056D0A9 /* _Chapter.h */,
+				983A079019FC3C0E0056D0A9 /* _Chapter.m */,
+				983A079119FC3C0E0056D0A9 /* _Novel.h */,
+				983A079219FC3C0E0056D0A9 /* _Novel.m */,
+				983A079319FC3C0E0056D0A9 /* _Volume.h */,
+				983A079419FC3C0E0056D0A9 /* _Volume.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		983A07A219FC3CA00056D0A9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,9 +355,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
+				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
+				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
+				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
+				983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */,
+				983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */,
 				983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */,
 				983A075A19FC2F400056D0A9 /* ViewController.m in Sources */,
+				983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */,
 				983A075119FC2F400056D0A9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
