@@ -14,6 +14,7 @@
 		983A075F19FC2F400056D0A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983A075E19FC2F400056D0A9 /* Images.xcassets */; };
 		983A076E19FC2F400056D0A9 /* Bakareader_EXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */; };
 		983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A077A19FC30D00056D0A9 /* CoreDataController.m */; };
+		983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A078619FC353C0056D0A9 /* libPKRevealController.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +24,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 983A074A19FC2F400056D0A9;
 			remoteInfo = "Bakareader EX";
+		};
+		983A078519FC353C0056D0A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F9621E7B1815246000469E41;
+			remoteInfo = PKRevealController;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -42,6 +50,9 @@
 		983A077919FC30D00056D0A9 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		983A077A19FC30D00056D0A9 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		983A077C19FC32A70056D0A9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PKRevealController.xcodeproj; path = ../PKRevealController/Source/PKRevealController.xcodeproj; sourceTree = "<group>"; };
+		983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PKRevealController.h"; path = "../../PKRevealController/Source/PKRevealController/Categories/UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
+		983A078C19FC36070056D0A9 /* PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PKRevealController.h; path = ../../PKRevealController/Source/PKRevealController/PKRevealController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +80,7 @@
 				983A074D19FC2F400056D0A9 /* Bakareader EX */,
 				983A076A19FC2F400056D0A9 /* Bakareader EXTests */,
 				983A074C19FC2F400056D0A9 /* Products */,
+				983A077E19FC34F60056D0A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,12 +96,12 @@
 		983A074D19FC2F400056D0A9 /* Bakareader EX */ = {
 			isa = PBXGroup;
 			children = (
-				983A077819FC30AC0056D0A9 /* CoreData */,
 				983A075219FC2F400056D0A9 /* AppDelegate.h */,
 				983A075319FC2F400056D0A9 /* AppDelegate.m */,
 				983A077719FC30A50056D0A9 /* ViewControllers */,
+				983A077819FC30AC0056D0A9 /* CoreData */,
+				983A078A19FC35AC0056D0A9 /* Categories */,
 				983A075E19FC2F400056D0A9 /* Images.xcassets */,
-				983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */,
 				983A074E19FC2F400056D0A9 /* Supporting Files */,
 			);
 			path = "Bakareader EX";
@@ -124,6 +137,7 @@
 		983A077719FC30A50056D0A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				983A078C19FC36070056D0A9 /* PKRevealController.h */,
 				983A075819FC2F400056D0A9 /* ViewController.h */,
 				983A075919FC2F400056D0A9 /* ViewController.m */,
 			);
@@ -133,10 +147,51 @@
 		983A077819FC30AC0056D0A9 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				983A077D19FC34D90056D0A9 /* DataModel */,
 				983A077919FC30D00056D0A9 /* CoreDataController.h */,
 				983A077A19FC30D00056D0A9 /* CoreDataController.m */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		983A077D19FC34D90056D0A9 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		983A077E19FC34F60056D0A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				983A078719FC35410056D0A9 /* PKRevealController */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		983A078119FC353B0056D0A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				983A078619FC353C0056D0A9 /* libPKRevealController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		983A078719FC35410056D0A9 /* PKRevealController */ = {
+			isa = PBXGroup;
+			children = (
+				983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */,
+			);
+			name = PKRevealController;
+			sourceTree = "<group>";
+		};
+		983A078A19FC35AC0056D0A9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +261,12 @@
 			mainGroup = 983A074219FC2F400056D0A9;
 			productRefGroup = 983A074C19FC2F400056D0A9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 983A078119FC353B0056D0A9 /* Products */;
+					ProjectRef = 983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				983A074A19FC2F400056D0A9 /* Bakareader EX */,
@@ -213,6 +274,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		983A078619FC353C0056D0A9 /* libPKRevealController.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPKRevealController.a;
+			remoteRef = 983A078519FC353C0056D0A9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		983A074919FC2F400056D0A9 /* Resources */ = {
@@ -349,6 +420,7 @@
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -362,6 +434,7 @@
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

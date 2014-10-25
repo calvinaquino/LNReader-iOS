@@ -10,5 +10,6 @@
 #define Bakareader_EX_PrefixHeader_pch
 
 #import "CoreDataController.h"
+#import "PKRevealController.h"
 
 #endif

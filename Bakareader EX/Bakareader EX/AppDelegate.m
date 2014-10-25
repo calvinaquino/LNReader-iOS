@@ -22,8 +22,16 @@
 //    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    ViewController *viewController = [[ViewController alloc] init];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    ViewController *leftViewController = [[ViewController alloc] init];
+    ViewController *frontViewController = [[ViewController alloc] init];
+    ViewController *rightViewController = [[ViewController alloc] init];
+    
+    PKRevealController *revealController = [PKRevealController revealControllerWithFrontViewController:[[UINavigationController alloc] initWithRootViewController:frontViewController]
+                                                                                    leftViewController:[[UINavigationController alloc] initWithRootViewController:leftViewController]
+                                                                                   rightViewController:[[UINavigationController alloc] initWithRootViewController:rightViewController]];
+    
+    self.window.rootViewController = revealController;
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -1,0 +1,3 @@
+[submodule "PKRevealController"]
+	path = PKRevealController
+	url = https://github.com/pkluz/PKRevealController.git
