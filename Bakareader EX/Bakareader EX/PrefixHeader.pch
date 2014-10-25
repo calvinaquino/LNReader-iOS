@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  Bakareader EX
+//
+//  Created by Calvin Gonçalves de Aquino on 10/25/14.
+//  Copyright (c) 2014 Erakk. All rights reserved.
+//
+
+#ifndef Bakareader_EX_PrefixHeader_pch
+#define Bakareader_EX_PrefixHeader_pch
+
+#import "CoreDataController.h"
+
+#endif
