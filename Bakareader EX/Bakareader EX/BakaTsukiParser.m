@@ -15,12 +15,12 @@
 //static NSString *const kXPATHNovelCover = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']/div/div/a[@class='image']/img";
 //static NSString *const kXPATHNovelSynopsis = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
 //static NSString *const kXPATHNovelVolumes = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
-
-static NSString *const kXPATHMainNovelList = @"//*[@id='mw-pages']/div/table/tr/td/ul/li";
-static NSString *const kXPATHNovelContent = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
-static NSString *const kXPATHNovelCover = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']/div/div/a[@class='image']";
-static NSString *const kXPATHNovelSynopsis = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
-static NSString *const kXPATHNovelVolumes = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
+//
+//static NSString *const kXPATHMainNovelList = @"//*[@id='mw-pages']/div/table/tr/td/ul/li";
+//static NSString *const kXPATHNovelContent = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
+//static NSString *const kXPATHNovelCover = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']/div/div/a[@class='image']";
+//static NSString *const kXPATHNovelSynopsis = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
+//static NSString *const kXPATHNovelVolumes = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
 
 //static NSString* const kNoChapterNameError = @"NO_CHAPTER_NAME_FOUND";
 

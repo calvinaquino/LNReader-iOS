@@ -10,7 +10,7 @@
 		983A075119FC2F400056D0A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075019FC2F400056D0A9 /* main.m */; };
 		983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075319FC2F400056D0A9 /* AppDelegate.m */; };
 		983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */; };
-		983A075A19FC2F400056D0A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075919FC2F400056D0A9 /* ViewController.m */; };
+		983A075A19FC2F400056D0A9 /* NovelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075919FC2F400056D0A9 /* NovelsTableViewController.m */; };
 		983A075F19FC2F400056D0A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983A075E19FC2F400056D0A9 /* Images.xcassets */; };
 		983A076E19FC2F400056D0A9 /* Bakareader_EXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */; };
 		983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A077A19FC30D00056D0A9 /* CoreDataController.m */; };
@@ -25,11 +25,11 @@
 		983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07A719FC3EDC0056D0A9 /* TFHppleElement.m */; };
 		983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07A919FC3EDC0056D0A9 /* XPathQuery.m */; };
 		983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */; };
-		983A07B219FC3F960056D0A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07B119FC3F960056D0A9 /* Constants.m */; };
 		983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07B519FC40A90056D0A9 /* RXMLElement.m */; };
 		983A07B819FC41BA0056D0A9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A07B719FC41BA0056D0A9 /* libz.dylib */; };
 		983A07BA19FC41C70056D0A9 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A07B919FC41C70056D0A9 /* libxml2.dylib */; };
 		983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */; };
+		983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C119FC92A00056D0A9 /* MenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +56,8 @@
 		983A075219FC2F400056D0A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		983A075319FC2F400056D0A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		983A075619FC2F400056D0A9 /* Bakareader_EX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bakareader_EX.xcdatamodel; sourceTree = "<group>"; };
-		983A075819FC2F400056D0A9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		983A075919FC2F400056D0A9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		983A075819FC2F400056D0A9 /* NovelsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovelsTableViewController.h; sourceTree = "<group>"; };
+		983A075919FC2F400056D0A9 /* NovelsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovelsTableViewController.m; sourceTree = "<group>"; };
 		983A075E19FC2F400056D0A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		983A076719FC2F400056D0A9 /* Bakareader EXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bakareader EXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		983A076C19FC2F400056D0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,13 +89,14 @@
 		983A07AD19FC3F120056D0A9 /* BakaTsukiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaTsukiParser.h; sourceTree = "<group>"; };
 		983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaTsukiParser.m; sourceTree = "<group>"; };
 		983A07B019FC3F960056D0A9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		983A07B119FC3F960056D0A9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		983A07B419FC40A90056D0A9 /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
 		983A07B519FC40A90056D0A9 /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
 		983A07B719FC41BA0056D0A9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		983A07B919FC41C70056D0A9 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		983A07BB19FC42510056D0A9 /* NSString+containsCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+containsCategory.h"; sourceTree = "<group>"; };
 		983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+containsCategory.m"; sourceTree = "<group>"; };
+		983A07C019FC92A00056D0A9 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		983A07C119FC92A00056D0A9 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				983A07B019FC3F960056D0A9 /* Constants.h */,
-				983A07B119FC3F960056D0A9 /* Constants.m */,
 				983A075219FC2F400056D0A9 /* AppDelegate.h */,
 				983A075319FC2F400056D0A9 /* AppDelegate.m */,
 				983A077719FC30A50056D0A9 /* ViewControllers */,
@@ -186,8 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				983A078C19FC36070056D0A9 /* PKRevealController.h */,
-				983A075819FC2F400056D0A9 /* ViewController.h */,
-				983A075919FC2F400056D0A9 /* ViewController.m */,
+				983A075819FC2F400056D0A9 /* NovelsTableViewController.h */,
+				983A075919FC2F400056D0A9 /* NovelsTableViewController.m */,
+				983A07C019FC92A00056D0A9 /* MenuViewController.h */,
+				983A07C119FC92A00056D0A9 /* MenuViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -416,7 +418,7 @@
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
 				983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */,
-				983A07B219FC3F960056D0A9 /* Constants.m in Sources */,
+				983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */,
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
 				983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */,
 				983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */,
@@ -428,7 +430,7 @@
 				983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */,
 				983A07AA19FC3EDC0056D0A9 /* TFHpple.m in Sources */,
 				983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */,
-				983A075A19FC2F400056D0A9 /* ViewController.m in Sources */,
+				983A075A19FC2F400056D0A9 /* NovelsTableViewController.m in Sources */,
 				983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */,
 				983A075119FC2F400056D0A9 /* main.m in Sources */,
 			);
@@ -620,6 +622,7 @@
 				983A077319FC2F400056D0A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		983A077419FC2F400056D0A9 /* Build configuration list for PBXNativeTarget "Bakareader EXTests" */ = {
 			isa = XCConfigurationList;
@@ -628,6 +631,7 @@
 				983A077619FC2F400056D0A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

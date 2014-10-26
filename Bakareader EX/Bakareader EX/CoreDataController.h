@@ -29,4 +29,6 @@
 + (NSArray *)allVolumesForNovel:(Novel *)novel;
 + (NSArray *)allChaptersForVolume:(Volume *)volume;
 
++ (NSUInteger)countAllNovels;
+
 @end

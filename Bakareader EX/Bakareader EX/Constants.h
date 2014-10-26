@@ -1,53 +1,30 @@
 //
-//  Constants.h
-//  LNReader
+//  AppDelegate.h
+//  Bakareader EX
 //
-//  Created by Commix Company on 7/17/13.
-//  Copyright (c) 2013 CommixWeb. All rights reserved.
+//  Created by Calvin Gonçalves de Aquino on 10/25/14.
+//  Copyright (c) 2014 Erakk. All rights reserved.
 //
 
 #ifndef LNReader_Constants_h
 #define LNReader_Constants_h
 
-//URLs
-#define kBTBaseUrl @"http://www.baka-tsuki.org"
-//#define kBTMainUrl @"http://www.baka-tsuki.org/project/index.php?title=Main_Page"
-#define kBTMainUrlEnglish @"http://www.baka-tsuki.org/project/index.php?action=render&title=Category:Light_novel_(English)"
-
-//get Queues
-#define GCDBackgroundThread dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-#define GCDMainThread dispatch_get_main_queue()
-
-#define startUIThread dispatch_async(GCDMainThread, ^{
-#define startBGThread dispatch_async(GCDBackgroundThread, ^{
-#define endThread });
-
-//storyboards
-#define kStoryboardIPhone @"MainStoryboard_iPhone"
-#define kStoryboardIPad @"MainStoryboard_iPad"
-
-//view controller strings
-#define kViewControllerMain @"Main"
-#define kViewControllerMenu @"Menu"
-
-//view controller integers
-enum viewControllers {
-    kViewMain,
-    kViewMenu
-};
-
 //other
-#define kKeyboardSize 216
+static CGFloat const kKeyboardSize = 216;
 
 //Errors
+static NSString *const kNoChapterNameError = @"NO_CHAPTER_NAME_FOUND";
 
-#define kNoChapterNameError @"NO_CHAPTER_NAME_FOUND"
-/* URLs */
-FOUNDATION_EXPORT NSString* const kBakaTsukiBaseUrl;
-FOUNDATION_EXPORT NSString* const kBakaTsukiMainPageUrl;
+//URLs
+static NSString *const kBTBaseUrl = @"http://www.baka-tsuki.org";
+static NSString *const kBakaTsukiBaseUrl = @"http://www.baka-tsuki.org";
+static NSString *const kBakaTsukiMainPageUrl = @"http://www.baka-tsuki.org/project/index.php?title=Main_Page";
+static NSString *const kBakaTsukiMainUrlEnglish = @"http://www.baka-tsuki.org/project/index.php?action=render&title=Category:Light_novel_(English)";
 
-/* GCD */
-#define GCDGlobalQueueDEFAULT dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-#define GCDMainQueue dispatch_get_main_queue()
+static NSString *const kXPATHMainNovelList = @"//*[@id='mw-pages']/div/table/tr/td/ul/li";
+static NSString *const kXPATHNovelContent = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
+static NSString *const kXPATHNovelCover = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']/div/div/a[@class='image']";
+static NSString *const kXPATHNovelSynopsis = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
+static NSString *const kXPATHNovelVolumes = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
 
 #endif

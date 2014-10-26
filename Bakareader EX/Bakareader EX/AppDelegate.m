@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "NovelsTableViewController.h"
+#import "MenuViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,13 +24,11 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ViewController *leftViewController = [[ViewController alloc] init];
-    ViewController *frontViewController = [[ViewController alloc] init];
-    ViewController *rightViewController = [[ViewController alloc] init];
+    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+    NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] init];
     
-    PKRevealController *revealController = [PKRevealController revealControllerWithFrontViewController:[[UINavigationController alloc] initWithRootViewController:frontViewController]
-                                                                                    leftViewController:[[UINavigationController alloc] initWithRootViewController:leftViewController]
-                                                                                   rightViewController:[[UINavigationController alloc] initWithRootViewController:rightViewController]];
+    PKRevealController *revealController = [PKRevealController revealControllerWithFrontViewController:[[UINavigationController alloc] initWithRootViewController:novelsTableViewController]
+                                                                                    leftViewController:[[UINavigationController alloc] initWithRootViewController:menuViewController]];
     
     self.window.rootViewController = revealController;
     [self.window makeKeyAndVisible];
@@ -50,7 +49,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[CoreDataController sharedInstance] saveContext];
+    [CoreDataController saveContext];
 }
 
 @end
