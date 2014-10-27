@@ -10,6 +10,7 @@
     <entity name="Novel" representedClassName="Novel" syncable="YES">
         <attribute name="coverImageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fetched" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="synopsis" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,8 +25,8 @@
         <relationship name="novel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Novel" inverseName="volumes" inverseEntity="Novel" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Novel" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Chapter" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="Novel" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="Volume" positionX="-36" positionY="9" width="128" height="118"/>
     </elements>
 </model>

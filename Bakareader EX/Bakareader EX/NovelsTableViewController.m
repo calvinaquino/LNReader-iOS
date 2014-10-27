@@ -7,8 +7,9 @@
 //
 
 #import "NovelsTableViewController.h"
+#import "NovelDetailViewController.h"
 
-#import "RXMLElement.h"
+#import "BakaTsukiParser.h"
 
 @interface NovelsTableViewController ()
 
@@ -63,17 +64,7 @@
 
 - (void)loadListFromInternet {
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        NSData *btHtmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:kBakaTsukiMainUrlEnglish]];
-        
-        RXMLElement *element = [RXMLElement elementFromHTMLData:btHtmlData];
-        NSArray *btNodes = [element childrenWithRootXPath:kXPATHMainNovelList];
-        
-        for (RXMLElement *element in btNodes) {
-            Novel *novelData = [CoreDataController newNovel];
-            novelData.title = [[element child:@"a"] text];
-            novelData.url = [[NSURL URLWithString:[[element child:@"a"] attribute:@"href"] relativeToURL:[NSURL URLWithString:kBTBaseUrl]] absoluteString];
-            [CoreDataController saveContext];
-        }
+        [BakaTsukiParser fetchNovelList];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self loadListFromDatabase];
         }];
@@ -92,7 +83,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"selected row %i", indexPath.row);
+    Novel *novel = self.novels[indexPath.row];
+    NSLog(@"selected novel.title %@", novel.title);
+    NSLog(@"selected novel.url %@", novel.url);
+    
+    NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
+    [self.navigationController pushViewController:novelDetailViewController animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

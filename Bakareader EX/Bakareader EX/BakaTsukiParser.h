@@ -11,11 +11,8 @@
 @interface BakaTsukiParser : NSObject
 
 //@property (retain) id<BTParserDelegate> delegate;
-+(NSArray*)novelListWithHTMLData:(NSData*)htmlData;
-+(NSURL*)novelCoverURLWithHTMLData:(NSData*)htmlData;
-+(NSURL*)novelCoverURLWithXMLData:(NSData*)xmlData;
-+(NSString*)parseNovelSynopsisWithData:(NSData*)novelData;
-+(NSArray*)parseNovelVolumesWithData:(NSData*)novelData;
-+(NSArray*)parseChapterContentWithData:(NSData*)chapterContent;
++ (void)fetchNovelList;
++ (void)fetchNovelInfo:(Novel *)novel;
+
 
 @end

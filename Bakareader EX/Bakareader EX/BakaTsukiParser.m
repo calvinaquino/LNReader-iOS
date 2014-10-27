@@ -42,25 +42,18 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
 
 @implementation BakaTsukiParser
 
-+ (NSArray*)novelListWithHTMLData:(NSData*)htmlData {
-    NSMutableArray *novelsArray = nil;
-    RXMLElement *element = [RXMLElement elementFromHTMLData:htmlData];
-
-    if ([element isValid]) {
-        novelsArray = [[NSMutableArray alloc] init];
-        for (RXMLElement *node in [element childrenWithRootXPath:kXPATHMainNovelList]) {
-            Novel *novelData = [CoreDataController newNovel];
-            RXMLElement *subNode = [node child:@"a"];
-            novelData.title = subNode.text;
-            novelData.url = [[NSURL URLWithString:[subNode attribute:@"href"] relativeToURL:[NSURL URLWithString:kBakaTsukiBaseUrl]] absoluteString];
-
-            [novelsArray addObject:novelData];
-        }
-    } else {
-        NSLog(@"Invalid data - parsing failed");
++ (void)fetchNovelList {
+    NSData *btHtmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:kBakaTsukiMainUrlEnglish]];
+    
+    RXMLElement *element = [RXMLElement elementFromHTMLData:btHtmlData];
+    NSArray *btNodes = [element childrenWithRootXPath:kXPATHMainNovelList];
+    
+    for (RXMLElement *element in btNodes) {
+        Novel *novelData = [CoreDataController newNovel];
+        novelData.title = [[element child:@"a"] text];
+        novelData.url = [[NSURL URLWithString:[[element child:@"a"] attribute:@"href"] relativeToURL:[NSURL URLWithString:kBTBaseUrl]] absoluteString];
+        [CoreDataController saveContext];
     }
-
-    return [novelsArray copy];
 }
 
 + (NSURL*)novelCoverURLWithHTMLData:(NSData*)novelData {
@@ -71,8 +64,14 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     return novelcoverURLFromElement([RXMLElement elementFromXMLData:novelData]);
 }
 
++ (void)fetchNovelInfo:(Novel *)novel {
+    NSData *novelData = [NSData dataWithContentsOfURL:[NSURL URLWithString:novel.url]];
+    [BakaTsukiParser parseNovelSynopsisWithData:novelData forNovel:novel];
+    [BakaTsukiParser parseNovelVolumesWithData:novelData forNovel:novel];
+}
 
-+ (NSString*)parseNovelSynopsisWithData:(NSData*)novelData {
+
++ (void)parseNovelSynopsisWithData:(NSData*)novelData forNovel:(Novel*)novel {
     RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
     
     __block BOOL parseSynopsis = NO; //this decides if should parse the <p>
@@ -104,11 +103,11 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
         }
     }];
 //    NSLog(@"%@",synopsis);
-    return synopsis;
+    novel.synopsis = synopsis;
 }
 
 
-+ (NSArray*)parseNovelVolumesWithData:(NSData*)novelData {
++ (void)parseNovelVolumesWithData:(NSData*)novelData forNovel:(Novel *)novel {
     //read data
     RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
     //get name
@@ -121,62 +120,63 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     //alloc resources
     __block NSMutableArray *volumes = [[NSMutableArray alloc] init]; //our volumes
     __block NSMutableArray *chapters = [[NSMutableArray alloc] init]; //our chapters
-    __block Volume *bufferVolume;
+    __block Volume *currentVolume;
     
     //iterate data
     [novelXMLRoot iterateWithRootXPath:@"//*/a" usingBlock:^(RXMLElement *element) {
-        //            NSLog(@"found volumes for rule //*/a");
         for (NSString *attributeName in element.attributeNames) {
-
+            
             NSString *content = [element attribute:attributeName];
             if ([content containsString:@"/project/index.php?title="]) {
                 //checks names by separating words.
                 if ([self checkForNames:[self getArrayOfPossibleNamesFor:novelNameSimple] inString:content]) {
-
+                    
                     //Must not contain
                     if ([self checkStringForUndesiredContent:content]) {
                         break;
                     }
                     //contains
                     if ([self checkStringForDesiredContent:content]) {
-
+                        
+                        //get dict with info names
+                        NSDictionary *currentInfo = [self getVolumeAndChapterWithURL:content];
+                        if (!currentInfo) {
+                            break;
+                        } //empty name, no data, quit this iteration
+                        
                         //alloc data for use
                         Volume *volume = [CoreDataController newVolume];
                         Chapter *chapter = [CoreDataController newChapter];
-
-                        //get dict with info names
-                        NSDictionary *currObject = [self getVolumeAndChapterWithURL:content];
-                        if (!currObject)break; //empty name, no data, quit this iteration
-
+                        
                         //set the names
-                        volume.title = currObject[@"volume"];
-                        chapter.title = currObject[@"chapter"];
-                        chapter.volume = currObject[@"volume"];
-
+                        volume.title = currentInfo[@"volume"];
+                        chapter.title = currentInfo[@"chapter"];
+                        chapter.volume = volume;
+                        
                         chapter.url = [[NSURL URLWithString:content relativeToURL:[NSURL URLWithString:kBakaTsukiBaseUrl]] absoluteString];
                         //                        NSLog(@"link %@",chapterUrl);
-
+                        
                         if ([chapter.title isEqualToString:kNoChapterNameError]) {
-                            [chapter setTitle:@"Chapter"];
+                            chapter.title = @"Chapter";
                         }
-
+                        
                         //organize (badly)
-                        if ([volume.title isEqualToString:bufferVolume.title]) {
+                        if ([volume.title isEqualToString:currentVolume.title]) {
                             //still on the same volume, add more chapters
-                            [chapters addObject:chapter];
+                            [volume addChaptersObject:chapter];
                         } else {
                             //volume changed OR first volume, add volume
-                            if (bufferVolume) {
+                            if (currentVolume) {
                                 //if buffer was allocated before, then add it
                                 if (chapters.count > 0) {
                                     //if there are volumes, add them
-                                    [bufferVolume setChapters:[NSSet setWithArray:chapters]];
+                                    [currentVolume setChapters:[NSSet setWithArray:chapters]];
                                 }
-                                [volumes addObject:bufferVolume];
+                                [volumes addObject:currentVolume];
                             }
-                            bufferVolume = [[Volume alloc] init];
+                            currentVolume = [CoreDataController newVolume];
                             chapters = [[NSMutableArray alloc] init];
-                            [bufferVolume setTitle:volume.title];
+                            [currentVolume setTitle:volume.title];
                             [chapters addObject:chapter];
                         }
                     }
@@ -185,17 +185,19 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
         }
     }];
     //Add last volume
-    if (bufferVolume) {
+    if (currentVolume) {
         //if buffer was allocated before, then add it
         if (chapters.count > 0) {
             //if there are volumes, add them
-            [bufferVolume setChapters:[NSSet setWithArray:chapters]];
+            [currentVolume addChapters:[NSSet setWithArray:chapters]];
         }
-        [volumes addObject:bufferVolume];
+        [volumes addObject:currentVolume];
     }
     
-//    DLog(@"%@",volumes);
-    return volumes;
+    NSLog(@"%@",volumes);
+    [novel setVolumes:[NSSet setWithArray:volumes]];
+    novel.fetchedValue = YES;
+    [CoreDataController saveContext];
 }
 
 + (NSArray*)parseChapterContentWithData:(NSData*)chapterContent {

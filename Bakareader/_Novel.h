@@ -7,6 +7,7 @@
 extern const struct NovelAttributes {
 	__unsafe_unretained NSString *coverImageName;
 	__unsafe_unretained NSString *favorite;
+	__unsafe_unretained NSString *fetched;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *synopsis;
 	__unsafe_unretained NSString *title;
@@ -21,6 +22,7 @@ extern const struct NovelFetchedProperties {
 } NovelFetchedProperties;
 
 @class Volume;
+
 
 
 
@@ -61,6 +63,20 @@ extern const struct NovelFetchedProperties {
 - (void)setFavoriteValue:(BOOL)value_;
 
 //- (BOOL)validateFavorite:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* fetched;
+
+
+
+@property BOOL fetchedValue;
+- (BOOL)fetchedValue;
+- (void)setFetchedValue:(BOOL)value_;
+
+//- (BOOL)validateFetched:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -139,6 +155,15 @@ extern const struct NovelFetchedProperties {
 
 - (BOOL)primitiveFavoriteValue;
 - (void)setPrimitiveFavoriteValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveFetched;
+- (void)setPrimitiveFetched:(NSNumber*)value;
+
+- (BOOL)primitiveFetchedValue;
+- (void)setPrimitiveFetchedValue:(BOOL)value_;
 
 
 

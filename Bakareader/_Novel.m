@@ -6,6 +6,7 @@
 const struct NovelAttributes NovelAttributes = {
 	.coverImageName = @"coverImageName",
 	.favorite = @"favorite",
+	.fetched = @"fetched",
 	.lastUpdated = @"lastUpdated",
 	.synopsis = @"synopsis",
 	.title = @"title",
@@ -50,6 +51,11 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"fetchedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"fetched"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -84,6 +90,32 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 
 - (void)setPrimitiveFavoriteValue:(BOOL)value_ {
 	[self setPrimitiveFavorite:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic fetched;
+
+
+
+- (BOOL)fetchedValue {
+	NSNumber *result = [self fetched];
+	return [result boolValue];
+}
+
+- (void)setFetchedValue:(BOOL)value_ {
+	[self setFetched:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveFetchedValue {
+	NSNumber *result = [self primitiveFetched];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveFetchedValue:(BOOL)value_ {
+	[self setPrimitiveFetched:[NSNumber numberWithBool:value_]];
 }
 
 

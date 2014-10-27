@@ -30,6 +30,7 @@
 		983A07BA19FC41C70056D0A9 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A07B919FC41C70056D0A9 /* libxml2.dylib */; };
 		983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */; };
 		983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C119FC92A00056D0A9 /* MenuViewController.m */; };
+		983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+containsCategory.m"; sourceTree = "<group>"; };
 		983A07C019FC92A00056D0A9 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		983A07C119FC92A00056D0A9 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NovelDetailViewController.h; sourceTree = "<group>"; };
+		983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NovelDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +193,8 @@
 				983A075919FC2F400056D0A9 /* NovelsTableViewController.m */,
 				983A07C019FC92A00056D0A9 /* MenuViewController.h */,
 				983A07C119FC92A00056D0A9 /* MenuViewController.m */,
+				983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */,
+				983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
+				983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */,
 				983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */,
 				983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */,
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
