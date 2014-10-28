@@ -9,6 +9,8 @@
 #ifndef Bakareader_EX_PrefixHeader_pch
 #define Bakareader_EX_PrefixHeader_pch
 
+#import "UIView+Constraints.h"
+
 #import "CoreDataController.h"
 #import "PKRevealController.h"
 #import "Constants.h"

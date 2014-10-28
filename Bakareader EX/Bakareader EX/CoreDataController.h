@@ -29,6 +29,10 @@
 + (NSArray *)allVolumesForNovel:(Novel *)novel;
 + (NSArray *)allChaptersForVolume:(Volume *)volume;
 
++ (Novel *)novelWithTitle:(NSString *)title;
++ (Novel *)novelWithUrl:(NSString *)url;
++ (BOOL)novelAlreadyExistsForUrl:(NSString *)url;
+
 + (NSUInteger)countAllNovels;
 
 @end

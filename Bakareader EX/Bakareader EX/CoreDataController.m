@@ -116,6 +116,21 @@
     return [CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:predicate];
 }
 
++ (Novel *)novelWithTitle:(NSString *)title {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@",title];
+    return [[CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:predicate] firstObject];
+}
+
++ (Novel *)novelWithUrl:(NSString *)url {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@",url];
+    return [[CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:predicate] firstObject];
+}
+
++ (BOOL)novelAlreadyExistsForUrl:(NSString *)url {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@",url];
+    return [CoreDataController countRecordsOfClass:[Novel class] usingPredicate:predicate];
+}
+
 + (NSUInteger)countAllNovels {
     return [CoreDataController countRecordsOfClass:[Novel class] usingPredicate:nil];
 }

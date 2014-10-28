@@ -84,8 +84,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Novel *novel = self.novels[indexPath.row];
-    NSLog(@"selected novel.title %@", novel.title);
-    NSLog(@"selected novel.url %@", novel.url);
     
     NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
     [self.navigationController pushViewController:novelDetailViewController animated:YES];
