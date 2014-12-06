@@ -10,6 +10,7 @@
 #define Bakareader_EX_PrefixHeader_pch
 
 #import "UIView+Constraints.h"
+#import "UILabel+SizeUtils.h"
 
 #import "CoreDataController.h"
 #import "PKRevealController.h"

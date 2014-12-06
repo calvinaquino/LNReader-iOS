@@ -39,24 +39,17 @@
 }
 
 - (void)setupHeaderView {
-    self.headerView = [[UIView alloc] init];
-    self.headerView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.headerView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    self.coverView = [[UIImageView alloc] init];
-    self.coverView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.coverView = [[UIImageView alloc] initWithFrame:CGRectZero];
     
-    self.synopsisLabel = [[UILabel alloc] init];
-    self.synopsisLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.synopsisLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.synopsisLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.synopsisLabel.numberOfLines = 0;
     self.synopsisLabel.text = self.novel.synopsis;
     
     [self.headerView addSubview:self.coverView];
     [self.headerView addSubview:self.synopsisLabel];
-    
-    NSDictionary *views = @{@"coverView": self.coverView, @"synopsisLabel": self.synopsisLabel};
-    
-    [self.headerView addConstraintsWithFormat:@"H:|[coverView]| && H:|[synopsisLabel]| && V:|[coverView][synopsisLabel]|" views:views];
 }
 
 - (void)setupTableView {
@@ -71,6 +64,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadNovelInfo];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [self recalculateHeaderFrames];
 }
 
 #pragma mark - Load Data
@@ -107,12 +106,14 @@
 
 - (void)updateHeaderSize {
     self.tableView.tableHeaderView = nil;
+    [self recalculateHeaderFrames];
     self.tableView.tableHeaderView = self.headerView;
-    
-    NSDictionary *views = @{@"headerView": self.headerView};
-    NSDictionary *metrics = @{@"width": @(self.screenWidth)};
-    
-    [self.tableView addConstraintsWithFormat:@"H:|[headerView(width)]| && V:|[headerView]|" metrics:metrics views:views];
+}
+
+- (void)recalculateHeaderFrames {
+    self.synopsisLabel.frame = CGRectMake(20, 20, self.view.frame.size.width - 40, 0);
+    [self.synopsisLabel calculateHeight];
+    self.headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.synopsisLabel.frame.origin.y + self.synopsisLabel.frame.size.height);
 }
 
 - (CGFloat)screenWidth {
