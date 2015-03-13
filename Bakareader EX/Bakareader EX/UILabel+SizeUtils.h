@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (SizeUtils)
-
++ (CGFloat)heightForText:(NSString *)text containedInWidth:(CGFloat)width withFont:(UIFont *)font;
 - (CGFloat)heightForText:(NSString *)text containedInWidth:(CGFloat)width;
 - (CGFloat)heightForCurrentTextAndWidth;
 - (void)calculateHeight;

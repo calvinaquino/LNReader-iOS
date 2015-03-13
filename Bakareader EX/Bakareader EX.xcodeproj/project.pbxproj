@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9826FEBC1AB0A1A3006719EA /* ChaptersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */; };
 		983A075119FC2F400056D0A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075019FC2F400056D0A9 /* main.m */; };
 		983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075319FC2F400056D0A9 /* AppDelegate.m */; };
 		983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */; };
@@ -33,6 +34,8 @@
 		983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */; };
 		9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */; };
 		98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A257201A003F4C008767C5 /* UIView+Constraints.m */; };
+		98C1754A1AB30C8D00A1737C /* ChapterContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */; };
+		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersTableViewController.h; sourceTree = "<group>"; };
+		9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersTableViewController.m; sourceTree = "<group>"; };
 		983A074B19FC2F400056D0A9 /* Bakareader EX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bakareader EX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		983A074F19FC2F400056D0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983A075019FC2F400056D0A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -106,6 +111,10 @@
 		9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeUtils.m"; sourceTree = "<group>"; };
 		98A2571F1A003F4C008767C5 /* UIView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraints.h"; sourceTree = "<group>"; };
 		98A257201A003F4C008767C5 /* UIView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Constraints.m"; sourceTree = "<group>"; };
+		98C175481AB30C8D00A1737C /* ChapterContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterContentTableViewController.h; sourceTree = "<group>"; };
+		98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterContentTableViewController.m; sourceTree = "<group>"; };
+		98C1754C1AB3167900A1737C /* ChapterContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterContentViewController.h; sourceTree = "<group>"; };
+		98C1754D1AB3167900A1737C /* ChapterContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +210,12 @@
 				983A07C119FC92A00056D0A9 /* MenuViewController.m */,
 				983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */,
 				983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */,
+				9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */,
+				9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */,
+				98C1754C1AB3167900A1737C /* ChapterContentViewController.h */,
+				98C1754D1AB3167900A1737C /* ChapterContentViewController.m */,
+				98C175481AB30C8D00A1737C /* ChapterContentTableViewController.h */,
+				98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -365,6 +380,7 @@
 				TargetAttributes = {
 					983A074A19FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 8LGTBBXKRY;
 					};
 					983A076619FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -432,13 +448,16 @@
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
+				98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
+				98C1754A1AB30C8D00A1737C /* ChapterContentTableViewController.m in Sources */,
 				983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */,
 				98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */,
 				983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */,
 				983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */,
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
 				983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */,
+				9826FEBC1AB0A1A3006719EA /* ChaptersTableViewController.m in Sources */,
 				983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */,
 				983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,

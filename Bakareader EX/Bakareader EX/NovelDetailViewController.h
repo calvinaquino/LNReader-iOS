@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NovelDetailDelegate;
+
 @interface NovelDetailViewController : UITableViewController
 
+@property (nonatomic, weak) id<NovelDetailDelegate> delegate;
+
 - (instancetype)initWithNovel:(Novel *)novel;
+
+@end
+
+@protocol NovelDetailDelegate <NSObject>
+
+- (void)novelDetailViewController:(NovelDetailViewController *)novelDetailViewController didFetchNovel:(Novel *)novel;
 
 @end

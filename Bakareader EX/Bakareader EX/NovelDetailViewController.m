@@ -7,6 +7,7 @@
 //
 
 #import "NovelDetailViewController.h"
+#import "ChaptersTableViewController.h"
 #import "BakaTsukiParser.h"
 
 @interface NovelDetailViewController ()
@@ -97,12 +98,19 @@
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         [BakaTsukiParser fetchNovelInfo:weakSelf.novel];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [weakSelf updateNovelTableView];
             [weakSelf loadNovelInfoFromDatabase];
         }];
     }];
 }
 
 #pragma mark - Private Methods
+
+- (void)updateNovelTableView {
+    if ([self.delegate respondsToSelector:@selector(novelDetailViewController:didFetchNovel:)]) {
+        [self.delegate novelDetailViewController:self didFetchNovel:self.novel];
+    }
+}
 
 - (void)updateHeaderSize {
     self.tableView.tableHeaderView = nil;
@@ -136,7 +144,12 @@
     return cell;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Volume *volume = self.volumes[indexPath.row];
+    
+    ChaptersTableViewController *chaptersViewController = [[ChaptersTableViewController alloc] initWithVolume:volume];
+    [self.navigationController pushViewController:chaptersViewController animated:YES];
+}
 
 
 @end

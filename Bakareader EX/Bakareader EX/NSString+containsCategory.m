@@ -8,11 +8,9 @@
 
 #import "NSString+containsCategory.h"
 
-@implementation NSString ( containsCategory )
+@implementation NSString (containsCategory)
 
-- (BOOL) containsString: (NSString*) substring
-{
-    //    NSLog(@"if contains %@",substring);
+- (BOOL)containsString:(NSString*)substring {
     NSRange range = [self rangeOfString : substring];
     BOOL found = ( range.location != NSNotFound );
     return found;

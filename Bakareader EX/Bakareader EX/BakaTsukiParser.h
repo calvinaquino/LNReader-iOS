@@ -13,6 +13,7 @@
 //@property (retain) id<BTParserDelegate> delegate;
 + (void)fetchNovelList;
 + (void)fetchNovelInfo:(Novel *)novel;
++ (void)fetchChapterContent:(Chapter *)chapter;
 
 
 @end

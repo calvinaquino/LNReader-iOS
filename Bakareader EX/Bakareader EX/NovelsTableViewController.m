@@ -11,7 +11,7 @@
 
 #import "BakaTsukiParser.h"
 
-@interface NovelsTableViewController ()
+@interface NovelsTableViewController () <NovelDetailDelegate>
 
 @property (nonatomic, strong) NSArray *novels;
 
@@ -86,6 +86,7 @@
     Novel *novel = self.novels[indexPath.row];
     
     NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
+    novelDetailViewController.delegate = self;
     [self.navigationController pushViewController:novelDetailViewController animated:YES];
 }
 
@@ -95,8 +96,19 @@
     Novel *novel = self.novels[indexPath.row];
     cell.textLabel.text = novel.title;
     cell.detailTextLabel.text = novel.url;
+    cell.accessoryType = novel.fetchedValue ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
 }
+
+
+#pragma mark - NovelDetailDelegate
+
+- (void)novelDetailViewController:(NovelDetailViewController *)novelDetailViewController didFetchNovel:(Novel *)novel {
+    NSInteger novelIndex = [self.novels indexOfObject:novel];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:novelIndex inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 @end

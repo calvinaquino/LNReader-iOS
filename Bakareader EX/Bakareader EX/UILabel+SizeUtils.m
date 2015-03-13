@@ -10,6 +10,16 @@
 
 @implementation UILabel (SizeUtils)
 
++ (CGFloat)heightForText:(NSString *)text containedInWidth:(CGFloat)width withFont:(UIFont *)font {
+    if (text && text.length) {
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:font}];
+        CGRect rect = [attributedText boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        return rect.size.height;
+    }
+    
+    return 0;
+}
+
 - (CGFloat)heightForText:(NSString *)text containedInWidth:(CGFloat)width {
     if (text && text.length) {
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:self.font}];
