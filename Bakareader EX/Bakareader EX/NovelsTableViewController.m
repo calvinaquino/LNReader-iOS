@@ -63,8 +63,7 @@
 }
 
 - (void)loadListFromInternet {
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        [BakaTsukiParser fetchNovelList];
+    [[BakaReaderDownloader sharedInstance] downloadNovelListWithCompletion:^(BOOL success) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self loadListFromDatabase];
         }];

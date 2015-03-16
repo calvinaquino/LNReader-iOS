@@ -95,8 +95,7 @@
 
 - (void)loadNovelInfoFromInternet {
     __weak typeof(self) weakSelf = self;
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        [BakaTsukiParser fetchNovelInfo:weakSelf.novel];
+    [[BakaReaderDownloader sharedInstance] downloadNovelDetails:weakSelf.novel withCompletion:^(BOOL success) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [weakSelf updateNovelTableView];
             [weakSelf loadNovelInfoFromDatabase];

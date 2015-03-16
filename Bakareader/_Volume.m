@@ -14,9 +14,6 @@ const struct VolumeRelationships VolumeRelationships = {
 	.novel = @"novel",
 };
 
-const struct VolumeFetchedProperties VolumeFetchedProperties = {
-};
-
 @implementation VolumeID
 @end
 
@@ -42,7 +39,7 @@ const struct VolumeFetchedProperties VolumeFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"orderValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"order"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -52,12 +49,7 @@ const struct VolumeFetchedProperties VolumeFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
 @dynamic order;
-
-
 
 - (int16_t)orderValue {
 	NSNumber *result = [self order];
@@ -77,44 +69,22 @@ const struct VolumeFetchedProperties VolumeFetchedProperties = {
 	[self setPrimitiveOrder:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic title;
-
-
-
-
-
 
 @dynamic url;
 
-
-
-
-
-
 @dynamic chapters;
 
-	
 - (NSMutableSet*)chaptersSet {
 	[self willAccessValueForKey:@"chapters"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"chapters"];
-  
+
 	[self didAccessValueForKey:@"chapters"];
 	return result;
 }
-	
 
 @dynamic novel;
 
-	
-
-
-
-
-
-
 @end
+

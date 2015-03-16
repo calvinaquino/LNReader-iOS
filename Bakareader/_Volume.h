@@ -3,7 +3,6 @@
 
 #import <CoreData/CoreData.h>
 
-
 extern const struct VolumeAttributes {
 	__unsafe_unretained NSString *order;
 	__unsafe_unretained NSString *title;
@@ -15,15 +14,8 @@ extern const struct VolumeRelationships {
 	__unsafe_unretained NSString *novel;
 } VolumeRelationships;
 
-extern const struct VolumeFetchedProperties {
-} VolumeFetchedProperties;
-
 @class Chapter;
 @class Novel;
-
-
-
-
 
 @interface VolumeID : NSManagedObjectID {}
 @end
@@ -32,65 +24,35 @@ extern const struct VolumeFetchedProperties {
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-- (VolumeID*)objectID;
-
-
-
-
+@property (nonatomic, readonly, strong) VolumeID* objectID;
 
 @property (nonatomic, strong) NSNumber* order;
 
-
-
-@property int16_t orderValue;
+@property (atomic) int16_t orderValue;
 - (int16_t)orderValue;
 - (void)setOrderValue:(int16_t)value_;
 
 //- (BOOL)validateOrder:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
 @property (nonatomic, strong) NSString* title;
-
-
 
 //- (BOOL)validateTitle:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
 @property (nonatomic, strong) NSString* url;
 
-
-
 //- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
-
-
-
-
 
 @property (nonatomic, strong) NSSet *chapters;
 
 - (NSMutableSet*)chaptersSet;
 
-
-
-
 @property (nonatomic, strong) Novel *novel;
 
 //- (BOOL)validateNovel:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
 @end
 
-@interface _Volume (CoreDataGeneratedAccessors)
-
+@interface _Volume (ChaptersCoreDataGeneratedAccessors)
 - (void)addChapters:(NSSet*)value_;
 - (void)removeChapters:(NSSet*)value_;
 - (void)addChaptersObject:(Chapter*)value_;
@@ -100,36 +62,22 @@ extern const struct VolumeFetchedProperties {
 
 @interface _Volume (CoreDataGeneratedPrimitiveAccessors)
 
-
 - (NSNumber*)primitiveOrder;
 - (void)setPrimitiveOrder:(NSNumber*)value;
 
 - (int16_t)primitiveOrderValue;
 - (void)setPrimitiveOrderValue:(int16_t)value_;
 
-
-
-
 - (NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(NSString*)value;
-
-
-
 
 - (NSString*)primitiveUrl;
 - (void)setPrimitiveUrl:(NSString*)value;
 
-
-
-
-
 - (NSMutableSet*)primitiveChapters;
 - (void)setPrimitiveChapters:(NSMutableSet*)value;
 
-
-
 - (Novel*)primitiveNovel;
 - (void)setPrimitiveNovel:(Novel*)value;
-
 
 @end

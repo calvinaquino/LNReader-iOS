@@ -10,10 +10,8 @@
 
 @interface BakaTsukiParser : NSObject
 
-//@property (retain) id<BTParserDelegate> delegate;
-+ (void)fetchNovelList;
-+ (void)fetchNovelInfo:(Novel *)novel;
-+ (void)fetchChapterContent:(Chapter *)chapter;
-
++ (void)parseNovelListFromData:(NSData *)data;
++ (void)parseNovelInfo:(Novel *)novel fromData:(NSData *)data;
++ (void)parseChapterContent:(Chapter *)chapter fromData:(NSData *)data;
 
 @end

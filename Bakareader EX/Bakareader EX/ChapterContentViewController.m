@@ -11,7 +11,6 @@
 
 @interface ChapterContentViewController ()
 
-@property (nonatomic, strong) Chapter *chapter;
 @property (nonatomic, strong) UITextView *textView;
 
 @end
@@ -22,7 +21,6 @@
     self = [super init];
     if (self) {
         self.chapter = chapter;
-        self.title = chapter.title;
     }
     
     return self;
@@ -37,11 +35,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.chapter.content) {
-        [self loadContentFromDatabase];
-    } else {
-        [self loadContentFromInternet];
-    }
+    [self loadChapterContent];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self saveReadingProgression];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +55,18 @@
 }
 
 
+#pragma mark - Property Accessors
+
+- (void)setChapter:(Chapter *)chapter {
+    _chapter = chapter;
+    self.title = chapter.title;
+    
+    if (self.isViewLoaded) {
+        [self loadChapterContent];
+    }
+}
+
+
 #pragma mark - Data Loading
 
 - (void)loadContentFromDatabase {
@@ -64,17 +75,42 @@
         weakSelf.textView.text = weakSelf.chapter.content;
         [weakSelf.textView setNeedsDisplay];
     }];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [weakSelf loadReadingProgression];
+    }];
 
 }
 
 - (void)loadContentFromInternet {
     __weak typeof(self) weakSelf = self;
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        [BakaTsukiParser fetchChapterContent:self.chapter];
+    [[BakaReaderDownloader sharedInstance] downloadChapter:self.chapter withCompletion:^(BOOL success) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [weakSelf loadContentFromDatabase];
         }];
     }];
 }
+
+- (void)loadReadingProgression {
+    CGFloat heightOffset = self.chapter.readingProgressionValue * (self.textView.contentSize.height - self.textView.frame.size.height);
+    self.textView.contentOffset = CGPointMake(self.textView.contentOffset.x, heightOffset);
+}
+
+- (void)saveReadingProgression {
+    CGFloat progression = self.textView.contentOffset.y / (self.textView.contentSize.height - self.textView.frame.size.height);
+    self.chapter.readingProgressionValue = progression;
+    [CoreDataController saveContext];
+}
+
+
+#pragma mark - Private Methods
+
+- (void)loadChapterContent {
+    if (self.chapter.content) {
+        [self loadContentFromDatabase];
+    } else {
+        [self loadContentFromInternet];
+    }
+}
+
 
 @end

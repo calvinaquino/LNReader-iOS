@@ -8,9 +8,10 @@
 
 #import "ChaptersTableViewController.h"
 #import "ChapterContentViewController.h"
+#import "ExternalContentViewController.h"
 #import "BakaTsukiParser.h"
 
-@interface ChaptersTableViewController ()
+@interface ChaptersTableViewController () <ChapterDelegate>
 
 @property (nonatomic, strong) Volume *volume;
 @property (nonatomic, strong) NSArray *chapters;
@@ -73,8 +74,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Chapter *chapter = self.chapters[indexPath.row];
     
-    ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
-    [self.navigationController pushViewController:chapterContentViewController animated:YES];
+    if (chapter.isExternalValue) {
+        ExternalContentViewController *externalContentViewController = [[ExternalContentViewController alloc] initWithChapter:chapter];
+        [self.navigationController pushViewController:externalContentViewController animated:YES];
+    } else {
+        ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
+        [self.navigationController pushViewController:chapterContentViewController animated:YES];
+    }
+}
+
+
+#pragma mark - Chapter Delegate
+
+- (Chapter *)chapterViewController:(UIViewController *)viewController didAskForNextChapterForCurrentChapter:(Chapter *)currentChapter {
+    return nil;
+}
+
+- (Chapter *)chapterViewController:(UIViewController *)viewController didAskForPreviousChapterForCurrentChapter:(Chapter *)currentChapter {
+    return nil;
 }
 
 @end
