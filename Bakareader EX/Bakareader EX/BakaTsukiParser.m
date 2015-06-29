@@ -64,6 +64,7 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
 
 + (void)parseChapterContent:(Chapter *)chapter fromData:(NSData *)data {
     chapter.content = [BakaTsukiParser parseChapterContentWithData:data];
+    chapter.fetchedValue = YES;
     [CoreDataController saveContext];
 }
 

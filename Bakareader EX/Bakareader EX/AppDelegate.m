@@ -25,12 +25,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     MenuViewController *menuViewController = [[MenuViewController alloc] init];
-    NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] init];
+//    NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] init];
     
-    PKRevealController *revealController = [PKRevealController revealControllerWithFrontViewController:[[UINavigationController alloc] initWithRootViewController:novelsTableViewController]
-                                                                                    leftViewController:[[UINavigationController alloc] initWithRootViewController:menuViewController]];
     
-    self.window.rootViewController = revealController;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     [self.window makeKeyAndVisible];
     
     return YES;

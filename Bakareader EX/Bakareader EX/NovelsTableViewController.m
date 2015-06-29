@@ -13,16 +13,28 @@
 
 @interface NovelsTableViewController () <NovelDetailDelegate>
 
+@property (nonatomic, assign) BOOL onlyFavorites;
 @property (nonatomic, strong) NSArray *novels;
 
 @end
 
 @implementation NovelsTableViewController
 
+- (instancetype)initWithFavorites {
+    self = [super init];
+    if (self) {
+        self.title = @"Favorites";
+        self.onlyFavorites = YES;
+    }
+    
+    return self;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.title = @"Light Novels";
+        self.onlyFavorites = NO;
     }
     
     return self;
@@ -55,7 +67,7 @@
 }
 
 - (void)loadListFromDatabase {
-    self.novels = [CoreDataController allNovels];
+    self.novels = self.onlyFavorites? [CoreDataController favoriteNovels] : [CoreDataController allNovels];
     if (self.refreshControl.isRefreshing) {
         [self.refreshControl endRefreshing];
     }
@@ -98,6 +110,38 @@
     cell.accessoryType = novel.fetchedValue ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    Novel *novel = weakSelf.novels[indexPath.row];
+    BOOL canDownload = !novel.fetchedValue;
+    NSString *favoriteTitle = novel.favoriteValue ? @"Unfavorite" : @"Favorite";
+    
+    UITableViewRowAction *favoriteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:favoriteTitle handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        Novel *novel = weakSelf.novels[indexPath.row];
+        novel.favoriteValue = !novel.favoriteValue;
+        [CoreDataController saveContext];
+        [weakSelf.tableView setEditing:NO animated:YES];
+    }];
+    favoriteAction.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+    
+    UITableViewRowAction *downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        Novel *novel = weakSelf.novels[indexPath.row];
+        [[BakaReaderDownloader sharedInstance] downloadNovelDetails:novel withCompletion:^(BOOL success) {
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        [weakSelf.tableView setEditing:NO animated:YES];
+    }];
+    
+    if (!canDownload) {
+        return @[favoriteAction];
+    } else {
+        return @[favoriteAction, downloadAction];
+    }
 }
 
 

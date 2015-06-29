@@ -26,6 +26,7 @@
 + (Chapter *)newChapter;
 
 + (NSArray *)allNovels;
++ (NSArray *)favoriteNovels;
 + (NSArray *)allVolumesForNovel:(Novel *)novel;
 + (NSArray *)allChaptersForVolume:(Volume *)volume;
 

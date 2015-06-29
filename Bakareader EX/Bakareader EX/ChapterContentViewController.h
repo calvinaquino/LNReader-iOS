@@ -22,6 +22,7 @@
 
 @protocol ChapterDelegate <NSObject>
 
+- (void)chapterViewController:(UIViewController *)viewController didFetchChapter:(Chapter *)chapter;
 - (Chapter *)chapterViewController:(UIViewController *)viewController didAskForNextChapterForCurrentChapter:(Chapter *)currentChapter;
 - (Chapter *)chapterViewController:(UIViewController *)viewController didAskForPreviousChapterForCurrentChapter:(Chapter *)currentChapter;
 

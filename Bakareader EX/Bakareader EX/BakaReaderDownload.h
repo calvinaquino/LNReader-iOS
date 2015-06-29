@@ -23,6 +23,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, assign) DownloadType downloadType;
+@property (nonatomic, copy) void (^progressUpdate)(CGFloat progress);
 
 + (BakaReaderDownload *)downloadForChapter:(Chapter *)chapter;
 + (BakaReaderDownload *)downloadForNovel:(Novel *)novel;

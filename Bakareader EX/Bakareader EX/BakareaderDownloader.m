@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSMutableArray *downloadQueue;
 @property (nonatomic, strong) BakaReaderDownload *currentDownload;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 @end
 
@@ -36,6 +37,7 @@
     self = [super init];
     if (self) {
         self.downloadQueue = [[NSMutableArray alloc] init];
+        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     }
     
     return self;
@@ -47,6 +49,7 @@
 - (void)downloadChapter:(Chapter *)chapter withCompletion:(void (^)(BOOL))completionBlock {
     BakaReaderDownload *download = [BakaReaderDownload downloadForChapter:chapter];
     
+//    __weak typeof(self) weakSelf = self;
     [download.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [BakaTsukiParser parseChapterContent:chapter fromData:(NSData *)responseObject];
         if (completionBlock) {
@@ -60,9 +63,7 @@
     }];
     
     [download.operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        NSLog(@"%li/%li", (long)totalBytesRead, (long)totalBytesExpectedToRead);
     }];
-    
     
     [self addDownload:download];
 }
@@ -70,6 +71,7 @@
 - (void)downloadNovelDetails:(Novel *)novel withCompletion:(void (^)(BOOL))completionBlock {
     BakaReaderDownload *download = [BakaReaderDownload downloadForNovel:novel];
     
+//    __weak typeof(self) weakSelf = self;
     [download.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [BakaTsukiParser parseNovelInfo:novel fromData:(NSData *)responseObject];
         if (completionBlock) {
@@ -83,15 +85,14 @@
     }];
     
     [download.operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        NSLog(@"%li/%li", (long)totalBytesRead, (long)totalBytesExpectedToRead);
     }];
-    
     [self addDownload:download];
 }
 
 - (void)downloadNovelListWithCompletion:(void (^)(BOOL))completionBlock {
     BakaReaderDownload *download = [BakaReaderDownload downloadForNovelList];
     
+//    __weak typeof(self) weakSelf = self;
     [download.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [BakaTsukiParser parseNovelListFromData:(NSData *)responseObject];
         if (completionBlock) {
@@ -105,7 +106,6 @@
     }];
     
     [download.operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        NSLog(@"%li/%li", (long)totalBytesRead, (long)totalBytesExpectedToRead);
     }];
     
     [self addDownload:download];

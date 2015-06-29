@@ -85,6 +85,9 @@
     __weak typeof(self) weakSelf = self;
     [[BakaReaderDownloader sharedInstance] downloadChapter:self.chapter withCompletion:^(BOOL success) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if ([weakSelf.delegate respondsToSelector:@selector(chapterViewController:didFetchChapter:)]) {
+                [weakSelf.delegate chapterViewController:weakSelf didFetchChapter:weakSelf.chapter];
+            }
             [weakSelf loadContentFromDatabase];
         }];
     }];

@@ -10,5 +10,7 @@
 
 @interface NovelsTableViewController : UITableViewController
 
+- (instancetype)initWithFavorites;
+
 @end
 
