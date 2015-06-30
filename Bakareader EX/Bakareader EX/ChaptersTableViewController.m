@@ -86,18 +86,13 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    Chapter *chapter = self.chapters[indexPath.row];
-    return  !chapter.fetchedValue;
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     Chapter *chapter = self.chapters[indexPath.row];
-    BOOL canDownload = !chapter.fetchedValue;
+    BOOL downloaded = chapter.fetchedValue;
     
     UITableViewRowAction *downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         Chapter *chapter = weakSelf.chapters[indexPath.row];
@@ -108,7 +103,17 @@
         [weakSelf.tableView setEditing:NO animated:YES];
     }];
     
-    return canDownload ? @[downloadAction] : nil;
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [weakSelf.tableView setEditing:NO animated:YES];
+        Chapter *chapter = weakSelf.chapters[indexPath.row];
+        
+        chapter.content = nil;
+        chapter.fetchedValue = NO;
+        [CoreDataController saveContext];
+        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    
+    return downloaded ? @[deleteAction] : @[downloadAction];
 }
 
 #pragma mark - Chapter Delegate

@@ -10,8 +10,11 @@
 
 @interface BakaReaderDownloader : NSObject
 
+@property (nonatomic, strong) UIProgressView *progressView;
+
 + (BakaReaderDownloader *)sharedInstance;
 
+- (void)downloadImageFromUrl:(NSString *)imageUrl withCompletion:(void (^)(BOOL, UIImage *image))completionBlock;
 - (void)downloadChapter:(Chapter *)chapter withCompletion:(void (^)(BOOL))completionBlock;
 - (void)downloadNovelDetails:(Novel *)novel withCompletion:(void (^)(BOOL))completionBlock;
 - (void)downloadNovelListWithCompletion:(void (^)(BOOL))completionBlock;

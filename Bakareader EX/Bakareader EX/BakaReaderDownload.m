@@ -19,22 +19,28 @@
     return self;
 }
 
++ (BakaReaderDownload *)downloadForImageUrl:(NSString *)imageUrl {
+    BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
+    download.downloadType = DownloadTypeImage;
+    return [self configureDownload:download withUrlString:imageUrl];
+}
+
 + (BakaReaderDownload *)downloadForChapter:(Chapter *)chapter {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
     download.downloadType = DownloadTypeChapterContent;
-    return [self configureDownload:download withUrlString:chapter.url];
+    return [self configureDownload:download withUrlString:[self urlWithRenderAction:chapter.url]];
 }
 
 + (BakaReaderDownload *)downloadForNovel:(Novel *)novel {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
     download.downloadType = DownloadTypeNovelDetail;
-    return [self configureDownload:download withUrlString:novel.url];
+    return [self configureDownload:download withUrlString:[self urlWithRenderAction:novel.url]];
 }
 
 + (BakaReaderDownload *)downloadForNovelList {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
     download.downloadType = DownloadTypeNoveList;
-    return [self configureDownload:download withUrlString:kBakaTsukiMainUrlEnglish];
+    return [self configureDownload:download withUrlString:kBakaTsukiMainUrlEnglish];//should use render here?
 }
 
 + (BakaReaderDownload *)configureDownload:(BakaReaderDownload *)download withUrlString:(NSString *)urlString {
@@ -57,5 +63,14 @@
     }];
     return download;
 }
+
+
+#pragma mark - Convenience
+
++ (NSString *)urlWithRenderAction:(NSString *)url {
+    NSString *renderAction = @"?action=render&";
+    return [url stringByReplacingOccurrencesOfString:@"?" withString:renderAction];
+}
+
 
 @end

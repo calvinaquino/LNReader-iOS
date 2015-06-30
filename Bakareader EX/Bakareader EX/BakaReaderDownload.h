@@ -11,6 +11,7 @@
 
 
 typedef enum : NSUInteger {
+    DownloadTypeImage,
     DownloadTypeChapterContent,
     DownloadTypeNovelDetail,
     DownloadTypeNoveList
@@ -25,6 +26,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) DownloadType downloadType;
 @property (nonatomic, copy) void (^progressUpdate)(CGFloat progress);
 
++ (BakaReaderDownload *)downloadForImageUrl:(NSString *)imageUrl;
 + (BakaReaderDownload *)downloadForChapter:(Chapter *)chapter;
 + (BakaReaderDownload *)downloadForNovel:(Novel *)novel;
 + (BakaReaderDownload *)downloadForNovelList;

@@ -13,5 +13,6 @@
 + (void)parseNovelListFromData:(NSData *)data;
 + (void)parseNovelInfo:(Novel *)novel fromData:(NSData *)data;
 + (void)parseChapterContent:(Chapter *)chapter fromData:(NSData *)data;
++ (NSString *)imageSourceUrlFromData:(NSData *)data;
 
 @end

@@ -200,16 +200,22 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     [CoreDataController saveContext];
 }
 
++ (NSString *)imageSourceUrlFromData:(NSData *)data {
+    RXMLElement *root = [RXMLElement elementFromHTMLData:data];
+    
+    NSArray *children = [root childrenWithRootXPath:@"//*[@id='file']/a"];
+    NSString *imageUrl = @"";
+    if (children.count) {
+        RXMLElement *child = [children firstObject];
+        imageUrl = [child attribute:@"href"];
+        NSLog(@"image url %@", imageUrl);
+    }
+    
+    return imageUrl;
+}
+
 + (NSString *)parseChapterContentWithData:(NSData*)chapterContent {
-    RXMLElement *chapterXMLRoot = [RXMLElement elementFromXMLData:chapterContent];
-    
-    NSMutableString *content = [[NSMutableString alloc] init];
-    
-    [chapterXMLRoot iterateWithRootXPath:@"//*[@id='mw-content-text']/*" usingBlock: ^(RXMLElement *element) {
-        [content appendString:@"\n"];
-        [content appendString:element.text];
-    }];
-    return content;
+    return [[NSString alloc] initWithData:chapterContent encoding:NSUTF8StringEncoding];
 }
 
 //Strings that might interest us.
