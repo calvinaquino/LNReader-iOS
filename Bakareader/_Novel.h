@@ -4,7 +4,6 @@
 #import <CoreData/CoreData.h>
 
 extern const struct NovelAttributes {
-	__unsafe_unretained NSString *coverImageName;
 	__unsafe_unretained NSString *favorite;
 	__unsafe_unretained NSString *fetched;
 	__unsafe_unretained NSString *lastUpdated;
@@ -14,9 +13,11 @@ extern const struct NovelAttributes {
 } NovelAttributes;
 
 extern const struct NovelRelationships {
+	__unsafe_unretained NSString *cover;
 	__unsafe_unretained NSString *volumes;
 } NovelRelationships;
 
+@class Image;
 @class Volume;
 
 @interface NovelID : NSManagedObjectID {}
@@ -27,10 +28,6 @@ extern const struct NovelRelationships {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) NovelID* objectID;
-
-@property (nonatomic, strong) NSString* coverImageName;
-
-//- (BOOL)validateCoverImageName:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* favorite;
 
@@ -64,6 +61,10 @@ extern const struct NovelRelationships {
 
 //- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) Image *cover;
+
+//- (BOOL)validateCover:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSSet *volumes;
 
 - (NSMutableSet*)volumesSet;
@@ -79,9 +80,6 @@ extern const struct NovelRelationships {
 @end
 
 @interface _Novel (CoreDataGeneratedPrimitiveAccessors)
-
-- (NSString*)primitiveCoverImageName;
-- (void)setPrimitiveCoverImageName:(NSString*)value;
 
 - (NSNumber*)primitiveFavorite;
 - (void)setPrimitiveFavorite:(NSNumber*)value;
@@ -106,6 +104,9 @@ extern const struct NovelRelationships {
 
 - (NSString*)primitiveUrl;
 - (void)setPrimitiveUrl:(NSString*)value;
+
+- (Image*)primitiveCover;
+- (void)setPrimitiveCover:(Image*)value;
 
 - (NSMutableSet*)primitiveVolumes;
 - (void)setPrimitiveVolumes:(NSMutableSet*)value;

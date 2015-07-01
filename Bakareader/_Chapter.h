@@ -14,9 +14,11 @@ extern const struct ChapterAttributes {
 } ChapterAttributes;
 
 extern const struct ChapterRelationships {
+	__unsafe_unretained NSString *images;
 	__unsafe_unretained NSString *volume;
 } ChapterRelationships;
 
+@class Image;
 @class Volume;
 
 @interface ChapterID : NSManagedObjectID {}
@@ -72,9 +74,21 @@ extern const struct ChapterRelationships {
 
 //- (BOOL)validateUrl:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSSet *images;
+
+- (NSMutableSet*)imagesSet;
+
 @property (nonatomic, strong) Volume *volume;
 
 //- (BOOL)validateVolume:(id*)value_ error:(NSError**)error_;
+
+@end
+
+@interface _Chapter (ImagesCoreDataGeneratedAccessors)
+- (void)addImages:(NSSet*)value_;
+- (void)removeImages:(NSSet*)value_;
+- (void)addImagesObject:(Image*)value_;
+- (void)removeImagesObject:(Image*)value_;
 
 @end
 
@@ -112,6 +126,9 @@ extern const struct ChapterRelationships {
 
 - (NSString*)primitiveUrl;
 - (void)setPrimitiveUrl:(NSString*)value;
+
+- (NSMutableSet*)primitiveImages;
+- (void)setPrimitiveImages:(NSMutableSet*)value;
 
 - (Volume*)primitiveVolume;
 - (void)setPrimitiveVolume:(Volume*)value;

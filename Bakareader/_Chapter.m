@@ -14,6 +14,7 @@ const struct ChapterAttributes ChapterAttributes = {
 };
 
 const struct ChapterRelationships ChapterRelationships = {
+	.images = @"images",
 	.volume = @"volume",
 };
 
@@ -152,6 +153,17 @@ const struct ChapterRelationships ChapterRelationships = {
 @dynamic title;
 
 @dynamic url;
+
+@dynamic images;
+
+- (NSMutableSet*)imagesSet {
+	[self willAccessValueForKey:@"images"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"images"];
+
+	[self didAccessValueForKey:@"images"];
+	return result;
+}
 
 @dynamic volume;
 

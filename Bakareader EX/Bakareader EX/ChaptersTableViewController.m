@@ -109,6 +109,7 @@
         
         chapter.content = nil;
         chapter.fetchedValue = NO;
+        [chapter deleteImages];
         [CoreDataController saveContext];
         [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];

@@ -21,8 +21,14 @@
 
 + (BakaReaderDownload *)downloadForImageUrl:(NSString *)imageUrl {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
-    download.downloadType = DownloadTypeImage;
+    download.downloadType = DownloadTypeImageUrl;
     return [self configureDownload:download withUrlString:imageUrl];
+}
+
++ (BakaReaderDownload *)downloadForImage:(Image *)image {
+    BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
+    download.downloadType = DownloadTypeImage;
+    return [self configureDownload:download withUrlString:image.url];
 }
 
 + (BakaReaderDownload *)downloadForChapter:(Chapter *)chapter {
@@ -34,13 +40,14 @@
 + (BakaReaderDownload *)downloadForNovel:(Novel *)novel {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
     download.downloadType = DownloadTypeNovelDetail;
-    return [self configureDownload:download withUrlString:[self urlWithRenderAction:novel.url]];
+//    return [self configureDownload:download withUrlString:[self urlWithRenderAction:novel.url]]; //parser does not support this yet for novel
+    return [self configureDownload:download withUrlString:novel.url];
 }
 
 + (BakaReaderDownload *)downloadForNovelList {
     BakaReaderDownload *download = [[BakaReaderDownload alloc] init];
     download.downloadType = DownloadTypeNoveList;
-    return [self configureDownload:download withUrlString:kBakaTsukiMainUrlEnglish];//should use render here?
+    return [self configureDownload:download withUrlString:kBakaTsukiMainUrlEnglish];
 }
 
 + (BakaReaderDownload *)configureDownload:(BakaReaderDownload *)download withUrlString:(NSString *)urlString {
@@ -48,7 +55,7 @@
     download.request = [NSURLRequest requestWithURL:download.url];
     download.operation = [[AFHTTPRequestOperation alloc] initWithRequest:download.request];
     download.operation.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-    download.operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    download.operation.responseSerializer = download.downloadType == DownloadTypeImage ? [AFImageResponseSerializer serializer] : [AFHTTPResponseSerializer serializer];
     __weak BakaReaderDownload *weakSelf = download;
     [download.operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         if (weakSelf.progressUpdate) {

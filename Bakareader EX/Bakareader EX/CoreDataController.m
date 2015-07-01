@@ -102,6 +102,10 @@
     return [Volume insertInManagedObjectContext:[CoreDataController context]];
 }
 
++ (Image *)newImage {
+    return [Image insertInManagedObjectContext:[CoreDataController context]];
+}
+
 + (NSArray *)allNovels {
     return [CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:nil];
 }

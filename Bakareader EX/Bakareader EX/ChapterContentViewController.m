@@ -146,7 +146,8 @@
     
     //is image
     if ([requestUrl containsString:@".jpg"] || [requestUrl containsString:@".png"]) {
-        ImageViewerController *imageViewerController = [[ImageViewerController alloc] initWithImageUrl:requestUrl];
+        Image *image = [self.chapter imageForUrl:requestUrl];
+        ImageViewerController *imageViewerController = [[ImageViewerController alloc] initWithImage:image];
         [self.navigationController pushViewController:imageViewerController animated:YES];
         return NO;
     }

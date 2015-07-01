@@ -58,6 +58,7 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
 }
 
 + (void)parseNovelInfo:(Novel *)novel fromData:(NSData *)data{
+    [BakaTsukiParser parseNovelCoverImageFileUrlWithData:data forNovel:novel];
     [BakaTsukiParser parseNovelSynopsisWithData:data forNovel:novel];
     [BakaTsukiParser parseNovelVolumesWithData:data forNovel:novel];
 }
@@ -68,8 +69,31 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     [CoreDataController saveContext];
 }
 
++ (void)parseNovelCoverImageFileUrlWithData:(NSData *)novelData forNovel:(Novel *)novel {
+    RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
+    
+    NSArray *children = [novelXMLRoot childrenWithRootXPath:@"//*[@class='thumbinner']/a"];
+    NSString *imageUrl = @"";
+    if (children.count) {
+        RXMLElement *child = [children firstObject];
+        imageUrl = [child attribute:@"href"];
+    }
+    
+    if (imageUrl) {
+        if (novel.cover) {
+            [novel.cover deleteImageFile];
+            [[CoreDataController context] deleteObject:novel.cover];
+        }
+        Image *cover = [CoreDataController newImage];
+        cover.url = [NSString stringWithFormat:@"%@%@", kBakaTsukiBaseUrl, imageUrl];
+        cover.fileUrl = nil;
+        novel.cover = cover;
+        
+        [CoreDataController saveContext];
+    }
+}
 
-+ (void)parseNovelSynopsisWithData:(NSData*)novelData forNovel:(Novel*)novel {
++ (void)parseNovelSynopsisWithData:(NSData *)novelData forNovel:(Novel *)novel {
     RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
     
     __block BOOL parseSynopsis = NO;

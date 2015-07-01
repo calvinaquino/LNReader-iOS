@@ -13,16 +13,16 @@
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) Image *image;
 
 @end
 
 @implementation ImageViewerController
 
-- (instancetype)initWithImageUrl:(NSString *)imageUrl {
+- (instancetype)initWithImage:(Image *)image {
     self = [super init];
     if (self) {
-        self.imageUrl = imageUrl;
+        self.image = image;
     }
     
     return self;
@@ -51,10 +51,10 @@
     [BakaReaderDownloader sharedInstance].progressView = self.progressView;
     
     __weak ImageViewerController *weakSelf = self;
-    [[BakaReaderDownloader sharedInstance] downloadImageFromUrl:self.imageUrl withCompletion:^(BOOL success, UIImage *image) {
+    [self.image fetchImageIfNeededWithCompletion:^(UIImage *image) {
         [BakaReaderDownloader sharedInstance].progressView = nil;
         weakSelf.progressView.hidden = YES;
-        if (success && image) {
+        if (image) {
             weakSelf.imageView.image = image;
             [weakSelf.view setNeedsLayout];
             [weakSelf setInitialZoomScale];

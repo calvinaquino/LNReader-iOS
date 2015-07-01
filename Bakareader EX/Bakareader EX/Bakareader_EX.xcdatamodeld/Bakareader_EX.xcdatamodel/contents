@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14D87h" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E33b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chapter" representedClassName="Chapter" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fetched" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -8,16 +8,25 @@
         <attribute name="readingProgression" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="chapter" inverseEntity="Image" syncable="YES"/>
         <relationship name="volume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="chapters" inverseEntity="Volume" syncable="YES"/>
     </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="fetched" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fileUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="images" inverseEntity="Chapter" syncable="YES"/>
+        <relationship name="novel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Novel" inverseName="cover" inverseEntity="Novel" syncable="YES"/>
+        <relationship name="volume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="cover" inverseEntity="Volume" syncable="YES"/>
+    </entity>
     <entity name="Novel" representedClassName="Novel" syncable="YES">
-        <attribute name="coverImageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fetched" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="synopsis" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cover" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="novel" inverseEntity="Image" syncable="YES"/>
         <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="novel" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
@@ -25,11 +34,13 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chapter" inverseName="volume" inverseEntity="Chapter" syncable="YES"/>
+        <relationship name="cover" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="volume" inverseEntity="Image" syncable="YES"/>
         <relationship name="novel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Novel" inverseName="volumes" inverseEntity="Novel" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chapter" positionX="-54" positionY="-9" width="128" height="163"/>
-        <element name="Novel" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="Volume" positionX="-36" positionY="9" width="128" height="118"/>
+        <element name="Chapter" positionX="-54" positionY="-9" width="128" height="180"/>
+        <element name="Novel" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Volume" positionX="-36" positionY="9" width="128" height="135"/>
+        <element name="Image" positionX="-45" positionY="54" width="128" height="135"/>
     </elements>
 </model>

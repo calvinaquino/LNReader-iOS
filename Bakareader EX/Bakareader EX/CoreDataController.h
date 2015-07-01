@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Novel, Volume, Chapter;
+@class Novel, Volume, Chapter, Image;
 
 @interface CoreDataController : NSObject
 
@@ -24,6 +24,7 @@
 + (Novel *)newNovel;
 + (Volume *)newVolume;
 + (Chapter *)newChapter;
++ (Image *)newImage;
 
 + (NSArray *)allNovels;
 + (NSArray *)favoriteNovels;

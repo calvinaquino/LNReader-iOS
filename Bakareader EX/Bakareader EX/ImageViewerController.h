@@ -10,6 +10,6 @@
 
 @interface ImageViewerController : UIViewController
 
-- (instancetype)initWithImageUrl:(NSString *)imageUrl;
+- (instancetype)initWithImage:(Image *)image;
 
 @end

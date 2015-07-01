@@ -11,10 +11,12 @@ extern const struct VolumeAttributes {
 
 extern const struct VolumeRelationships {
 	__unsafe_unretained NSString *chapters;
+	__unsafe_unretained NSString *cover;
 	__unsafe_unretained NSString *novel;
 } VolumeRelationships;
 
 @class Chapter;
+@class Image;
 @class Novel;
 
 @interface VolumeID : NSManagedObjectID {}
@@ -46,6 +48,10 @@ extern const struct VolumeRelationships {
 
 - (NSMutableSet*)chaptersSet;
 
+@property (nonatomic, strong) Image *cover;
+
+//- (BOOL)validateCover:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) Novel *novel;
 
 //- (BOOL)validateNovel:(id*)value_ error:(NSError**)error_;
@@ -76,6 +82,9 @@ extern const struct VolumeRelationships {
 
 - (NSMutableSet*)primitiveChapters;
 - (void)setPrimitiveChapters:(NSMutableSet*)value;
+
+- (Image*)primitiveCover;
+- (void)setPrimitiveCover:(Image*)value;
 
 - (Novel*)primitiveNovel;
 - (void)setPrimitiveNovel:(Novel*)value;

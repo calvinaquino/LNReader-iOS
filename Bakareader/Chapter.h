@@ -1,5 +1,8 @@
 #import "_Chapter.h"
 
 @interface Chapter : _Chapter {}
-// Custom logic goes here.
+
+- (Image *)imageForUrl:(NSString *)imageUrl;
+- (void)deleteImages;
+
 @end

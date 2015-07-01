@@ -4,7 +4,6 @@
 #import "_Novel.h"
 
 const struct NovelAttributes NovelAttributes = {
-	.coverImageName = @"coverImageName",
 	.favorite = @"favorite",
 	.fetched = @"fetched",
 	.lastUpdated = @"lastUpdated",
@@ -14,6 +13,7 @@ const struct NovelAttributes NovelAttributes = {
 };
 
 const struct NovelRelationships NovelRelationships = {
+	.cover = @"cover",
 	.volumes = @"volumes",
 };
 
@@ -56,8 +56,6 @@ const struct NovelRelationships NovelRelationships = {
 
 	return keyPaths;
 }
-
-@dynamic coverImageName;
 
 @dynamic favorite;
 
@@ -106,6 +104,8 @@ const struct NovelRelationships NovelRelationships = {
 @dynamic title;
 
 @dynamic url;
+
+@dynamic cover;
 
 @dynamic volumes;
 

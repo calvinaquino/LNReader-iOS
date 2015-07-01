@@ -20,5 +20,6 @@
 #import "Novel.h"
 #import "Volume.h"
 #import "Chapter.h"
+#import "Image.h"
 
 #endif

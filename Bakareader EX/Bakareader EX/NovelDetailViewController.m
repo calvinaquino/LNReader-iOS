@@ -43,6 +43,7 @@
     self.headerView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.coverView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.coverView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.synopsisLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.synopsisLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -84,6 +85,7 @@
 }
 
 - (void)loadNovelInfoFromDatabase {
+    [self updateNovelCover];
     self.volumes = [[self.novel.volumes allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]]];
     self.synopsisLabel.text = self.novel.synopsis;
     [self updateHeaderSize];
@@ -105,6 +107,18 @@
 
 #pragma mark - Private Methods
 
+- (void)updateNovelCover {
+    if (self.novel.cover) {
+        __weak typeof(self) weakSelf = self;
+        [self.novel.cover fetchImageIfNeededWithCompletion:^(UIImage *image) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                weakSelf.coverView.image = image;
+                [weakSelf updateHeaderSize];
+            }];
+        }];
+    }
+}
+
 - (void)updateNovelTableView {
     if ([self.delegate respondsToSelector:@selector(novelDetailViewController:didFetchNovel:)]) {
         [self.delegate novelDetailViewController:self didFetchNovel:self.novel];
@@ -118,7 +132,15 @@
 }
 
 - (void)recalculateHeaderFrames {
-    self.synopsisLabel.frame = CGRectMake(20, 20, self.view.frame.size.width - 40, 0);
+    if (self.coverView.image) {
+        CGFloat dimensionRatio = self.view.bounds.size.width / self.coverView.image.size.width;
+        
+        self.coverView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.coverView.image.size.height * dimensionRatio);
+    } else {
+        self.coverView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0);
+    }
+    
+    self.synopsisLabel.frame = CGRectMake(20, self.coverView.bounds.size.height + 20, self.view.frame.size.width - 40, 0);
     [self.synopsisLabel calculateHeight];
     self.headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.synopsisLabel.frame.origin.y + self.synopsisLabel.frame.size.height);
 }

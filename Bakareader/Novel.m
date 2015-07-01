@@ -10,6 +10,13 @@
 
 @implementation Novel
 
-// Custom logic goes here.
+- (void)deleteVolumes {
+    for (Volume *volume in self.volumes.allObjects) {
+        [volume deleteChapters];
+        [[CoreDataController context] deleteObject:volume];
+    }
+    
+    [CoreDataController saveContext];
+}
 
 @end

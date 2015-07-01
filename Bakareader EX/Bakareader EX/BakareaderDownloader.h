@@ -14,7 +14,7 @@
 
 + (BakaReaderDownloader *)sharedInstance;
 
-- (void)downloadImageFromUrl:(NSString *)imageUrl withCompletion:(void (^)(BOOL, UIImage *image))completionBlock;
+- (void)downloadImage:(Image *)image withCompletion:(void (^)(BOOL))completionBlock;
 - (void)downloadChapter:(Chapter *)chapter withCompletion:(void (^)(BOOL))completionBlock;
 - (void)downloadNovelDetails:(Novel *)novel withCompletion:(void (^)(BOOL))completionBlock;
 - (void)downloadNovelListWithCompletion:(void (^)(BOOL))completionBlock;

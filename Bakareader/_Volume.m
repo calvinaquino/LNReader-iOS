@@ -11,6 +11,7 @@ const struct VolumeAttributes VolumeAttributes = {
 
 const struct VolumeRelationships VolumeRelationships = {
 	.chapters = @"chapters",
+	.cover = @"cover",
 	.novel = @"novel",
 };
 
@@ -83,6 +84,8 @@ const struct VolumeRelationships VolumeRelationships = {
 	[self didAccessValueForKey:@"chapters"];
 	return result;
 }
+
+@dynamic cover;
 
 @dynamic novel;
 

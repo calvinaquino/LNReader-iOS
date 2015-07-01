@@ -118,7 +118,7 @@
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     Novel *novel = weakSelf.novels[indexPath.row];
-    BOOL canDownload = !novel.fetchedValue;
+    BOOL isDownloaded = novel.fetchedValue;
     NSString *favoriteTitle = novel.favoriteValue ? @"Unfavorite" : @"Favorite";
     
     UITableViewRowAction *favoriteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:favoriteTitle handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
@@ -129,19 +129,35 @@
     }];
     favoriteAction.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
     
-    UITableViewRowAction *downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        Novel *novel = weakSelf.novels[indexPath.row];
-        [[BakaReaderDownloader sharedInstance] downloadNovelDetails:novel withCompletion:^(BOOL success) {
-            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
-        [weakSelf.tableView setEditing:NO animated:YES];
-    }];
     
-    if (!canDownload) {
-        return @[favoriteAction];
+    UITableViewRowAction *downloadAction = nil;
+    if (isDownloaded) {
+        downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            Novel *novel = weakSelf.novels[indexPath.row];
+            
+            novel.fetchedValue = NO;
+            [novel.cover deleteImageFile];
+            [[CoreDataController context] deleteObject:novel.cover];
+            novel.synopsis = nil;
+            [novel deleteVolumes];
+            
+            [CoreDataController saveContext];
+            
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [weakSelf.tableView setEditing:NO animated:YES];
+        }];
     } else {
-        return @[favoriteAction, downloadAction];
+        downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            Novel *novel = weakSelf.novels[indexPath.row];
+            [[BakaReaderDownloader sharedInstance] downloadNovelDetails:novel withCompletion:^(BOOL success) {
+                [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
+            [weakSelf.tableView setEditing:NO animated:YES];
+        }];
     }
+   
+    
+    return @[favoriteAction, downloadAction];
 }
 
 

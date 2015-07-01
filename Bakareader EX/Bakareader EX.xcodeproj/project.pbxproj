@@ -34,6 +34,8 @@
 		985955C21B42342A007D761A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955C11B42342A007D761A /* UIColor+Hex.m */; };
 		985955C51B423A6A007D761A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985955C41B423A6A007D761A /* WebKit.framework */; };
 		985955C81B423E71007D761A /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955C71B423E71007D761A /* ImageViewerController.m */; };
+		985955CB1B436FAB007D761A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CA1B436FAB007D761A /* Image.m */; };
+		985955CE1B436FB5007D761A /* _Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CD1B436FB5007D761A /* _Image.m */; };
 		9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */; };
 		98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A257201A003F4C008767C5 /* UIView+Constraints.m */; };
 		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
@@ -109,6 +111,10 @@
 		985955C41B423A6A007D761A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		985955C61B423E71007D761A /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
 		985955C71B423E71007D761A /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
+		985955C91B436FAB007D761A /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ../../Bakareader/Image.h; sourceTree = "<group>"; };
+		985955CA1B436FAB007D761A /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Image.m; path = ../../Bakareader/Image.m; sourceTree = "<group>"; };
+		985955CC1B436FB5007D761A /* _Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Image.h; path = ../../Bakareader/_Image.h; sourceTree = "<group>"; };
+		985955CD1B436FB5007D761A /* _Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Image.m; path = ../../Bakareader/_Image.m; sourceTree = "<group>"; };
 		9881F8D51A3361DB00DEC7ED /* UILabel+SizeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+SizeUtils.h"; sourceTree = "<group>"; };
 		9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeUtils.m"; sourceTree = "<group>"; };
 		98A2571F1A003F4C008767C5 /* UIView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraints.h"; sourceTree = "<group>"; };
@@ -278,6 +284,8 @@
 				983A079819FC3C0E0056D0A9 /* Novel.m */,
 				983A079919FC3C0E0056D0A9 /* Volume.h */,
 				983A079A19FC3C0E0056D0A9 /* Volume.m */,
+				985955C91B436FAB007D761A /* Image.h */,
+				985955CA1B436FAB007D761A /* Image.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -291,6 +299,8 @@
 				983A079219FC3C0E0056D0A9 /* _Novel.m */,
 				983A079319FC3C0E0056D0A9 /* _Volume.h */,
 				983A079419FC3C0E0056D0A9 /* _Volume.m */,
+				985955CC1B436FB5007D761A /* _Image.h */,
+				985955CD1B436FB5007D761A /* _Image.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -517,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
+				985955CB1B436FAB007D761A /* Image.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
 				98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
@@ -536,6 +547,7 @@
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
 				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
 				98C175511AB35D2B00A1737C /* ExternalContentViewController.m in Sources */,
+				985955CE1B436FB5007D761A /* _Image.m in Sources */,
 				983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */,
 				983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */,
 				983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */,
