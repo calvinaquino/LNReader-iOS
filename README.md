@@ -1,11 +1,24 @@
-LNReader-iOS
+BakaReader EX iOS
 ============
 
-bakareader EX for iOS
+ - v0.1 (not counting yet)
 
-TODO
-====
+App Requirements
+================
 
- - Create coreData structure and add mogen
- - Add Hpple and PKReveal libs
+ - iOS 8
+
+Development Requirements
+========================
+
+ - Cocoa Pods
+ - AFNetworking
+
+TODO - MVP
+==========
+
+ - New Interface
+ - Downloaded images list
+ - Reading progression logic (save scroll position)
+ - Resume reading feature
 
