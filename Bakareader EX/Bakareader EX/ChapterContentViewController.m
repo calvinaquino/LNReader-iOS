@@ -40,6 +40,13 @@
     [self loadChapterContent];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [CoreDataController user].lastChapterRead = self.chapter;
+    [CoreDataController saveContext];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self saveReadingProgression];
@@ -77,10 +84,6 @@
         [weakSelf.webView loadHTMLString:[weakSelf chapterContent] baseURL:[NSURL URLWithString:kBakaTsukiBaseUrl]];
         [weakSelf.webView setNeedsDisplay];
     }];
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [weakSelf loadReadingProgression];
-    }];
-
 }
 
 - (void)loadContentFromInternet {
@@ -96,14 +99,16 @@
 }
 
 - (void)loadReadingProgression {
-//    CGFloat heightOffset = self.chapter.readingProgressionValue * (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
-//    self.webView.scrollView.contentOffset = CGPointMake(self.webView.scrollView.contentOffset.x, heightOffset);
+    CGFloat heightOffset = self.chapter.readingProgressionValue * (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
+    if (heightOffset > 1) {
+        self.webView.scrollView.contentOffset = CGPointMake(self.webView.scrollView.contentOffset.x, heightOffset);
+    }
 }
 
 - (void)saveReadingProgression {
-//    CGFloat progression = self.webView.scrollView.contentOffset.y / (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
-//    self.chapter.readingProgressionValue = progression;
-//    [CoreDataController saveContext];
+    CGFloat progression = self.webView.scrollView.contentOffset.y / (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
+    self.chapter.readingProgressionValue = progression;
+    [CoreDataController saveContext];
 }
 
 
@@ -127,6 +132,12 @@
 
 
 #pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self loadReadingProgression];
+    }];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString *requestUrl = [request.URL absoluteString];

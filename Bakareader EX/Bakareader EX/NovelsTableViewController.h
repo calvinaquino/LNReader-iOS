@@ -11,6 +11,7 @@
 @interface NovelsTableViewController : UITableViewController
 
 - (instancetype)initWithFavorites;
+- (instancetype)initResuminngChapter;
 
 @end
 

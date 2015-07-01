@@ -11,5 +11,6 @@
 @interface ChaptersTableViewController : UITableViewController
 
 - (instancetype)initWithVolume:(Volume *)volume;
+- (instancetype)initResumingChapter;
 
 @end

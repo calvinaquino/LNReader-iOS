@@ -90,6 +90,17 @@
 
 #pragma mark - Database Manipulation
 
++ (User *)user {
+    User *user = nil;
+    if (![CoreDataController countRecordsOfClass:[User class] usingPredicate:nil]) {
+        user = [User insertInManagedObjectContext:[CoreDataController context]];
+    } else {
+        user = [[CoreDataController findRecordsEntityNamed:[User entityName] usingPredicate:nil] firstObject];
+    }
+    
+    return user;
+}
+
 + (Chapter *)newChapter {
     return [Chapter insertInManagedObjectContext:[CoreDataController context]];
 }

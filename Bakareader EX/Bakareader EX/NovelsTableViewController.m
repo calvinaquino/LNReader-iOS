@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign) BOOL onlyFavorites;
 @property (nonatomic, strong) NSArray *novels;
+@property (nonatomic, assign) BOOL resumingChapter;
 
 @end
 
@@ -25,6 +26,16 @@
     if (self) {
         self.title = @"Favorites";
         self.onlyFavorites = YES;
+        self.resumingChapter = NO;
+    }
+    
+    return self;
+}
+
+- (instancetype)initResuminngChapter {
+    self = [self init];
+    if (self) {
+        self.resumingChapter = YES;
     }
     
     return self;
@@ -35,6 +46,7 @@
     if (self) {
         self.title = @"Light Novels";
         self.onlyFavorites = NO;
+        self.resumingChapter = NO;
     }
     
     return self;
@@ -49,6 +61,18 @@
     self.refreshControl = refresh;
     
     [self loadList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.resumingChapter) {
+        
+        NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initResumingChapter];
+        novelDetailViewController.delegate = self;
+        [self.navigationController pushViewController:novelDetailViewController animated:NO];
+        self.resumingChapter = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -19,15 +19,27 @@
 @property (nonatomic, strong) UIImageView *coverView;
 @property (nonatomic, strong) UILabel *synopsisLabel;
 
+@property (nonatomic, assign) BOOL resumingChapter;
+
 @end
 
 @implementation NovelDetailViewController
+
+- (instancetype)initResumingChapter {
+    self = [self initWithNovel:[CoreDataController user].lastChapterRead.volume.novel];
+    if (self) {
+        self.resumingChapter = YES;
+    }
+    
+    return self;
+}
 
 - (instancetype)initWithNovel:(Novel *)novel {
     self = [super init];
     if (self) {
         self.novel = novel;
         self.title = novel.title;
+        self.resumingChapter = NO;
     }
     
     return self;
@@ -66,6 +78,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadNovelInfo];
+    if (self.resumingChapter) {
+        ChaptersTableViewController *chaptersViewController = [[ChaptersTableViewController alloc] initResumingChapter];
+        [self.navigationController pushViewController:chaptersViewController animated:NO];
+        self.resumingChapter = NO;
+    }
 }
 
 - (void)viewDidLayoutSubviews {

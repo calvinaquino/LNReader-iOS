@@ -36,6 +36,8 @@
 		985955C81B423E71007D761A /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955C71B423E71007D761A /* ImageViewerController.m */; };
 		985955CB1B436FAB007D761A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CA1B436FAB007D761A /* Image.m */; };
 		985955CE1B436FB5007D761A /* _Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CD1B436FB5007D761A /* _Image.m */; };
+		985955D11B439F08007D761A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955D01B439F08007D761A /* User.m */; };
+		985955D41B439F16007D761A /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955D31B439F16007D761A /* _User.m */; };
 		9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */; };
 		98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A257201A003F4C008767C5 /* UIView+Constraints.m */; };
 		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
@@ -115,6 +117,10 @@
 		985955CA1B436FAB007D761A /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Image.m; path = ../../Bakareader/Image.m; sourceTree = "<group>"; };
 		985955CC1B436FB5007D761A /* _Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Image.h; path = ../../Bakareader/_Image.h; sourceTree = "<group>"; };
 		985955CD1B436FB5007D761A /* _Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Image.m; path = ../../Bakareader/_Image.m; sourceTree = "<group>"; };
+		985955CF1B439F08007D761A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../../Bakareader/User.h; sourceTree = "<group>"; };
+		985955D01B439F08007D761A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../../Bakareader/User.m; sourceTree = "<group>"; };
+		985955D21B439F16007D761A /* _User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _User.h; path = ../../Bakareader/_User.h; sourceTree = "<group>"; };
+		985955D31B439F16007D761A /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _User.m; path = ../../Bakareader/_User.m; sourceTree = "<group>"; };
 		9881F8D51A3361DB00DEC7ED /* UILabel+SizeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+SizeUtils.h"; sourceTree = "<group>"; };
 		9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeUtils.m"; sourceTree = "<group>"; };
 		98A2571F1A003F4C008767C5 /* UIView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraints.h"; sourceTree = "<group>"; };
@@ -286,6 +292,8 @@
 				983A079A19FC3C0E0056D0A9 /* Volume.m */,
 				985955C91B436FAB007D761A /* Image.h */,
 				985955CA1B436FAB007D761A /* Image.m */,
+				985955CF1B439F08007D761A /* User.h */,
+				985955D01B439F08007D761A /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -301,6 +309,8 @@
 				983A079419FC3C0E0056D0A9 /* _Volume.m */,
 				985955CC1B436FB5007D761A /* _Image.h */,
 				985955CD1B436FB5007D761A /* _Image.m */,
+				985955D21B439F16007D761A /* _User.h */,
+				985955D31B439F16007D761A /* _User.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -526,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				985955D41B439F16007D761A /* _User.m in Sources */,
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				985955CB1B436FAB007D761A /* Image.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
@@ -537,6 +548,7 @@
 				983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */,
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
 				983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */,
+				985955D11B439F08007D761A /* User.m in Sources */,
 				9826FEBC1AB0A1A3006719EA /* ChaptersTableViewController.m in Sources */,
 				98C1755B1AB6358400A1737C /* BakaReaderDownloader.m in Sources */,
 				983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */,

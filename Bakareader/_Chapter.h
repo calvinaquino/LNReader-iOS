@@ -7,6 +7,7 @@ extern const struct ChapterAttributes {
 	__unsafe_unretained NSString *content;
 	__unsafe_unretained NSString *fetched;
 	__unsafe_unretained NSString *isExternal;
+	__unsafe_unretained NSString *lastRead;
 	__unsafe_unretained NSString *order;
 	__unsafe_unretained NSString *readingProgression;
 	__unsafe_unretained NSString *title;
@@ -15,10 +16,12 @@ extern const struct ChapterAttributes {
 
 extern const struct ChapterRelationships {
 	__unsafe_unretained NSString *images;
+	__unsafe_unretained NSString *user;
 	__unsafe_unretained NSString *volume;
 } ChapterRelationships;
 
 @class Image;
+@class User;
 @class Volume;
 
 @interface ChapterID : NSManagedObjectID {}
@@ -50,6 +53,10 @@ extern const struct ChapterRelationships {
 
 //- (BOOL)validateIsExternal:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSDate* lastRead;
+
+//- (BOOL)validateLastRead:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSNumber* order;
 
 @property (atomic) int16_t orderValue;
@@ -77,6 +84,10 @@ extern const struct ChapterRelationships {
 @property (nonatomic, strong) NSSet *images;
 
 - (NSMutableSet*)imagesSet;
+
+@property (nonatomic, strong) User *user;
+
+//- (BOOL)validateUser:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) Volume *volume;
 
@@ -109,6 +120,9 @@ extern const struct ChapterRelationships {
 - (BOOL)primitiveIsExternalValue;
 - (void)setPrimitiveIsExternalValue:(BOOL)value_;
 
+- (NSDate*)primitiveLastRead;
+- (void)setPrimitiveLastRead:(NSDate*)value;
+
 - (NSNumber*)primitiveOrder;
 - (void)setPrimitiveOrder:(NSNumber*)value;
 
@@ -129,6 +143,9 @@ extern const struct ChapterRelationships {
 
 - (NSMutableSet*)primitiveImages;
 - (void)setPrimitiveImages:(NSMutableSet*)value;
+
+- (User*)primitiveUser;
+- (void)setPrimitiveUser:(User*)value;
 
 - (Volume*)primitiveVolume;
 - (void)setPrimitiveVolume:(Volume*)value;

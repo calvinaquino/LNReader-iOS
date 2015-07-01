@@ -7,6 +7,7 @@ const struct ChapterAttributes ChapterAttributes = {
 	.content = @"content",
 	.fetched = @"fetched",
 	.isExternal = @"isExternal",
+	.lastRead = @"lastRead",
 	.order = @"order",
 	.readingProgression = @"readingProgression",
 	.title = @"title",
@@ -15,6 +16,7 @@ const struct ChapterAttributes ChapterAttributes = {
 
 const struct ChapterRelationships ChapterRelationships = {
 	.images = @"images",
+	.user = @"user",
 	.volume = @"volume",
 };
 
@@ -110,6 +112,8 @@ const struct ChapterRelationships ChapterRelationships = {
 	[self setPrimitiveIsExternal:[NSNumber numberWithBool:value_]];
 }
 
+@dynamic lastRead;
+
 @dynamic order;
 
 - (int16_t)orderValue {
@@ -164,6 +168,8 @@ const struct ChapterRelationships ChapterRelationships = {
 	[self didAccessValueForKey:@"images"];
 	return result;
 }
+
+@dynamic user;
 
 @dynamic volume;
 

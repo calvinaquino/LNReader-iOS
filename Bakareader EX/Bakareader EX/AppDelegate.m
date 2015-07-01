@@ -25,8 +25,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     MenuViewController *menuViewController = [[MenuViewController alloc] init];
-//    NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] init];
-    
     
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     [self.window makeKeyAndVisible];

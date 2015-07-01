@@ -39,9 +39,21 @@
 }
 
 - (void)setupMenuCellTitles {
-    self.cellTitles = @[@"Light Novels", @"Favorites"];
+    self.cellTitles = @[@"Light Novels", @"Favorites", @"Resume"];
 }
 
+- (NSString *)subtitleForResumeCell {
+    NSString *subtitle = nil;
+    Chapter *lastReadChapter = [CoreDataController user].lastChapterRead;
+    if (lastReadChapter) {
+        Volume *lastReadVolume = lastReadChapter.volume;
+        Novel *lastReadNovel = lastReadVolume.novel;
+        
+        subtitle = [NSString stringWithFormat:@"%@ %@ %@", lastReadNovel.title, lastReadVolume.title, lastReadChapter.title];
+    }
+    
+    return subtitle;
+}
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 
@@ -60,6 +72,9 @@
     } else if (indexPath.row == 1) {
         NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initWithFavorites];
         [self.navigationController pushViewController:novelsTableViewController animated:YES];
+    } else if (indexPath.row == 2) {
+        NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
+        [self.navigationController pushViewController:novelsTableViewController animated:YES];
     }
 }
 
@@ -67,6 +82,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
     
     cell.textLabel.text = self.cellTitles[indexPath.row];
+    if (indexPath.row == 2) {
+        cell.detailTextLabel.text = [self subtitleForResumeCell];
+    } else {
+        cell.detailTextLabel.text = nil;
+    }
     
     return cell;
 }

@@ -15,15 +15,26 @@
 
 @property (nonatomic, strong) Volume *volume;
 @property (nonatomic, strong) NSArray *chapters;
+@property (nonatomic, assign) BOOL resumingChapter;
 
 @end
 
 @implementation ChaptersTableViewController
 
+- (instancetype)initResumingChapter {
+    self = [self initWithVolume:[CoreDataController user].lastChapterRead.volume];
+    if (self) {
+        self.resumingChapter = YES;
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithVolume:(Volume *)volume {
     self = [super init];
     if (self) {
         self.volume = volume;
+        self.resumingChapter = NO;
     }
     
     return self;
@@ -37,6 +48,24 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.resumingChapter) {
+        Chapter *chapter = [CoreDataController user].lastChapterRead;
+        if (chapter.isExternalValue) {
+            ExternalContentViewController *externalContentViewController = [[ExternalContentViewController alloc] initWithChapter:chapter];
+            externalContentViewController.delegate = self;
+            [self.navigationController pushViewController:externalContentViewController animated:NO];
+        } else {
+            ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
+            chapterContentViewController.delegate = self;
+            [self.navigationController pushViewController:chapterContentViewController animated:NO];
+        }
+        self.resumingChapter = NO;
+    }
 }
 
 

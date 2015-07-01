@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Novel, Volume, Chapter, Image;
+@class Novel, Volume, Chapter, Image, User;
 
 @interface CoreDataController : NSObject
 
@@ -20,6 +20,8 @@
 + (CoreDataController *)sharedInstance;
 + (NSManagedObjectContext *)context;
 + (void)saveContext;
+
++ (User *)user;
 
 + (Novel *)newNovel;
 + (Volume *)newVolume;

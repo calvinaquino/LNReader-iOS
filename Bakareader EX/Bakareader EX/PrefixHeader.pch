@@ -17,6 +17,7 @@
 #import "BakareaderDownloader.h"
 #import "Constants.h"
 
+#import "User.h"
 #import "Novel.h"
 #import "Volume.h"
 #import "Chapter.h"
