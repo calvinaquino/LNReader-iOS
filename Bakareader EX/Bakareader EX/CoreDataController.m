@@ -102,8 +102,17 @@
     return [Volume insertInManagedObjectContext:[CoreDataController context]];
 }
 
++ (Image *)newImage {
+    return [Image insertInManagedObjectContext:[CoreDataController context]];
+}
+
 + (NSArray *)allNovels {
     return [CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:nil];
+}
+
++ (NSArray *)favoriteNovels {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"favorite == YES"];
+    return [CoreDataController findRecordsEntityNamed:[Novel entityName] usingPredicate:predicate];
 }
 
 + (NSArray *)allChaptersForVolume:(Volume *)volume {

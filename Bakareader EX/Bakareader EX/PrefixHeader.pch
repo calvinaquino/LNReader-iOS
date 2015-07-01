@@ -10,14 +10,16 @@
 #define Bakareader_EX_PrefixHeader_pch
 
 #import "UIView+Constraints.h"
+#import "UIColor+Hex.h"
 #import "UILabel+SizeUtils.h"
 
 #import "CoreDataController.h"
-#import "PKRevealController.h"
+#import "BakareaderDownloader.h"
 #import "Constants.h"
 
 #import "Novel.h"
 #import "Volume.h"
 #import "Chapter.h"
+#import "Image.h"
 
 #endif

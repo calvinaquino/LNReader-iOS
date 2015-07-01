@@ -4,7 +4,6 @@
 #import "_Novel.h"
 
 const struct NovelAttributes NovelAttributes = {
-	.coverImageName = @"coverImageName",
 	.favorite = @"favorite",
 	.fetched = @"fetched",
 	.lastUpdated = @"lastUpdated",
@@ -14,10 +13,8 @@ const struct NovelAttributes NovelAttributes = {
 };
 
 const struct NovelRelationships NovelRelationships = {
+	.cover = @"cover",
 	.volumes = @"volumes",
-};
-
-const struct NovelFetchedProperties NovelFetchedProperties = {
 };
 
 @implementation NovelID
@@ -45,7 +42,7 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"favoriteValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"favorite"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -60,19 +57,7 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
-@dynamic coverImageName;
-
-
-
-
-
-
 @dynamic favorite;
-
-
 
 - (BOOL)favoriteValue {
 	NSNumber *result = [self favorite];
@@ -92,13 +77,7 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 	[self setPrimitiveFavorite:[NSNumber numberWithBool:value_]];
 }
 
-
-
-
-
 @dynamic fetched;
-
-
 
 - (BOOL)fetchedValue {
 	NSNumber *result = [self fetched];
@@ -118,54 +97,26 @@ const struct NovelFetchedProperties NovelFetchedProperties = {
 	[self setPrimitiveFetched:[NSNumber numberWithBool:value_]];
 }
 
-
-
-
-
 @dynamic lastUpdated;
-
-
-
-
-
 
 @dynamic synopsis;
 
-
-
-
-
-
 @dynamic title;
-
-
-
-
-
 
 @dynamic url;
 
-
-
-
-
+@dynamic cover;
 
 @dynamic volumes;
 
-	
 - (NSMutableSet*)volumesSet {
 	[self willAccessValueForKey:@"volumes"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"volumes"];
-  
+
 	[self didAccessValueForKey:@"volumes"];
 	return result;
 }
-	
-
-
-
-
-
 
 @end
+

@@ -5,16 +5,17 @@
 
 const struct ChapterAttributes ChapterAttributes = {
 	.content = @"content",
+	.fetched = @"fetched",
+	.isExternal = @"isExternal",
 	.order = @"order",
+	.readingProgression = @"readingProgression",
 	.title = @"title",
 	.url = @"url",
 };
 
 const struct ChapterRelationships ChapterRelationships = {
+	.images = @"images",
 	.volume = @"volume",
-};
-
-const struct ChapterFetchedProperties ChapterFetchedProperties = {
 };
 
 @implementation ChapterID
@@ -42,9 +43,24 @@ const struct ChapterFetchedProperties ChapterFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
+	if ([key isEqualToString:@"fetchedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"fetched"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"isExternalValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isExternal"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"orderValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"order"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"readingProgressionValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"readingProgression"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -52,19 +68,49 @@ const struct ChapterFetchedProperties ChapterFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
 @dynamic content;
 
+@dynamic fetched;
 
+- (BOOL)fetchedValue {
+	NSNumber *result = [self fetched];
+	return [result boolValue];
+}
 
+- (void)setFetchedValue:(BOOL)value_ {
+	[self setFetched:[NSNumber numberWithBool:value_]];
+}
 
+- (BOOL)primitiveFetchedValue {
+	NSNumber *result = [self primitiveFetched];
+	return [result boolValue];
+}
 
+- (void)setPrimitiveFetchedValue:(BOOL)value_ {
+	[self setPrimitiveFetched:[NSNumber numberWithBool:value_]];
+}
+
+@dynamic isExternal;
+
+- (BOOL)isExternalValue {
+	NSNumber *result = [self isExternal];
+	return [result boolValue];
+}
+
+- (void)setIsExternalValue:(BOOL)value_ {
+	[self setIsExternal:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsExternalValue {
+	NSNumber *result = [self primitiveIsExternal];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsExternalValue:(BOOL)value_ {
+	[self setPrimitiveIsExternal:[NSNumber numberWithBool:value_]];
+}
 
 @dynamic order;
-
-
 
 - (int16_t)orderValue {
 	NSNumber *result = [self order];
@@ -84,31 +130,42 @@ const struct ChapterFetchedProperties ChapterFetchedProperties = {
 	[self setPrimitiveOrder:[NSNumber numberWithShort:value_]];
 }
 
+@dynamic readingProgression;
 
+- (float)readingProgressionValue {
+	NSNumber *result = [self readingProgression];
+	return [result floatValue];
+}
 
+- (void)setReadingProgressionValue:(float)value_ {
+	[self setReadingProgression:[NSNumber numberWithFloat:value_]];
+}
 
+- (float)primitiveReadingProgressionValue {
+	NSNumber *result = [self primitiveReadingProgression];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveReadingProgressionValue:(float)value_ {
+	[self setPrimitiveReadingProgression:[NSNumber numberWithFloat:value_]];
+}
 
 @dynamic title;
 
-
-
-
-
-
 @dynamic url;
 
+@dynamic images;
 
+- (NSMutableSet*)imagesSet {
+	[self willAccessValueForKey:@"images"];
 
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"images"];
 
-
+	[self didAccessValueForKey:@"images"];
+	return result;
+}
 
 @dynamic volume;
 
-	
-
-
-
-
-
-
 @end
+

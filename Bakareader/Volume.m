@@ -10,6 +10,13 @@
 
 @implementation Volume
 
-// Custom logic goes here.
+- (void)deleteChapters {
+    for (Chapter *chapter in self.chapters.allObjects) {
+        [chapter deleteImages];
+        [[CoreDataController context] deleteObject:chapter];
+    }
+    
+    [CoreDataController saveContext];
+}
 
 @end

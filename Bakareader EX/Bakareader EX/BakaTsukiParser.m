@@ -28,10 +28,8 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
 
 @implementation BakaTsukiParser
 
-+ (void)fetchNovelList {
-    NSData *btHtmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:kBakaTsukiMainUrlEnglish]];
-    
-    RXMLElement *element = [RXMLElement elementFromHTMLData:btHtmlData];
++ (void)parseNovelListFromData:(NSData *)data {
+    RXMLElement *element = [RXMLElement elementFromHTMLData:data];
     NSArray *btNodes = [element childrenWithRootXPath:kXPATHMainNovelList];
     
     for (RXMLElement *element in btNodes) {
@@ -59,20 +57,43 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     return novelcoverURLFromElement([RXMLElement elementFromXMLData:novelData]);
 }
 
-+ (void)fetchNovelInfo:(Novel *)novel {
-    NSData *novelData = [NSData dataWithContentsOfURL:[NSURL URLWithString:novel.url]];
-    [BakaTsukiParser parseNovelSynopsisWithData:novelData forNovel:novel];
-    [BakaTsukiParser parseNovelVolumesWithData:novelData forNovel:novel];
++ (void)parseNovelInfo:(Novel *)novel fromData:(NSData *)data{
+    [BakaTsukiParser parseNovelCoverImageFileUrlWithData:data forNovel:novel];
+    [BakaTsukiParser parseNovelSynopsisWithData:data forNovel:novel];
+    [BakaTsukiParser parseNovelVolumesWithData:data forNovel:novel];
 }
 
-+ (void)fetchChapterContent:(Chapter *)chapter {
-    NSData *chapterData = [NSData dataWithContentsOfURL:[NSURL URLWithString:chapter.url]];
-    chapter.content = [BakaTsukiParser parseChapterContentWithData:chapterData];
++ (void)parseChapterContent:(Chapter *)chapter fromData:(NSData *)data {
+    chapter.content = [BakaTsukiParser parseChapterContentWithData:data];
+    chapter.fetchedValue = YES;
     [CoreDataController saveContext];
 }
 
++ (void)parseNovelCoverImageFileUrlWithData:(NSData *)novelData forNovel:(Novel *)novel {
+    RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
+    
+    NSArray *children = [novelXMLRoot childrenWithRootXPath:@"//*[@class='thumbinner']/a"];
+    NSString *imageUrl = @"";
+    if (children.count) {
+        RXMLElement *child = [children firstObject];
+        imageUrl = [child attribute:@"href"];
+    }
+    
+    if (imageUrl) {
+        if (novel.cover) {
+            [novel.cover deleteImageFile];
+            [[CoreDataController context] deleteObject:novel.cover];
+        }
+        Image *cover = [CoreDataController newImage];
+        cover.url = [NSString stringWithFormat:@"%@%@", kBakaTsukiBaseUrl, imageUrl];
+        cover.fileUrl = nil;
+        novel.cover = cover;
+        
+        [CoreDataController saveContext];
+    }
+}
 
-+ (void)parseNovelSynopsisWithData:(NSData*)novelData forNovel:(Novel*)novel {
++ (void)parseNovelSynopsisWithData:(NSData *)novelData forNovel:(Novel *)novel {
     RXMLElement *novelXMLRoot = [RXMLElement elementFromXMLData:novelData];
     
     __block BOOL parseSynopsis = NO;
@@ -119,10 +140,38 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     [novelXMLRoot iterateWithRootXPath:@"//*/a" usingBlock:^(RXMLElement *element) {
         for (NSString *attributeName in element.attributeNames) {
             NSString *content = [element attribute:attributeName];
+            BOOL isExternal = [content containsString:@"external"];
             
-            NSLog(@"content %@", content);
-            
-            if ([content containsString:@"/project/index.php?title="] || [content containsString:@"external"]) {
+            if (isExternal) {
+                NSString *text = element.text;
+                if ([self checkForNames:@[@"Chapter", @"chapter"] inString:text]) {
+                    if ([self checkStringForUndesiredContent:text]) {
+                        break;
+                    }
+                    if ([self checkStringForDesiredContent:text]) {
+                        if (!currentVolume) {
+                            currentVolume = [CoreDataController newVolume];
+                            currentVolume.orderValue = volumeOrder;
+                            currentVolume.title = @"External";
+                            volumeOrder++;
+                            [volumes addObject:currentVolume];
+                            chapterOrder = 0;
+                        }
+                        Chapter *chapter = [CoreDataController newChapter];
+                        chapter.orderValue = chapterOrder;
+                        chapter.isExternalValue = YES;
+                        chapterOrder++;
+                        
+                        chapter.title = text;
+                        chapter.volume = currentVolume;
+                        
+                        chapter.url = [element attribute:@"href"];
+                        
+                        [currentVolume.chaptersSet addObject:chapter];
+                    }
+                }
+                
+            } else if ([content containsString:@"/project/index.php?title="]) {
                 if ([self checkForNames:[self getArrayOfPossibleNamesFor:novelNameSimple] inString:content]) {
                     
                     if ([self checkStringForUndesiredContent:content]) {
@@ -135,10 +184,6 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
                         }
                         
                         if (!currentVolume || ![currentVolume.title isEqualToString:currentInfo[@"volume"]]) {
-//                            if (currentVolume && chapters.count) {
-//                                [currentVolume addChapters:[NSSet setWithArray:chapters]];
-//                                chapters = [[NSMutableArray alloc] init];
-//                            }
                             currentVolume = [CoreDataController newVolume];
                             currentVolume.orderValue = volumeOrder;
                             currentVolume.title = currentInfo[@"volume"];
@@ -159,7 +204,6 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
                             chapter.title = @"Chapter";
                         }
                         
-//                        [chapters addObject:chapter];
                         [currentVolume.chaptersSet addObject:chapter];
                     }
                 }
@@ -180,16 +224,22 @@ NS_RETURNS_NOT_RETAINED NSURL* novelcoverURLFromElement(RXMLElement* element) {
     [CoreDataController saveContext];
 }
 
++ (NSString *)imageSourceUrlFromData:(NSData *)data {
+    RXMLElement *root = [RXMLElement elementFromHTMLData:data];
+    
+    NSArray *children = [root childrenWithRootXPath:@"//*[@id='file']/a"];
+    NSString *imageUrl = @"";
+    if (children.count) {
+        RXMLElement *child = [children firstObject];
+        imageUrl = [child attribute:@"href"];
+        NSLog(@"image url %@", imageUrl);
+    }
+    
+    return imageUrl;
+}
+
 + (NSString *)parseChapterContentWithData:(NSData*)chapterContent {
-    RXMLElement *chapterXMLRoot = [RXMLElement elementFromXMLData:chapterContent];
-    
-    NSMutableString *content = [[NSMutableString alloc] init];
-    
-    [chapterXMLRoot iterateWithRootXPath:@"//*[@id='mw-content-text']/*" usingBlock: ^(RXMLElement *element) {
-        [content appendString:@"\n"];
-        [content appendString:element.text];
-    }];
-    return content;
+    return [[NSString alloc] initWithData:chapterContent encoding:NSUTF8StringEncoding];
 }
 
 //Strings that might interest us.

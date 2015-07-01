@@ -15,7 +15,6 @@
 		983A075F19FC2F400056D0A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983A075E19FC2F400056D0A9 /* Images.xcassets */; };
 		983A076E19FC2F400056D0A9 /* Bakareader_EXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */; };
 		983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A077A19FC30D00056D0A9 /* CoreDataController.m */; };
-		983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 983A078619FC353C0056D0A9 /* libPKRevealController.a */; };
 		983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079019FC3C0E0056D0A9 /* _Chapter.m */; };
 		983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079219FC3C0E0056D0A9 /* _Novel.m */; };
 		983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079419FC3C0E0056D0A9 /* _Volume.m */; };
@@ -32,10 +31,18 @@
 		983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */; };
 		983A07C219FC92A00056D0A9 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C119FC92A00056D0A9 /* MenuViewController.m */; };
 		983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */; };
+		985955C21B42342A007D761A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955C11B42342A007D761A /* UIColor+Hex.m */; };
+		985955C51B423A6A007D761A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985955C41B423A6A007D761A /* WebKit.framework */; };
+		985955C81B423E71007D761A /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955C71B423E71007D761A /* ImageViewerController.m */; };
+		985955CB1B436FAB007D761A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CA1B436FAB007D761A /* Image.m */; };
+		985955CE1B436FB5007D761A /* _Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 985955CD1B436FB5007D761A /* _Image.m */; };
 		9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */; };
 		98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A257201A003F4C008767C5 /* UIView+Constraints.m */; };
-		98C1754A1AB30C8D00A1737C /* ChapterContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */; };
 		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
+		98C175511AB35D2B00A1737C /* ExternalContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C175501AB35D2B00A1737C /* ExternalContentViewController.m */; };
+		98C1755B1AB6358400A1737C /* BakaReaderDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */; };
+		98C1755F1AB63F7C00A1737C /* BakaReaderDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */; };
+		EC563E494273D0255C2D9140 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 995CCF184DA755E2AB4291FA /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +53,10 @@
 			remoteGlobalIDString = 983A074A19FC2F400056D0A9;
 			remoteInfo = "Bakareader EX";
 		};
-		983A078519FC353C0056D0A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F9621E7B1815246000469E41;
-			remoteInfo = PKRevealController;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D8EF5B06181F0D40C09702C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersTableViewController.h; sourceTree = "<group>"; };
 		9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersTableViewController.m; sourceTree = "<group>"; };
 		983A074B19FC2F400056D0A9 /* Bakareader EX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bakareader EX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,9 +74,7 @@
 		983A077919FC30D00056D0A9 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		983A077A19FC30D00056D0A9 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		983A077C19FC32A70056D0A9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PKRevealController.xcodeproj; path = ../PKRevealController/Source/PKRevealController.xcodeproj; sourceTree = "<group>"; };
 		983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PKRevealController.h"; path = "../../PKRevealController/Source/PKRevealController/Categories/UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
-		983A078C19FC36070056D0A9 /* PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PKRevealController.h; path = ../../PKRevealController/Source/PKRevealController/PKRevealController.h; sourceTree = "<group>"; };
 		983A078F19FC3C0E0056D0A9 /* _Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Chapter.h; path = ../../Bakareader/_Chapter.h; sourceTree = "<group>"; };
 		983A079019FC3C0E0056D0A9 /* _Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Chapter.m; path = ../../Bakareader/_Chapter.m; sourceTree = "<group>"; };
 		983A079119FC3C0E0056D0A9 /* _Novel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Novel.h; path = ../../Bakareader/_Novel.h; sourceTree = "<group>"; };
@@ -107,14 +106,29 @@
 		983A07C119FC92A00056D0A9 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NovelDetailViewController.h; sourceTree = "<group>"; };
 		983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NovelDetailViewController.m; sourceTree = "<group>"; };
+		985955C01B42342A007D761A /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		985955C11B42342A007D761A /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		985955C41B423A6A007D761A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		985955C61B423E71007D761A /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
+		985955C71B423E71007D761A /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
+		985955C91B436FAB007D761A /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ../../Bakareader/Image.h; sourceTree = "<group>"; };
+		985955CA1B436FAB007D761A /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Image.m; path = ../../Bakareader/Image.m; sourceTree = "<group>"; };
+		985955CC1B436FB5007D761A /* _Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Image.h; path = ../../Bakareader/_Image.h; sourceTree = "<group>"; };
+		985955CD1B436FB5007D761A /* _Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Image.m; path = ../../Bakareader/_Image.m; sourceTree = "<group>"; };
 		9881F8D51A3361DB00DEC7ED /* UILabel+SizeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+SizeUtils.h"; sourceTree = "<group>"; };
 		9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeUtils.m"; sourceTree = "<group>"; };
 		98A2571F1A003F4C008767C5 /* UIView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraints.h"; sourceTree = "<group>"; };
 		98A257201A003F4C008767C5 /* UIView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Constraints.m"; sourceTree = "<group>"; };
-		98C175481AB30C8D00A1737C /* ChapterContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterContentTableViewController.h; sourceTree = "<group>"; };
-		98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterContentTableViewController.m; sourceTree = "<group>"; };
 		98C1754C1AB3167900A1737C /* ChapterContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterContentViewController.h; sourceTree = "<group>"; };
 		98C1754D1AB3167900A1737C /* ChapterContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterContentViewController.m; sourceTree = "<group>"; };
+		98C1754F1AB35D2B00A1737C /* ExternalContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalContentViewController.h; sourceTree = "<group>"; };
+		98C175501AB35D2B00A1737C /* ExternalContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalContentViewController.m; sourceTree = "<group>"; };
+		98C175591AB6358400A1737C /* BakaReaderDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaReaderDownloader.h; sourceTree = "<group>"; };
+		98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaReaderDownloader.m; sourceTree = "<group>"; };
+		98C1755D1AB63F7C00A1737C /* BakaReaderDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaReaderDownload.h; sourceTree = "<group>"; };
+		98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaReaderDownload.m; sourceTree = "<group>"; };
+		995CCF184DA755E2AB4291FA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		99991A53F28FF1D914552F40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +136,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				985955C51B423A6A007D761A /* WebKit.framework in Frameworks */,
 				983A07BA19FC41C70056D0A9 /* libxml2.dylib in Frameworks */,
 				983A07B819FC41BA0056D0A9 /* libz.dylib in Frameworks */,
-				983A078819FC35610056D0A9 /* libPKRevealController.a in Frameworks */,
+				EC563E494273D0255C2D9140 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +153,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90B9343347337793C22B13B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99991A53F28FF1D914552F40 /* Pods.debug.xcconfig */,
+				5D8EF5B06181F0D40C09702C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		983A074219FC2F400056D0A9 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +169,7 @@
 				983A076A19FC2F400056D0A9 /* Bakareader EXTests */,
 				983A074C19FC2F400056D0A9 /* Products */,
 				983A077E19FC34F60056D0A9 /* Frameworks */,
+				90B9343347337793C22B13B3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,19 +228,12 @@
 		983A077719FC30A50056D0A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				983A078C19FC36070056D0A9 /* PKRevealController.h */,
-				983A075819FC2F400056D0A9 /* NovelsTableViewController.h */,
-				983A075919FC2F400056D0A9 /* NovelsTableViewController.m */,
 				983A07C019FC92A00056D0A9 /* MenuViewController.h */,
 				983A07C119FC92A00056D0A9 /* MenuViewController.m */,
-				983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */,
-				983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */,
-				9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */,
-				9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */,
-				98C1754C1AB3167900A1737C /* ChapterContentViewController.h */,
-				98C1754D1AB3167900A1737C /* ChapterContentViewController.m */,
-				98C175481AB30C8D00A1737C /* ChapterContentTableViewController.h */,
-				98C175491AB30C8D00A1737C /* ChapterContentTableViewController.m */,
+				98C175581AB62A7400A1737C /* Novel List */,
+				98C175571AB62A6500A1737C /* Novel Detail */,
+				98C175561AB62A5200A1737C /* Chapter List */,
+				98C175551AB62A4400A1737C /* Chapter Content */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -234,29 +252,14 @@
 		983A077E19FC34F60056D0A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				985955C41B423A6A007D761A /* WebKit.framework */,
 				983A07B919FC41C70056D0A9 /* libxml2.dylib */,
 				983A07B719FC41BA0056D0A9 /* libz.dylib */,
 				983A07B319FC40900056D0A9 /* RaptureXML */,
 				983A07A319FC3EAF0056D0A9 /* Hpple */,
-				983A078719FC35410056D0A9 /* PKRevealController */,
+				995CCF184DA755E2AB4291FA /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		983A078119FC353B0056D0A9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				983A078619FC353C0056D0A9 /* libPKRevealController.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		983A078719FC35410056D0A9 /* PKRevealController */ = {
-			isa = PBXGroup;
-			children = (
-				983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */,
-			);
-			name = PKRevealController;
 			sourceTree = "<group>";
 		};
 		983A078A19FC35AC0056D0A9 /* Categories */ = {
@@ -265,6 +268,8 @@
 				983A07BB19FC42510056D0A9 /* NSString+containsCategory.h */,
 				983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */,
 				983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */,
+				985955C01B42342A007D761A /* UIColor+Hex.h */,
+				985955C11B42342A007D761A /* UIColor+Hex.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -279,6 +284,8 @@
 				983A079819FC3C0E0056D0A9 /* Novel.m */,
 				983A079919FC3C0E0056D0A9 /* Volume.h */,
 				983A079A19FC3C0E0056D0A9 /* Volume.m */,
+				985955C91B436FAB007D761A /* Image.h */,
+				985955CA1B436FAB007D761A /* Image.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -292,6 +299,8 @@
 				983A079219FC3C0E0056D0A9 /* _Novel.m */,
 				983A079319FC3C0E0056D0A9 /* _Volume.h */,
 				983A079419FC3C0E0056D0A9 /* _Volume.m */,
+				985955CC1B436FB5007D761A /* _Image.h */,
+				985955CD1B436FB5007D761A /* _Image.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -301,6 +310,7 @@
 			children = (
 				983A07AD19FC3F120056D0A9 /* BakaTsukiParser.h */,
 				983A07AE19FC3F120056D0A9 /* BakaTsukiParser.m */,
+				98C1755C1AB63F5C00A1737C /* BakaReader Downloader */,
 				98A2571F1A003F4C008767C5 /* UIView+Constraints.h */,
 				98A257201A003F4C008767C5 /* UIView+Constraints.m */,
 				9881F8D51A3361DB00DEC7ED /* UILabel+SizeUtils.h */,
@@ -331,6 +341,57 @@
 			name = RaptureXML;
 			sourceTree = "<group>";
 		};
+		98C175551AB62A4400A1737C /* Chapter Content */ = {
+			isa = PBXGroup;
+			children = (
+				98C1754C1AB3167900A1737C /* ChapterContentViewController.h */,
+				98C1754D1AB3167900A1737C /* ChapterContentViewController.m */,
+				98C1754F1AB35D2B00A1737C /* ExternalContentViewController.h */,
+				98C175501AB35D2B00A1737C /* ExternalContentViewController.m */,
+				985955C61B423E71007D761A /* ImageViewerController.h */,
+				985955C71B423E71007D761A /* ImageViewerController.m */,
+			);
+			name = "Chapter Content";
+			sourceTree = "<group>";
+		};
+		98C175561AB62A5200A1737C /* Chapter List */ = {
+			isa = PBXGroup;
+			children = (
+				9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */,
+				9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */,
+			);
+			name = "Chapter List";
+			sourceTree = "<group>";
+		};
+		98C175571AB62A6500A1737C /* Novel Detail */ = {
+			isa = PBXGroup;
+			children = (
+				983A07C319FCA3C60056D0A9 /* NovelDetailViewController.h */,
+				983A07C419FCA3C60056D0A9 /* NovelDetailViewController.m */,
+			);
+			name = "Novel Detail";
+			sourceTree = "<group>";
+		};
+		98C175581AB62A7400A1737C /* Novel List */ = {
+			isa = PBXGroup;
+			children = (
+				983A075819FC2F400056D0A9 /* NovelsTableViewController.h */,
+				983A075919FC2F400056D0A9 /* NovelsTableViewController.m */,
+			);
+			name = "Novel List";
+			sourceTree = "<group>";
+		};
+		98C1755C1AB63F5C00A1737C /* BakaReader Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				98C175591AB6358400A1737C /* BakaReaderDownloader.h */,
+				98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */,
+				98C1755D1AB63F7C00A1737C /* BakaReaderDownload.h */,
+				98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */,
+			);
+			name = "BakaReader Downloader";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -338,9 +399,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 983A077119FC2F400056D0A9 /* Build configuration list for PBXNativeTarget "Bakareader EX" */;
 			buildPhases = (
+				60C80F7A0285A03D05898B42 /* Check Pods Manifest.lock */,
 				983A074719FC2F400056D0A9 /* Sources */,
 				983A074819FC2F400056D0A9 /* Frameworks */,
 				983A074919FC2F400056D0A9 /* Resources */,
+				54AB84157DB2DC6A81273DDC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -399,12 +462,6 @@
 			mainGroup = 983A074219FC2F400056D0A9;
 			productRefGroup = 983A074C19FC2F400056D0A9 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 983A078119FC353B0056D0A9 /* Products */;
-					ProjectRef = 983A078019FC353B0056D0A9 /* PKRevealController.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				983A074A19FC2F400056D0A9 /* Bakareader EX */,
@@ -412,16 +469,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		983A078619FC353C0056D0A9 /* libPKRevealController.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libPKRevealController.a;
-			remoteRef = 983A078519FC353C0056D0A9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		983A074919FC2F400056D0A9 /* Resources */ = {
@@ -441,16 +488,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54AB84157DB2DC6A81273DDC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60C80F7A0285A03D05898B42 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		983A074719FC2F400056D0A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
+				985955CB1B436FAB007D761A /* Image.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
 				98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
-				98C1754A1AB30C8D00A1737C /* ChapterContentTableViewController.m in Sources */,
 				983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */,
 				98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */,
 				983A07AF19FC3F120056D0A9 /* BakaTsukiParser.m in Sources */,
@@ -458,10 +538,16 @@
 				983A079F19FC3C0E0056D0A9 /* Novel.m in Sources */,
 				983A07B619FC40A90056D0A9 /* RXMLElement.m in Sources */,
 				9826FEBC1AB0A1A3006719EA /* ChaptersTableViewController.m in Sources */,
+				98C1755B1AB6358400A1737C /* BakaReaderDownloader.m in Sources */,
 				983A07BD19FC42510056D0A9 /* NSString+containsCategory.m in Sources */,
+				985955C21B42342A007D761A /* UIColor+Hex.m in Sources */,
+				98C1755F1AB63F7C00A1737C /* BakaReaderDownload.m in Sources */,
+				985955C81B423E71007D761A /* ImageViewerController.m in Sources */,
 				983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
 				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
+				98C175511AB35D2B00A1737C /* ExternalContentViewController.m in Sources */,
+				985955CE1B436FB5007D761A /* _Image.m in Sources */,
 				983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */,
 				983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */,
 				983A07AC19FC3EDC0056D0A9 /* XPathQuery.m in Sources */,
@@ -526,7 +612,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -561,7 +647,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -570,6 +656,7 @@
 		};
 		983A077219FC2F400056D0A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99991A53F28FF1D914552F40 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -581,14 +668,16 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		983A077319FC2F400056D0A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D8EF5B06181F0D40C09702C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -600,8 +689,9 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Bakareader EX/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

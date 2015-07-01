@@ -1,5 +1,5 @@
 //
-//  ChapterContentTableViewController.h
+//  ExternalContentViewController.h
 //  Bakareader EX
 //
 //  Created by Calvin Gonçalves de Aquino on 3/13/15.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChapterContentViewController.h"
 
-@interface ChapterContentTableViewController : UITableViewController
-
-- (instancetype)initWithChapter:(Chapter *)chapter;
+@interface ExternalContentViewController : ChapterContentViewController
 
 @end
