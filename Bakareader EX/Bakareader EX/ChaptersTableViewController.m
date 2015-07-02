@@ -8,7 +8,6 @@
 
 #import "ChaptersTableViewController.h"
 #import "ChapterContentViewController.h"
-#import "ExternalContentViewController.h"
 #import "BakaTsukiParser.h"
 
 @interface ChaptersTableViewController () <ChapterDelegate>
@@ -55,15 +54,9 @@
     
     if (self.resumingChapter) {
         Chapter *chapter = [CoreDataController user].lastChapterRead;
-        if (chapter.isExternalValue) {
-            ExternalContentViewController *externalContentViewController = [[ExternalContentViewController alloc] initWithChapter:chapter];
-            externalContentViewController.delegate = self;
-            [self.navigationController pushViewController:externalContentViewController animated:NO];
-        } else {
-            ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
-            chapterContentViewController.delegate = self;
-            [self.navigationController pushViewController:chapterContentViewController animated:NO];
-        }
+        ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
+        chapterContentViewController.delegate = self;
+        [self.navigationController pushViewController:chapterContentViewController animated:YES];
         self.resumingChapter = NO;
     }
 }
@@ -104,15 +97,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Chapter *chapter = self.chapters[indexPath.row];
     
-    if (chapter.isExternalValue) {
-        ExternalContentViewController *externalContentViewController = [[ExternalContentViewController alloc] initWithChapter:chapter];
-        externalContentViewController.delegate = self;
-        [self.navigationController pushViewController:externalContentViewController animated:YES];
-    } else {
-        ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
-        chapterContentViewController.delegate = self;
-        [self.navigationController pushViewController:chapterContentViewController animated:YES];
-    }
+    ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
+    chapterContentViewController.delegate = self;
+    [self.navigationController pushViewController:chapterContentViewController animated:YES];
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -41,7 +41,6 @@
 		9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9881F8D61A3361DB00DEC7ED /* UILabel+SizeUtils.m */; };
 		98A257211A003F4C008767C5 /* UIView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A257201A003F4C008767C5 /* UIView+Constraints.m */; };
 		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
-		98C175511AB35D2B00A1737C /* ExternalContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C175501AB35D2B00A1737C /* ExternalContentViewController.m */; };
 		98C1755B1AB6358400A1737C /* BakaReaderDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */; };
 		98C1755F1AB63F7C00A1737C /* BakaReaderDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */; };
 		EC563E494273D0255C2D9140 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 995CCF184DA755E2AB4291FA /* libPods.a */; };
@@ -127,8 +126,6 @@
 		98A257201A003F4C008767C5 /* UIView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Constraints.m"; sourceTree = "<group>"; };
 		98C1754C1AB3167900A1737C /* ChapterContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterContentViewController.h; sourceTree = "<group>"; };
 		98C1754D1AB3167900A1737C /* ChapterContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterContentViewController.m; sourceTree = "<group>"; };
-		98C1754F1AB35D2B00A1737C /* ExternalContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalContentViewController.h; sourceTree = "<group>"; };
-		98C175501AB35D2B00A1737C /* ExternalContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalContentViewController.m; sourceTree = "<group>"; };
 		98C175591AB6358400A1737C /* BakaReaderDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaReaderDownloader.h; sourceTree = "<group>"; };
 		98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaReaderDownloader.m; sourceTree = "<group>"; };
 		98C1755D1AB63F7C00A1737C /* BakaReaderDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaReaderDownload.h; sourceTree = "<group>"; };
@@ -356,8 +353,6 @@
 			children = (
 				98C1754C1AB3167900A1737C /* ChapterContentViewController.h */,
 				98C1754D1AB3167900A1737C /* ChapterContentViewController.m */,
-				98C1754F1AB35D2B00A1737C /* ExternalContentViewController.h */,
-				98C175501AB35D2B00A1737C /* ExternalContentViewController.m */,
 				985955C61B423E71007D761A /* ImageViewerController.h */,
 				985955C71B423E71007D761A /* ImageViewerController.m */,
 			);
@@ -558,7 +553,6 @@
 				983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
 				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
-				98C175511AB35D2B00A1737C /* ExternalContentViewController.m in Sources */,
 				985955CE1B436FB5007D761A /* _Image.m in Sources */,
 				983A07A019FC3C0E0056D0A9 /* Volume.m in Sources */,
 				983A079C19FC3C0E0056D0A9 /* _Novel.m in Sources */,

@@ -52,9 +52,8 @@
 
 + (BakaReaderDownload *)configureDownload:(BakaReaderDownload *)download withUrlString:(NSString *)urlString {
     download.url = [NSURL URLWithString:urlString];
-    download.request = [NSURLRequest requestWithURL:download.url];
+    download.request = [NSURLRequest requestWithURL:download.url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60];
     download.operation = [[AFHTTPRequestOperation alloc] initWithRequest:download.request];
-    download.operation.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
     download.operation.responseSerializer = download.downloadType == DownloadTypeImage ? [AFImageResponseSerializer serializer] : [AFHTTPResponseSerializer serializer];
     __weak BakaReaderDownload *weakSelf = download;
     [download.operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {

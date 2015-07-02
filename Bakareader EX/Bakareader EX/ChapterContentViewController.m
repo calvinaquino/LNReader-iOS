@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, readonly) NSString *chapterContent;
+@property (nonatomic, assign) BOOL firstTimeLoad;
 
 @end
 
@@ -23,6 +24,7 @@
     self = [super init];
     if (self) {
         self.chapter = chapter;
+        self.firstTimeLoad = YES;
     }
     
     return self;
@@ -37,7 +39,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadChapterContent];
+    if (self.firstTimeLoad) {
+        self.firstTimeLoad = NO;
+        [self loadChapterContent];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,6 +87,7 @@
     __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [weakSelf.webView loadHTMLString:[weakSelf chapterContent] baseURL:[NSURL URLWithString:kBakaTsukiBaseUrl]];
+//        [weakSelf.webView loadHTMLString:[weakSelf chapterContent] baseURL:nil];
         [weakSelf.webView setNeedsDisplay];
     }];
 }
@@ -140,12 +146,22 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (self.chapter.isExternalValue) {
+        NSLog(@"external chapter");
+        return YES;
+    }
     NSString *requestUrl = [request.URL absoluteString];
     NSString *standardContentUrl = [NSString stringWithFormat:@"%@/", kBakaTsukiBaseUrl];
+    NSString *blankUrl = @"about:blank";
     
     //is standard load.
     if ([requestUrl isEqualToString:standardContentUrl]) {
         NSLog(@"standard content loading");
+        return YES;
+    }
+    
+    //is standard load without base URL
+    if ([requestUrl isEqualToString:blankUrl]) {
         return YES;
     }
     
