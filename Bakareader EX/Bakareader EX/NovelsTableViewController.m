@@ -145,6 +145,17 @@
     BOOL isDownloaded = novel.fetchedValue;
     NSString *favoriteTitle = novel.favoriteValue ? @"Unfavorite" : @"Favorite";
     
+    UITableViewRowAction *resumeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Resume" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        Novel *novel = weakSelf.novels[indexPath.row];;
+        BOOL resume = novel.lastChapterRead != nil;
+        NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel resume:resume];
+        novelDetailViewController.delegate = weakSelf;
+        [weakSelf.navigationController pushViewController:novelDetailViewController animated:YES];
+        
+        [weakSelf.tableView setEditing:NO animated:YES];
+    }];
+    resumeAction.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+    
     UITableViewRowAction *favoriteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:favoriteTitle handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         Novel *novel = weakSelf.novels[indexPath.row];
         novel.favoriteValue = !novel.favoriteValue;
@@ -181,7 +192,7 @@
     }
    
     
-    return @[favoriteAction, downloadAction];
+    return @[favoriteAction, downloadAction, resumeAction];
 }
 
 

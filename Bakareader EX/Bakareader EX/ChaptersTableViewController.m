@@ -14,7 +14,8 @@
 
 @property (nonatomic, strong) Volume *volume;
 @property (nonatomic, strong) NSArray *chapters;
-@property (nonatomic, assign) BOOL resumingChapter;
+
+@property (nonatomic, assign) ChapterResumeSource resumeSource;
 
 @end
 
@@ -23,17 +24,21 @@
 - (instancetype)initResumingChapter {
     self = [self initWithVolume:[CoreDataController user].lastChapterRead.volume];
     if (self) {
-        self.resumingChapter = YES;
+        self.resumeSource = ChapterResumeLastRead;
     }
     
     return self;
 }
 
 - (instancetype)initWithVolume:(Volume *)volume {
+    return [self initWithVolume:volume resume:NO];
+}
+
+- (instancetype)initWithVolume:(Volume *)volume resume:(BOOL)resume {
     self = [super init];
     if (self) {
         self.volume = volume;
-        self.resumingChapter = NO;
+        self.resumeSource = resume ? ChapterResumeNovel : ChapterResumeNone;
     }
     
     return self;
@@ -46,18 +51,22 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.resumingChapter) {
-        Chapter *chapter = [CoreDataController user].lastChapterRead;
+    if (self.resumeSource != ChapterResumeNone) {
+        Chapter *chapter = nil;
+        if (self.resumeSource == ChapterResumeLastRead) {
+            chapter = [CoreDataController user].lastChapterRead;
+        } else {
+            chapter = self.volume.novel.lastChapterRead;
+        }
         ChapterContentViewController *chapterContentViewController = [[ChapterContentViewController alloc] initWithChapter:chapter];
         chapterContentViewController.delegate = self;
         [self.navigationController pushViewController:chapterContentViewController animated:YES];
-        self.resumingChapter = NO;
+        self.resumeSource = ChapterResumeNone;
     }
 }
 
@@ -145,28 +154,42 @@
 
 - (Chapter *)chapterViewController:(UIViewController *)viewController didAskForNextChapterForCurrentChapter:(Chapter *)currentChapter {
     NSInteger chapterIndex = [self.chapters indexOfObject:currentChapter];
-    BOOL isLastChapter = chapterIndex == self.chapters.count;
-    
+    BOOL isLastChapter = currentChapter == [self.chapters lastObject];
+    Chapter *nextChapter = nil;
     if (!isLastChapter) {
-        Chapter *nextChapter = self.chapters[chapterIndex + 1];
-        return nextChapter;
+        nextChapter = self.chapters[chapterIndex + 1];
     } else {
-        //ask for next volume?
-        return nil;
+        if ([self.delegate respondsToSelector:@selector(volumeViewController:didAskForNextVolumeForCurrentVolume:)]) {
+            Volume *nextVolume = [self.delegate volumeViewController:self didAskForNextVolumeForCurrentVolume:self.volume];
+            if (nextVolume) {
+                self.volume = nextVolume;
+                [self.tableView reloadData];
+                nextChapter = [self.chapters firstObject];
+            }
+        }
     }
+    
+    return nextChapter;
 }
 
 - (Chapter *)chapterViewController:(UIViewController *)viewController didAskForPreviousChapterForCurrentChapter:(Chapter *)currentChapter {
     NSInteger chapterIndex = [self.chapters indexOfObject:currentChapter];
-    BOOL isFirstChapter = chapterIndex == 0;
-    
+    BOOL isFirstChapter = currentChapter == [self.chapters firstObject];
+    Chapter *previousChapter = nil;
     if (!isFirstChapter) {
-        Chapter *previousChapter = self.chapters[chapterIndex - 1];
-        return previousChapter;
+        previousChapter = self.chapters[chapterIndex - 1];
     } else {
-        //ask for previous volume?
-        return nil;
+        if ([self.delegate respondsToSelector:@selector(volumeViewController:didAskForPreviousVolumeForCurrentVolume:)]) {
+            Volume *previousVolume = [self.delegate volumeViewController:self didAskForPreviousVolumeForCurrentVolume:self.volume];
+            if (previousVolume) {
+                self.volume = previousVolume;
+                [self.tableView reloadData];
+                previousChapter = [self.chapters lastObject];
+            }
+        }
     }
+    
+    return previousChapter;
 }
 
 @end

@@ -14,6 +14,7 @@ const struct NovelAttributes NovelAttributes = {
 
 const struct NovelRelationships NovelRelationships = {
 	.cover = @"cover",
+	.lastChapterRead = @"lastChapterRead",
 	.volumes = @"volumes",
 };
 
@@ -106,6 +107,8 @@ const struct NovelRelationships NovelRelationships = {
 @dynamic url;
 
 @dynamic cover;
+
+@dynamic lastChapterRead;
 
 @dynamic volumes;
 

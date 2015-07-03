@@ -16,6 +16,10 @@
 @property (nonatomic, readonly) NSString *chapterContent;
 @property (nonatomic, assign) BOOL firstTimeLoad;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGesture;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeRightGesture;
+
 @end
 
 @implementation ChapterContentViewController
@@ -32,9 +36,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillTerminateNotification object:nil];
+    
     self.webView = [[UIWebView alloc] init];
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
+    
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    self.swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    self.swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    self.swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [self.view addGestureRecognizer:self.tapGesture];
+    [self.view addGestureRecognizer:self.swipeRightGesture];
+    [self.view addGestureRecognizer:self.swipeLeftGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,22 +63,18 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [CoreDataController user].lastChapterRead = self.chapter;
-    [CoreDataController saveContext];
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self saveReadingProgression];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//}
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
@@ -81,13 +95,67 @@
 }
 
 
+#pragma mark - Private Methods
+
+- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
+    if (tapGesture.state == UIGestureRecognizerStateRecognized) {
+        
+    }
+}
+
+- (void)handleLeftSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+    if (swipeGesture.state == UIGestureRecognizerStateRecognized) {
+        [self nextChapterIfPossible];
+    }
+}
+
+- (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+    if (swipeGesture.state == UIGestureRecognizerStateRecognized) {
+        [self previousChapterIfPossible];
+    }
+}
+
+- (void)nextChapterIfPossible {
+    if ([self.delegate respondsToSelector:@selector(chapterViewController:didAskForNextChapterForCurrentChapter:)]) {
+        Chapter *nextChapter = [self.delegate chapterViewController:self didAskForNextChapterForCurrentChapter:self.chapter];
+        if (nextChapter) {
+            self.chapter = nextChapter;
+            [self loadChapterContent];
+        } else {
+            NSLog(@"no next chapter");
+        }
+    }
+}
+
+- (void)previousChapterIfPossible {
+    if ([self.delegate respondsToSelector:@selector(chapterViewController:didAskForPreviousChapterForCurrentChapter:)]) {
+        Chapter *previousChapter = [self.delegate chapterViewController:self didAskForPreviousChapterForCurrentChapter:self.chapter];
+        if (previousChapter) {
+            self.chapter = previousChapter;
+            [self loadChapterContent];
+        } else {
+            NSLog(@"no previous chapter");
+        }
+    }
+}
+
+- (void)saveState {
+    @synchronized(self) {
+        CGFloat progression = self.webView.scrollView.contentOffset.y / (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
+        self.chapter.readingProgressionValue = progression;
+    
+        [CoreDataController user].lastChapterRead = self.chapter;
+        self.chapter.volume.novel.lastChapterRead = self.chapter;
+        [CoreDataController saveContext];
+    }
+}
+
 #pragma mark - Data Loading
 
 - (void)loadContentFromDatabase {
     __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [weakSelf.webView loadHTMLString:[weakSelf chapterContent] baseURL:[NSURL URLWithString:kBakaTsukiBaseUrl]];
-//        [weakSelf.webView loadHTMLString:[weakSelf chapterContent] baseURL:nil];
         [weakSelf.webView setNeedsDisplay];
     }];
 }
@@ -134,6 +202,7 @@
     } else {
         [self loadContentFromInternet];
     }
+    [self saveState];
 }
 
 

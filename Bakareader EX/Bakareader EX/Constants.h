@@ -27,4 +27,12 @@ static NSString *const kXPATHNovelCover = @"//html/body/div[@class='mw-body']/di
 static NSString *const kXPATHNovelSynopsis = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
 static NSString *const kXPATHNovelVolumes = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";
 
+enum ChapterResumeSource {
+    ChapterResumeNone,
+    ChapterResumeLastRead,
+    ChapterResumeNovel,
+};
+
+typedef enum ChapterResumeSource ChapterResumeSource;
+
 #endif

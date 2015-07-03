@@ -10,7 +10,7 @@
 #import "ChaptersTableViewController.h"
 #import "BakaTsukiParser.h"
 
-@interface NovelDetailViewController ()
+@interface NovelDetailViewController () <VolumeDelegate>
 
 @property (nonatomic, strong) Novel *novel;
 @property (nonatomic, strong) NSArray *volumes;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIImageView *coverView;
 @property (nonatomic, strong) UILabel *synopsisLabel;
 
-@property (nonatomic, assign) BOOL resumingChapter;
+@property (nonatomic, assign) ChapterResumeSource resumeSource;
 
 @end
 
@@ -28,18 +28,21 @@
 - (instancetype)initResumingChapter {
     self = [self initWithNovel:[CoreDataController user].lastChapterRead.volume.novel];
     if (self) {
-        self.resumingChapter = YES;
+        self.resumeSource = ChapterResumeLastRead;
     }
     
     return self;
 }
 
 - (instancetype)initWithNovel:(Novel *)novel {
+    return [self initWithNovel:novel resume:NO];
+}
+
+- (instancetype)initWithNovel:(Novel *)novel resume:(BOOL)resume {
     self = [super init];
     if (self) {
         self.novel = novel;
-        self.title = novel.title;
-        self.resumingChapter = NO;
+        self.resumeSource = resume ? ChapterResumeNovel : ChapterResumeNone;
     }
     
     return self;
@@ -78,10 +81,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadNovelInfo];
-    if (self.resumingChapter) {
-        ChaptersTableViewController *chaptersViewController = [[ChaptersTableViewController alloc] initResumingChapter];
+    if (self.resumeSource != ChapterResumeNone) {
+        ChaptersTableViewController *chaptersViewController = nil;
+        if (self.resumeSource == ChapterResumeLastRead) {
+            chaptersViewController = [[ChaptersTableViewController alloc] initResumingChapter];
+        } else {
+            chaptersViewController = [[ChaptersTableViewController alloc] initWithVolume:self.novel.lastChapterRead.volume resume:YES];
+        }
+        chaptersViewController.delegate = self;
         [self.navigationController pushViewController:chaptersViewController animated:NO];
-        self.resumingChapter = NO;
+        self.resumeSource = ChapterResumeNone;
     }
 }
 
@@ -121,6 +130,15 @@
         }];
     }];
 }
+
+
+#pragma mark - Accessors
+
+- (void)setNovel:(Novel *)novel {
+    _novel = novel;
+    self.title = novel.title;
+}
+
 
 #pragma mark - Private Methods
 
@@ -187,6 +205,31 @@
     
     ChaptersTableViewController *chaptersViewController = [[ChaptersTableViewController alloc] initWithVolume:volume];
     [self.navigationController pushViewController:chaptersViewController animated:YES];
+}
+
+
+#pragma mark - VolumeDelegate
+
+- (Volume *)volumeViewController:(UIViewController *)viewController didAskForNextVolumeForCurrentVolume:(Volume *)currentVolume {
+    NSInteger volumeIndex = [self.volumes indexOfObject:currentVolume];
+    BOOL isLastVolume = currentVolume == [self.volumes lastObject];
+    Volume *nextVolume = nil;
+    if (!isLastVolume) {
+        nextVolume = self.volumes[volumeIndex + 1];
+    }
+    
+    return nextVolume;
+}
+
+- (Volume *)volumeViewController:(UIViewController *)viewController didAskForPreviousVolumeForCurrentVolume:(Volume *)currentVolume {
+    NSInteger volumeIndex = [self.volumes indexOfObject:currentVolume];
+    BOOL isFirstVolume = currentVolume == [self.volumes firstObject];
+    Volume *previousVolume = nil;
+    if (!isFirstVolume) {
+        previousVolume = self.volumes[volumeIndex - 1];
+    }
+    
+    return previousVolume;
 }
 
 

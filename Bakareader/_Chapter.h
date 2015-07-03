@@ -16,11 +16,13 @@ extern const struct ChapterAttributes {
 
 extern const struct ChapterRelationships {
 	__unsafe_unretained NSString *images;
+	__unsafe_unretained NSString *isLastRead;
 	__unsafe_unretained NSString *user;
 	__unsafe_unretained NSString *volume;
 } ChapterRelationships;
 
 @class Image;
+@class Novel;
 @class User;
 @class Volume;
 
@@ -85,6 +87,10 @@ extern const struct ChapterRelationships {
 
 - (NSMutableSet*)imagesSet;
 
+@property (nonatomic, strong) Novel *isLastRead;
+
+//- (BOOL)validateIsLastRead:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) User *user;
 
 //- (BOOL)validateUser:(id*)value_ error:(NSError**)error_;
@@ -143,6 +149,9 @@ extern const struct ChapterRelationships {
 
 - (NSMutableSet*)primitiveImages;
 - (void)setPrimitiveImages:(NSMutableSet*)value;
+
+- (Novel*)primitiveIsLastRead;
+- (void)setPrimitiveIsLastRead:(Novel*)value;
 
 - (User*)primitiveUser;
 - (void)setPrimitiveUser:(User*)value;

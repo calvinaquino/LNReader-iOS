@@ -14,10 +14,12 @@ extern const struct NovelAttributes {
 
 extern const struct NovelRelationships {
 	__unsafe_unretained NSString *cover;
+	__unsafe_unretained NSString *lastChapterRead;
 	__unsafe_unretained NSString *volumes;
 } NovelRelationships;
 
 @class Image;
+@class Chapter;
 @class Volume;
 
 @interface NovelID : NSManagedObjectID {}
@@ -65,6 +67,10 @@ extern const struct NovelRelationships {
 
 //- (BOOL)validateCover:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) Chapter *lastChapterRead;
+
+//- (BOOL)validateLastChapterRead:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSSet *volumes;
 
 - (NSMutableSet*)volumesSet;
@@ -107,6 +113,9 @@ extern const struct NovelRelationships {
 
 - (Image*)primitiveCover;
 - (void)setPrimitiveCover:(Image*)value;
+
+- (Chapter*)primitiveLastChapterRead;
+- (void)setPrimitiveLastChapterRead:(Chapter*)value;
 
 - (NSMutableSet*)primitiveVolumes;
 - (void)setPrimitiveVolumes:(NSMutableSet*)value;

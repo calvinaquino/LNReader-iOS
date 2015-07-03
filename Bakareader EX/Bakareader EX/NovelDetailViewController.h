@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) id<NovelDetailDelegate> delegate;
 
+- (instancetype)initWithNovel:(Novel *)novel resume:(BOOL)resume;
 - (instancetype)initWithNovel:(Novel *)novel;
 - (instancetype)initResumingChapter;
 

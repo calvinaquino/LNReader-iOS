@@ -73,9 +73,14 @@
         NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initWithFavorites];
         [self.navigationController pushViewController:novelsTableViewController animated:YES];
     } else if (indexPath.row == 2) {
-        NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
-        [self.navigationController pushViewController:novelsTableViewController animated:YES];
+        if ([CoreDataController user].lastChapterRead != nil) {
+            NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
+            [self.navigationController pushViewController:novelsTableViewController animated:YES];
+        }
     }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

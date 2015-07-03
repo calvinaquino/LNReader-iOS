@@ -8,9 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VolumeDelegate;
+
 @interface ChaptersTableViewController : UITableViewController
 
+@property (nonatomic, weak) id<VolumeDelegate> delegate;
+
+- (instancetype)initWithVolume:(Volume *)volume resume:(BOOL)resume;
 - (instancetype)initWithVolume:(Volume *)volume;
 - (instancetype)initResumingChapter;
+
+@end
+
+@protocol VolumeDelegate <NSObject>
+
+- (Volume *)volumeViewController:(UIViewController *)viewController didAskForNextVolumeForCurrentVolume:(Volume *)currentVolume;
+- (Volume *)volumeViewController:(UIViewController *)viewController didAskForPreviousVolumeForCurrentVolume:(Volume *)currentVolume;
 
 @end

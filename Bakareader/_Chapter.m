@@ -16,6 +16,7 @@ const struct ChapterAttributes ChapterAttributes = {
 
 const struct ChapterRelationships ChapterRelationships = {
 	.images = @"images",
+	.isLastRead = @"isLastRead",
 	.user = @"user",
 	.volume = @"volume",
 };
@@ -168,6 +169,8 @@ const struct ChapterRelationships ChapterRelationships = {
 	[self didAccessValueForKey:@"images"];
 	return result;
 }
+
+@dynamic isLastRead;
 
 @dynamic user;
 
