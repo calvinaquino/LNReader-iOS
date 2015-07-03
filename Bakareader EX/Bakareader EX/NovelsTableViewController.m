@@ -70,7 +70,7 @@
         
         NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initResumingChapter];
         novelDetailViewController.delegate = self;
-        [self.navigationController pushViewController:novelDetailViewController animated:NO];
+        [self.navigationController pushViewController:novelDetailViewController animated:YES];
         self.resumingChapter = NO;
     }
 }

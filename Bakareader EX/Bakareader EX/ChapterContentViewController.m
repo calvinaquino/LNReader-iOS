@@ -10,7 +10,7 @@
 #import "ImageViewerController.h"
 #import "BakaTsukiParser.h"
 
-@interface ChapterContentViewController () <UIWebViewDelegate>
+@interface ChapterContentViewController () <UIWebViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, readonly) NSString *chapterContent;
@@ -45,12 +45,17 @@
     [self.view addSubview:self.webView];
     
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGesture.numberOfTouchesRequired = 1;
+    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.delegate = self;
     self.swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
     self.swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    self.swipeRightGesture.delegate = self;
     self.swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
     self.swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    self.swipeLeftGesture.delegate = self;
     
-    [self.view addGestureRecognizer:self.tapGesture];
+    [self.webView addGestureRecognizer:self.tapGesture];
     [self.view addGestureRecognizer:self.swipeRightGesture];
     [self.view addGestureRecognizer:self.swipeLeftGesture];
 }
@@ -63,18 +68,10 @@
     }
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self saveReadingProgression];
+    [self saveState];
 }
-
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//}
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
@@ -99,7 +96,10 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGesture {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
+        BOOL isFullScreen = self.navigationController.isNavigationBarHidden;
         
+        [self.navigationController setNavigationBarHidden:!isFullScreen animated:YES];
+        [[UIApplication sharedApplication] setStatusBarHidden:!isFullScreen withAnimation:UIStatusBarAnimationSlide];
     }
 }
 
@@ -141,11 +141,9 @@
 
 - (void)saveState {
     @synchronized(self) {
-        CGFloat progression = self.webView.scrollView.contentOffset.y / (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
-        self.chapter.readingProgressionValue = progression;
-    
         [CoreDataController user].lastChapterRead = self.chapter;
         self.chapter.volume.novel.lastChapterRead = self.chapter;
+        [self saveProgress];
         [CoreDataController saveContext];
     }
 }
@@ -172,17 +170,16 @@
     }];
 }
 
-- (void)loadReadingProgression {
+- (void)loadProgress {
     CGFloat heightOffset = self.chapter.readingProgressionValue * (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
     if (heightOffset > 1) {
         self.webView.scrollView.contentOffset = CGPointMake(self.webView.scrollView.contentOffset.x, heightOffset);
     }
 }
 
-- (void)saveReadingProgression {
+- (void)saveProgress {
     CGFloat progression = self.webView.scrollView.contentOffset.y / (self.webView.scrollView.contentSize.height - self.webView.frame.size.height);
     self.chapter.readingProgressionValue = progression;
-    [CoreDataController saveContext];
 }
 
 
@@ -202,7 +199,6 @@
     } else {
         [self loadContentFromInternet];
     }
-    [self saveState];
 }
 
 
@@ -210,7 +206,8 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self loadReadingProgression];
+        [self loadProgress];
+        [self saveState];
     }];
 }
 
@@ -250,6 +247,27 @@
     
     NSLog(@"unhandled request");
     return NO;
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    BOOL shouldRecognize = YES;
+    
+    NSUInteger numberOfKnownGesturesInvolved = 0;
+    
+    BOOL isTapInvolved = ( gestureRecognizer == self.tapGesture || otherGestureRecognizer == self.tapGesture);
+    BOOL isSwipeLeftInvolved = ( gestureRecognizer == self.swipeLeftGesture || otherGestureRecognizer == self.swipeLeftGesture);
+    BOOL isSwipeRightInvolved = ( gestureRecognizer == self.swipeRightGesture || otherGestureRecognizer == self.swipeRightGesture);
+    
+    numberOfKnownGesturesInvolved += isTapInvolved ? 1 : 0;
+    numberOfKnownGesturesInvolved += isSwipeLeftInvolved ? 1 : 0;
+    numberOfKnownGesturesInvolved += isSwipeRightInvolved ? 1 : 0;
+    
+    shouldRecognize = numberOfKnownGesturesInvolved == 1;
+    
+    return shouldRecognize;
 }
 
 

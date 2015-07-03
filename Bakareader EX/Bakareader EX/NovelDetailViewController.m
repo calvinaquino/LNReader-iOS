@@ -89,7 +89,7 @@
             chaptersViewController = [[ChaptersTableViewController alloc] initWithVolume:self.novel.lastChapterRead.volume resume:YES];
         }
         chaptersViewController.delegate = self;
-        [self.navigationController pushViewController:chaptersViewController animated:NO];
+        [self.navigationController pushViewController:chaptersViewController animated:YES];
         self.resumeSource = ChapterResumeNone;
     }
 }
