@@ -8,6 +8,7 @@
 
 #import "NovelDetailViewController.h"
 #import "ChaptersTableViewController.h"
+#import "BRTableViewCell.h"
 #import "BakaTsukiParser.h"
 
 @interface NovelDetailViewController () <VolumeDelegate>
@@ -50,6 +51,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor backgroundColor];
+    
     [self setupHeaderView];
     [self setupTableView];
 }
@@ -61,6 +65,8 @@
     self.coverView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.synopsisLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.synopsisLabel.textColor = [UIColor textColor];
+    self.synopsisLabel.font = [UIFont textFont];
     self.synopsisLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.synopsisLabel.numberOfLines = 0;
     self.synopsisLabel.text = self.novel.synopsis;
@@ -70,7 +76,8 @@
 }
 
 - (void)setupTableView {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    [self.tableView registerClass:[BRTableViewCell class] forCellReuseIdentifier:[BRTableViewCell identifier]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(loadNovelInfoFromInternet) forControlEvents:UIControlEventValueChanged];
@@ -190,12 +197,16 @@
     return self.volumes.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [BRTableViewCell height];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    BRTableViewCell *cell = (BRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[BRTableViewCell identifier] forIndexPath:indexPath];
     
     Volume *volume = self.volumes[indexPath.row];
-    cell.textLabel.text = volume.title;
+    cell.title = volume.title;
+    cell.subtitle = [volume progressAndSizeDescription];
     
     return cell;
 }

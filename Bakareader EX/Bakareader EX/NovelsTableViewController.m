@@ -8,6 +8,7 @@
 
 #import "NovelsTableViewController.h"
 #import "NovelDetailViewController.h"
+#import "BRTableViewCell.h"
 
 #import "BakaTsukiParser.h"
 
@@ -24,7 +25,7 @@
 - (instancetype)initWithFavorites {
     self = [super init];
     if (self) {
-        self.title = @"Favorites";
+        self.title = @"Watch List";
         self.onlyFavorites = YES;
         self.resumingChapter = NO;
     }
@@ -54,7 +55,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    [self.tableView registerClass:[BRTableViewCell class] forCellReuseIdentifier:NSStringFromClass([BRTableViewCell class])];
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(loadListFromInternet) forControlEvents:UIControlEventValueChanged];
@@ -106,46 +109,14 @@
     }];
 }
 
-
-#pragma mark - UITableViewDelegate UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.novels.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Novel *novel = self.novels[indexPath.row];
-    
-    NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
-    novelDetailViewController.delegate = self;
-    [self.navigationController pushViewController:novelDetailViewController animated:YES];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
-    
-    Novel *novel = self.novels[indexPath.row];
-    cell.textLabel.text = novel.title;
-    cell.detailTextLabel.text = novel.url;
-    cell.accessoryType = novel.fetchedValue ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)showActionSheetForIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     Novel *novel = weakSelf.novels[indexPath.row];
     BOOL isDownloaded = novel.fetchedValue;
     NSString *favoriteTitle = novel.favoriteValue ? @"Unfavorite" : @"Favorite";
     
-    UITableViewRowAction *resumeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Resume" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:novel.title message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *resumeAction = [UIAlertAction actionWithTitle:@"Resume" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         Novel *novel = weakSelf.novels[indexPath.row];;
         BOOL resume = novel.lastChapterRead != nil;
         NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel resume:resume];
@@ -154,20 +125,18 @@
         
         [weakSelf.tableView setEditing:NO animated:YES];
     }];
-    resumeAction.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
     
-    UITableViewRowAction *favoriteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:favoriteTitle handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    UIAlertAction *favoriteAction = [UIAlertAction actionWithTitle:favoriteTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         Novel *novel = weakSelf.novels[indexPath.row];
         novel.favoriteValue = !novel.favoriteValue;
         [CoreDataController saveContext];
         [weakSelf.tableView setEditing:NO animated:YES];
     }];
-    favoriteAction.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
     
     
-    UITableViewRowAction *downloadAction = nil;
+    UIAlertAction *downloadAction = nil;
     if (isDownloaded) {
-        downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        downloadAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             Novel *novel = weakSelf.novels[indexPath.row];
             
             novel.fetchedValue = NO;
@@ -182,7 +151,7 @@
             [weakSelf.tableView setEditing:NO animated:YES];
         }];
     } else {
-        downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        downloadAction = [UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             Novel *novel = weakSelf.novels[indexPath.row];
             [[BakaReaderDownloader sharedInstance] downloadNovelDetails:novel withCompletion:^(BOOL success) {
                 [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -190,10 +159,70 @@
             [weakSelf.tableView setEditing:NO animated:YES];
         }];
     }
-   
     
-    return @[favoriteAction, downloadAction, resumeAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf.tableView setEditing:NO animated:YES];
+    }];
+    if (novel.lastChapterRead) {
+        [actionSheet addAction:resumeAction];
+    }
+    [actionSheet addAction:favoriteAction];
+    [actionSheet addAction:downloadAction];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
+
+
+#pragma mark - UITableViewDelegate UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.novels.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [BRTableViewCell height];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Novel *novel = self.novels[indexPath.row];
+    
+    NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
+    novelDetailViewController.delegate = self;
+    [self.navigationController pushViewController:novelDetailViewController animated:YES];
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BRTableViewCell *cell = (BRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([BRTableViewCell class]) forIndexPath:indexPath];
+    
+    Novel *novel = self.novels[indexPath.row];
+    cell.title = novel.title;
+    cell.subtitle = novel.fetchedValue ? @"Downloaded" : nil;
+    cell.overflowEnabled = YES;
+    
+    __weak typeof(self) weakSelf = self;
+    [cell setOverflowActionBlock:^(BRTableViewCell *brCell) {
+        NSIndexPath *overflowIndexPath = [weakSelf.tableView indexPathForCell:brCell];
+        [weakSelf showActionSheetForIndexPath:overflowIndexPath];
+    }];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    __weak typeof(self) weakSelf = self;
+//    UITableViewRowAction *moreActions = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Options" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        [weakSelf showActionSheetForIndexPath:indexPath];
+//    }];
+//    return @[moreActions];
+//}
 
 
 #pragma mark - NovelDetailDelegate

@@ -4,5 +4,6 @@
 
 - (Image *)imageForUrl:(NSString *)imageUrl;
 - (void)deleteImages;
+- (NSString *)progressDescription;
 
 @end

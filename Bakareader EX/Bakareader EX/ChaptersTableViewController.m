@@ -8,6 +8,7 @@
 
 #import "ChaptersTableViewController.h"
 #import "ChapterContentViewController.h"
+#import "BRTableViewCell.h"
 #import "BakaTsukiParser.h"
 
 @interface ChaptersTableViewController () <ChapterDelegate>
@@ -46,7 +47,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    [self.tableView registerClass:[BRTableViewCell class] forCellReuseIdentifier:[BRTableViewCell identifier]];
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,6 +85,67 @@
 
 #pragma mark - Private Methods
 
+- (void)showActionSheetForIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    Chapter *chapter = self.chapters[indexPath.row];
+    BOOL isDownloaded = chapter.fetchedValue;
+    BOOL isRead = chapter.readingProgressionValue > 0.95;
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:chapter.title message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *markReadAction = nil;
+    if (isRead) {
+        markReadAction = [UIAlertAction actionWithTitle:@"Mark as unread" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            Chapter *chapter = weakSelf.chapters[indexPath.row];
+            chapter.readingProgressionValue = 0.0;
+            [CoreDataController saveContext];
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [weakSelf.tableView setEditing:NO animated:YES];
+        }];
+    } else {
+        markReadAction = [UIAlertAction actionWithTitle:@"Mark as read" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            Chapter *chapter = weakSelf.chapters[indexPath.row];
+            chapter.readingProgressionValue = 1.0;
+            [CoreDataController saveContext];
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [weakSelf.tableView setEditing:NO animated:YES];
+        }];
+    }
+    
+    UIAlertAction *downloadAction = nil;
+    if (isDownloaded) {
+        downloadAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [weakSelf.tableView setEditing:NO animated:YES];
+            Chapter *chapter = weakSelf.chapters[indexPath.row];
+            
+            chapter.content = nil;
+            chapter.fetchedValue = NO;
+            [chapter deleteImages];
+            [CoreDataController saveContext];
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+    } else {
+        downloadAction = [UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            Chapter *chapter = weakSelf.chapters[indexPath.row];
+            
+            [[BakaReaderDownloader sharedInstance] downloadChapter:chapter withCompletion:^(BOOL success) {
+                [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }];
+            [weakSelf.tableView setEditing:NO animated:YES];
+        }];
+    }
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf.tableView setEditing:NO animated:YES];
+    }];
+    [actionSheet addAction:markReadAction];
+    [actionSheet addAction:downloadAction];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
 
 #pragma mark - Table view data source
 
@@ -93,12 +157,24 @@
     return self.chapters.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [BRTableViewCell height];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    BRTableViewCell *cell = (BRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[BRTableViewCell identifier] forIndexPath:indexPath];
     
     Chapter *chapter = self.chapters[indexPath.row];
-    cell.textLabel.text = chapter.title;
-    cell.accessoryType = chapter.fetchedValue ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    cell.title = chapter.title;
+    cell.subtitle = chapter.fetchedValue ? @"Downloaded" : nil;
+    cell.overflowEnabled = YES;
+    cell.markedAsRead = chapter.readingProgressionValue > 0.95;
+    
+    __weak typeof(self) weakSelf = self;
+    [cell setOverflowActionBlock:^(BRTableViewCell *brCell) {
+        NSIndexPath *overflowIndexPath = [weakSelf.tableView indexPathForCell:brCell];
+        [weakSelf showActionSheetForIndexPath:overflowIndexPath];
+    }];
     
     return cell;
 }
@@ -115,33 +191,33 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    __weak typeof(self) weakSelf = self;
-    Chapter *chapter = self.chapters[indexPath.row];
-    BOOL downloaded = chapter.fetchedValue;
-    
-    UITableViewRowAction *downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        Chapter *chapter = weakSelf.chapters[indexPath.row];
-        
-        [[BakaReaderDownloader sharedInstance] downloadChapter:chapter withCompletion:^(BOOL success) {
-            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
-        [weakSelf.tableView setEditing:NO animated:YES];
-    }];
-    
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        [weakSelf.tableView setEditing:NO animated:YES];
-        Chapter *chapter = weakSelf.chapters[indexPath.row];
-        
-        chapter.content = nil;
-        chapter.fetchedValue = NO;
-        [chapter deleteImages];
-        [CoreDataController saveContext];
-        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-    
-    return downloaded ? @[deleteAction] : @[downloadAction];
-}
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    __weak typeof(self) weakSelf = self;
+//    Chapter *chapter = self.chapters[indexPath.row];
+//    BOOL downloaded = chapter.fetchedValue;
+//    
+//    UITableViewRowAction *downloadAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Download" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        Chapter *chapter = weakSelf.chapters[indexPath.row];
+//        
+//        [[BakaReaderDownloader sharedInstance] downloadChapter:chapter withCompletion:^(BOOL success) {
+//            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        }];
+//        [weakSelf.tableView setEditing:NO animated:YES];
+//    }];
+//    
+//    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        [weakSelf.tableView setEditing:NO animated:YES];
+//        Chapter *chapter = weakSelf.chapters[indexPath.row];
+//        
+//        chapter.content = nil;
+//        chapter.fetchedValue = NO;
+//        [chapter deleteImages];
+//        [CoreDataController saveContext];
+//        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    }];
+//    
+//    return downloaded ? @[deleteAction] : @[downloadAction];
+//}
 
 #pragma mark - Chapter Delegate
 

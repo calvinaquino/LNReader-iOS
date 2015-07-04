@@ -4,4 +4,6 @@
 
 - (void)deleteChapters;
 
+- (NSString *)progressAndSizeDescription;
+
 @end

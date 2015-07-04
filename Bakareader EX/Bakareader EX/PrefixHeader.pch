@@ -12,6 +12,9 @@
 #import "UIView+Constraints.h"
 #import "UIColor+Hex.h"
 #import "UILabel+SizeUtils.h"
+#import "UIView+UIHelper.h"
+#import "UIFont+BakaReader_EX.h"
+#import "UIColor+BakaReader_EX.h"
 
 #import "CoreDataController.h"
 #import "BakareaderDownloader.h"

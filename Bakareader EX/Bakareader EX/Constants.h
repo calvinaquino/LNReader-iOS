@@ -9,8 +9,15 @@
 #ifndef LNReader_Constants_h
 #define LNReader_Constants_h
 
-//other
+//UI
 static CGFloat const kKeyboardSize = 216;
+
+static CGFloat const kMargin = 20.0;
+static CGFloat const kMarginSmall = 10.0;
+
+static CGFloat const kFontSizeBig = 22.0;
+static CGFloat const kFontSizeMedium = 18.0;
+static CGFloat const kFontSizeSmall = 12.0;
 
 //Errors
 static NSString *const kNoChapterNameError = @"NO_CHAPTER_NAME_FOUND";

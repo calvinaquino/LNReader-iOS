@@ -12,7 +12,6 @@
 		983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075319FC2F400056D0A9 /* AppDelegate.m */; };
 		983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 983A075519FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld */; };
 		983A075A19FC2F400056D0A9 /* NovelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075919FC2F400056D0A9 /* NovelsTableViewController.m */; };
-		983A075F19FC2F400056D0A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983A075E19FC2F400056D0A9 /* Images.xcassets */; };
 		983A076E19FC2F400056D0A9 /* Bakareader_EXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */; };
 		983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A077A19FC30D00056D0A9 /* CoreDataController.m */; };
 		983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A079019FC3C0E0056D0A9 /* _Chapter.m */; };
@@ -43,6 +42,11 @@
 		98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1754D1AB3167900A1737C /* ChapterContentViewController.m */; };
 		98C1755B1AB6358400A1737C /* BakaReaderDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */; };
 		98C1755F1AB63F7C00A1737C /* BakaReaderDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */; };
+		98D487A31B483CE7007B5EE9 /* BRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487A21B483CE7007B5EE9 /* BRTableViewCell.m */; };
+		98D487A61B48428F007B5EE9 /* UIColor+BakaReader_EX.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487A51B48428F007B5EE9 /* UIColor+BakaReader_EX.m */; };
+		98D487A91B4842A5007B5EE9 /* UIFont+BakaReader_EX.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487A81B4842A5007B5EE9 /* UIFont+BakaReader_EX.m */; };
+		98D487AC1B4855EF007B5EE9 /* UIView+UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487AB1B4855EF007B5EE9 /* UIView+UIHelper.m */; };
+		98D487B01B48686B007B5EE9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98D487AF1B48686B007B5EE9 /* Images.xcassets */; };
 		EC563E494273D0255C2D9140 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 995CCF184DA755E2AB4291FA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,14 +72,12 @@
 		983A075619FC2F400056D0A9 /* Bakareader_EX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bakareader_EX.xcdatamodel; sourceTree = "<group>"; };
 		983A075819FC2F400056D0A9 /* NovelsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovelsTableViewController.h; sourceTree = "<group>"; };
 		983A075919FC2F400056D0A9 /* NovelsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovelsTableViewController.m; sourceTree = "<group>"; };
-		983A075E19FC2F400056D0A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		983A076719FC2F400056D0A9 /* Bakareader EXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bakareader EXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		983A076C19FC2F400056D0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983A076D19FC2F400056D0A9 /* Bakareader_EXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bakareader_EXTests.m; sourceTree = "<group>"; };
 		983A077919FC30D00056D0A9 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		983A077A19FC30D00056D0A9 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		983A077C19FC32A70056D0A9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PKRevealController.h"; path = "../../PKRevealController/Source/PKRevealController/Categories/UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
 		983A078F19FC3C0E0056D0A9 /* _Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Chapter.h; path = ../../Bakareader/_Chapter.h; sourceTree = "<group>"; };
 		983A079019FC3C0E0056D0A9 /* _Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Chapter.m; path = ../../Bakareader/_Chapter.m; sourceTree = "<group>"; };
 		983A079119FC3C0E0056D0A9 /* _Novel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Novel.h; path = ../../Bakareader/_Novel.h; sourceTree = "<group>"; };
@@ -130,6 +132,16 @@
 		98C1755A1AB6358400A1737C /* BakaReaderDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaReaderDownloader.m; sourceTree = "<group>"; };
 		98C1755D1AB63F7C00A1737C /* BakaReaderDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakaReaderDownload.h; sourceTree = "<group>"; };
 		98C1755E1AB63F7C00A1737C /* BakaReaderDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakaReaderDownload.m; sourceTree = "<group>"; };
+		98D487A11B483CE7007B5EE9 /* BRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTableViewCell.h; sourceTree = "<group>"; };
+		98D487A21B483CE7007B5EE9 /* BRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTableViewCell.m; sourceTree = "<group>"; };
+		98D487A41B48428F007B5EE9 /* UIColor+BakaReader_EX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BakaReader_EX.h"; sourceTree = "<group>"; };
+		98D487A51B48428F007B5EE9 /* UIColor+BakaReader_EX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BakaReader_EX.m"; sourceTree = "<group>"; };
+		98D487A71B4842A5007B5EE9 /* UIFont+BakaReader_EX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+BakaReader_EX.h"; sourceTree = "<group>"; };
+		98D487A81B4842A5007B5EE9 /* UIFont+BakaReader_EX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+BakaReader_EX.m"; sourceTree = "<group>"; };
+		98D487AA1B4855EF007B5EE9 /* UIView+UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UIHelper.h"; sourceTree = "<group>"; };
+		98D487AB1B4855EF007B5EE9 /* UIView+UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UIHelper.m"; sourceTree = "<group>"; };
+		98D487AF1B48686B007B5EE9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		98D487B11B486CA3007B5EE9 /* BakaReaderTableViewCellPrivateInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BakaReaderTableViewCellPrivateInterface.h; sourceTree = "<group>"; };
 		995CCF184DA755E2AB4291FA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		99991A53F28FF1D914552F40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +203,7 @@
 				983A07B019FC3F960056D0A9 /* Constants.h */,
 				983A075219FC2F400056D0A9 /* AppDelegate.h */,
 				983A075319FC2F400056D0A9 /* AppDelegate.m */,
+				98D487A01B483CC9007B5EE9 /* Components */,
 				983A077719FC30A50056D0A9 /* ViewControllers */,
 				983A077819FC30AC0056D0A9 /* CoreData */,
 				983A078A19FC35AC0056D0A9 /* Categories */,
@@ -203,7 +216,7 @@
 		983A074E19FC2F400056D0A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				983A075E19FC2F400056D0A9 /* Images.xcassets */,
+				98D487AF1B48686B007B5EE9 /* Images.xcassets */,
 				983A074F19FC2F400056D0A9 /* Info.plist */,
 				983A075019FC2F400056D0A9 /* main.m */,
 				983A077C19FC32A70056D0A9 /* PrefixHeader.pch */,
@@ -270,9 +283,14 @@
 			children = (
 				983A07BB19FC42510056D0A9 /* NSString+containsCategory.h */,
 				983A07BC19FC42510056D0A9 /* NSString+containsCategory.m */,
-				983A078B19FC35FA0056D0A9 /* UIViewController+PKRevealController.h */,
 				985955C01B42342A007D761A /* UIColor+Hex.h */,
 				985955C11B42342A007D761A /* UIColor+Hex.m */,
+				98D487A41B48428F007B5EE9 /* UIColor+BakaReader_EX.h */,
+				98D487A51B48428F007B5EE9 /* UIColor+BakaReader_EX.m */,
+				98D487A71B4842A5007B5EE9 /* UIFont+BakaReader_EX.h */,
+				98D487A81B4842A5007B5EE9 /* UIFont+BakaReader_EX.m */,
+				98D487AA1B4855EF007B5EE9 /* UIView+UIHelper.h */,
+				98D487AB1B4855EF007B5EE9 /* UIView+UIHelper.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -397,6 +415,16 @@
 			name = "BakaReader Downloader";
 			sourceTree = "<group>";
 		};
+		98D487A01B483CC9007B5EE9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				98D487A11B483CE7007B5EE9 /* BRTableViewCell.h */,
+				98D487A21B483CE7007B5EE9 /* BRTableViewCell.m */,
+				98D487B11B486CA3007B5EE9 /* BakaReaderTableViewCellPrivateInterface.h */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -448,7 +476,6 @@
 				TargetAttributes = {
 					983A074A19FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 8LGTBBXKRY;
 					};
 					983A076619FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -480,7 +507,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				983A075F19FC2F400056D0A9 /* Images.xcassets in Resources */,
+				98D487B01B48686B007B5EE9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +562,7 @@
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				985955CB1B436FAB007D761A /* Image.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
+				98D487A31B483CE7007B5EE9 /* BRTableViewCell.m in Sources */,
 				98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */,
 				983A079B19FC3C0E0056D0A9 /* _Chapter.m in Sources */,
 				983A07C519FCA3C60056D0A9 /* NovelDetailViewController.m in Sources */,
@@ -551,6 +579,7 @@
 				98C1755F1AB63F7C00A1737C /* BakaReaderDownload.m in Sources */,
 				985955C81B423E71007D761A /* ImageViewerController.m in Sources */,
 				983A07AB19FC3EDC0056D0A9 /* TFHppleElement.m in Sources */,
+				98D487AC1B4855EF007B5EE9 /* UIView+UIHelper.m in Sources */,
 				983A077B19FC30D00056D0A9 /* CoreDataController.m in Sources */,
 				983A079D19FC3C0E0056D0A9 /* _Volume.m in Sources */,
 				985955CE1B436FB5007D761A /* _Image.m in Sources */,
@@ -561,7 +590,9 @@
 				983A075719FC2F400056D0A9 /* Bakareader_EX.xcdatamodeld in Sources */,
 				983A075A19FC2F400056D0A9 /* NovelsTableViewController.m in Sources */,
 				983A079E19FC3C0E0056D0A9 /* Chapter.m in Sources */,
+				98D487A61B48428F007B5EE9 /* UIColor+BakaReader_EX.m in Sources */,
 				983A075119FC2F400056D0A9 /* main.m in Sources */,
+				98D487A91B4842A5007B5EE9 /* UIFont+BakaReader_EX.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +697,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -687,6 +719,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (

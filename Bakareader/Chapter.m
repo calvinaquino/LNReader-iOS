@@ -35,4 +35,13 @@
     [CoreDataController saveContext];
 }
 
+- (NSString *)progressDescription {
+    CGFloat totalProgress = self.readingProgressionValue;
+    if (totalProgress < 1) {
+        return nil;
+    } else {
+        return [NSString stringWithFormat:@"Progress: %.0f%%", totalProgress];
+    }
+}
+
 @end

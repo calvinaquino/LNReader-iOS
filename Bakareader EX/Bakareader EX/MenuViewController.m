@@ -8,10 +8,11 @@
 
 #import "MenuViewController.h"
 #import "NovelsTableViewController.h"
+#import "BRTableViewCell.h"
 
 @interface MenuViewController ()
 
-@property (nonatomic, strong) NSArray *cellTitles;
+@property (nonatomic, strong) NSArray *options;
 
 @end
 
@@ -20,7 +21,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"Menu";
+        self.title = @"BakaReader EX";
     }
     
     return self;
@@ -28,8 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-    [self setupMenuCellTitles];
+    [self.tableView registerClass:[BRTableViewCell class] forCellReuseIdentifier:[BRTableViewCell identifier]];
+    self.tableView.backgroundColor = [UIColor backgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self setupOptions];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,8 +41,8 @@
     [self.tableView reloadData];
 }
 
-- (void)setupMenuCellTitles {
-    self.cellTitles = @[@"Light Novels", @"Favorites", @"Resume"];
+- (void)setupOptions {
+    self.options = @[@"Light Novels", @"Watch List", @"Resume Novel", @"Bookmarks", @"Updates", @"Download List", @"Settings"];
 }
 
 - (NSString *)subtitleForResumeCell {
@@ -58,11 +61,11 @@
 #pragma mark - UITableViewDelegate UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cellTitles.count;
+    return self.options.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return [BRTableViewCell height];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,6 +80,16 @@
             NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
             [self.navigationController pushViewController:novelsTableViewController animated:YES];
         }
+    } else {
+        NSString *selectedOption = self.options[indexPath.row];
+        NSString *alertMessage = [NSString stringWithFormat:@"The option %@ is not yet implemented :(", selectedOption];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alertController dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        [alertController addAction:dismissAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -84,13 +97,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    BRTableViewCell *cell = (BRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[BRTableViewCell identifier] forIndexPath:indexPath];
     
-    cell.textLabel.text = self.cellTitles[indexPath.row];
+    cell.title = self.options[indexPath.row];
     if (indexPath.row == 2) {
-        cell.detailTextLabel.text = [self subtitleForResumeCell];
-    } else {
-        cell.detailTextLabel.text = nil;
+        cell.subtitle = [self subtitleForResumeCell];
     }
     
     return cell;

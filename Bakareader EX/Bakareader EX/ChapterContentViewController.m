@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, readonly) NSString *chapterContent;
 @property (nonatomic, assign) BOOL firstTimeLoad;
+@property (nonatomic, assign, getter=isFullScreen) BOOL fullScreen;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGesture;
@@ -36,17 +37,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor backgroundColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillTerminateNotification object:nil];
     
     self.webView = [[UIWebView alloc] init];
+    self.webView.backgroundColor = [UIColor backgroundColor];
+    self.webView.opaque = NO;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
     
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     self.tapGesture.numberOfTouchesRequired = 1;
-    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.numberOfTapsRequired = 2;
     self.tapGesture.delegate = self;
     self.swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
     self.swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
@@ -96,10 +100,8 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGesture {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
-        BOOL isFullScreen = self.navigationController.isNavigationBarHidden;
+        self.fullScreen = !self.navigationController.isNavigationBarHidden;
         
-        [self.navigationController setNavigationBarHidden:!isFullScreen animated:YES];
-        [[UIApplication sharedApplication] setStatusBarHidden:!isFullScreen withAnimation:UIStatusBarAnimationSlide];
     }
 }
 
@@ -112,6 +114,15 @@
 - (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipeGesture {
     if (swipeGesture.state == UIGestureRecognizerStateRecognized) {
         [self previousChapterIfPossible];
+    }
+}
+
+- (void)setFullScreen:(BOOL)fullScreen {
+    if (_fullScreen != fullScreen) {
+        _fullScreen = fullScreen;
+        
+        [self.navigationController setNavigationBarHidden:fullScreen animated:YES];
+        [[UIApplication sharedApplication] setStatusBarHidden:fullScreen withAnimation:UIStatusBarAnimationSlide];
     }
 }
 
@@ -186,11 +197,34 @@
 #pragma mark - Private Methods
 
 - (NSString *)chapterContent {
-    NSString *backgroundColor = [[UIColor whiteColor] hexString];
-    NSString *textColor = [[UIColor blackColor] hexString];
-    NSNumber *fontSize = @(12);
+    NSString *backgroundColor = [[UIColor backgroundColor] hexString];
+    NSString *borderColor = [[UIColor darkGrayColor] hexString];
+    NSString *textColor = [[UIColor textColor] hexString];
+    NSString *linkColor = [[UIColor orangeColor] hexString];
+//    NSNumber *fontSize = @(kFontSizeSmall);
     
-    return [NSString stringWithFormat:@"<html><body bgcolor=\"#%@\" text=\"#%@\" size=\"%@5\">%@</body></html>", backgroundColor, textColor, fontSize, self.chapter.content];
+    NSMutableString *style = [[NSMutableString alloc] init];
+    [style appendString:@"<head><style>"];
+    //body
+    [style appendString:@"body{"];
+    [style appendString:[NSString stringWithFormat:@"background-color:#%@;",backgroundColor]];
+    [style appendString:[NSString stringWithFormat:@"border-color:#%@;",borderColor]];
+    [style appendString:[NSString stringWithFormat:@"color:#%@;",textColor]];
+//    [style appendString:[NSString stringWithFormat:@"font-size:%@;",fontSize]];
+    [style appendString:@"}"];
+    //link
+    [style appendString:@"a{"];
+    [style appendString:[NSString stringWithFormat:@"color:#%@;",linkColor]];
+    [style appendString:@"}"];
+    //table
+    [style appendString:@"table, td, th{"];
+    [style appendString:[NSString stringWithFormat:@"background-color:#%@;",backgroundColor]];
+    [style appendString:@"}"];
+    
+    [style appendString:@"</style></head>"];
+    
+    return [NSString stringWithFormat:@"<html>%@<body>%@</body></html>",style, self.chapter.content];
+//    return [NSString stringWithFormat:@"<html><body bgcolor=\"#%@\" text=\"#%@\" size=\"%@\">%@</body></html>", backgroundColor, textColor, fontSize, self.chapter.content];
 }
 
 - (void)loadChapterContent {
@@ -241,6 +275,7 @@
     if ([requestUrl containsString:@".jpg"] || [requestUrl containsString:@".png"]) {
         Image *image = [self.chapter imageForUrl:requestUrl];
         ImageViewerController *imageViewerController = [[ImageViewerController alloc] initWithImage:image];
+        self.fullScreen = NO;
         [self.navigationController pushViewController:imageViewerController animated:YES];
         return NO;
     }

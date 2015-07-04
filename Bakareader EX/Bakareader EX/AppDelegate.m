@@ -26,7 +26,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0],
-                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:16.0]}];
+                                                            NSFontAttributeName: [UIFont titleFont]}];
     
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:40 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
