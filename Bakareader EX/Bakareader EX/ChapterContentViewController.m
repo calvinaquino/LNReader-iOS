@@ -130,6 +130,8 @@
     if ([self.delegate respondsToSelector:@selector(chapterViewController:didAskForNextChapterForCurrentChapter:)]) {
         Chapter *nextChapter = [self.delegate chapterViewController:self didAskForNextChapterForCurrentChapter:self.chapter];
         if (nextChapter) {
+            [self saveProgress];
+            [CoreDataController saveContext];
             self.chapter = nextChapter;
             [self loadChapterContent];
         } else {
@@ -142,6 +144,8 @@
     if ([self.delegate respondsToSelector:@selector(chapterViewController:didAskForPreviousChapterForCurrentChapter:)]) {
         Chapter *previousChapter = [self.delegate chapterViewController:self didAskForPreviousChapterForCurrentChapter:self.chapter];
         if (previousChapter) {
+            [self saveProgress];
+            [CoreDataController saveContext];
             self.chapter = previousChapter;
             [self loadChapterContent];
         } else {

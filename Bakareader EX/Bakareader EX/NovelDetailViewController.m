@@ -54,8 +54,15 @@
     
     self.view.backgroundColor = [UIColor backgroundColor];
     
+    [self setupNavigationBar];
     [self setupHeaderView];
     [self setupTableView];
+}
+
+- (void)setupNavigationBar {
+    UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"moreWhite"] style:UIBarButtonItemStyleDone target:self action:@selector(showMoreMenu)];
+    
+    self.navigationItem.rightBarButtonItem = moreButton;
 }
 
 - (void)setupHeaderView {
@@ -148,6 +155,60 @@
 
 
 #pragma mark - Private Methods
+
+- (void)showMoreMenu {
+    __weak typeof(self) weakSelf = self;
+    BOOL isWatched = self.novel.favoriteValue;
+    BOOL canResume = self.novel.lastChapterRead != nil;
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:self.novel.title message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *resumeAction = [UIAlertAction actionWithTitle:@"Resume" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        ChaptersTableViewController *chaptersViewController = [[ChaptersTableViewController alloc] initWithVolume:weakSelf.novel.lastChapterRead.volume resume:YES];
+        chaptersViewController.delegate = weakSelf;
+        [weakSelf.navigationController pushViewController:chaptersViewController animated:YES];
+    }];
+    
+    UIAlertAction *toggleWatch = nil;
+    if (!isWatched) {
+        toggleWatch = [UIAlertAction actionWithTitle:@"Watch this novel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            weakSelf.novel.favoriteValue = YES;
+            [CoreDataController saveContext];
+        }];
+    } else {
+        toggleWatch = [UIAlertAction actionWithTitle:@"Stop watching" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            weakSelf.novel.favoriteValue = NO;
+            [CoreDataController saveContext];
+        }];
+    }
+    
+    UIAlertAction *refreshAction = [UIAlertAction actionWithTitle:@"Refresh content" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf loadNovelInfoFromInternet];
+    }];
+    
+    UIAlertAction *downloadAllAction = [UIAlertAction actionWithTitle:@"Download all volumes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        for (Volume *volume in [weakSelf.novel.volumes allObjects]) {
+            for (Chapter *chapter in [volume.chapters allObjects]) {
+                if (!chapter.fetchedValue) {
+                    [[BakaReaderDownloader sharedInstance] downloadChapter:chapter withCompletion:NULL];
+                }
+            }
+        };
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    if (canResume) {
+        [actionSheet addAction:resumeAction];
+    }
+    [actionSheet addAction:toggleWatch];
+    [actionSheet addAction:refreshAction];
+    [actionSheet addAction:downloadAllAction];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
 
 - (void)updateNovelCover {
     if (self.novel.cover) {
