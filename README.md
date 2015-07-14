@@ -19,8 +19,10 @@ For Testers (What you need, might be incomplete)
 Development Requirements
 ========================
 
+ - Xcode 6+
  - Cocoa Pods
  - AFNetworking
+ - Don't touch master branch
 
 TODO - MVP
 ==========
