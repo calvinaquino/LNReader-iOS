@@ -72,13 +72,16 @@
     if (indexPath.row == 0) {
         NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] init];
         [self.navigationController pushViewController:novelsTableViewController animated:YES];
+//        [self.splitViewController showViewController:novelsTableViewController sender:self];
     } else if (indexPath.row == 1) {
         NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initWithFavorites];
         [self.navigationController pushViewController:novelsTableViewController animated:YES];
+//        [self.splitViewController showViewController:novelsTableViewController sender:self];
     } else if (indexPath.row == 2) {
         if ([CoreDataController user].lastChapterRead != nil) {
             NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
             [self.navigationController pushViewController:novelsTableViewController animated:YES];
+//            [self.splitViewController showViewController:novelsTableViewController sender:self];
         }
     } else {
         NSString *selectedOption = self.options[indexPath.row];

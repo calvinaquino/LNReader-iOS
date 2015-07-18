@@ -16,6 +16,8 @@
 @property (nonatomic, assign, getter=isOverflowEnabled) BOOL overflowEnabled;
 @property (nonatomic, copy) void (^overflowActionBlock)(BRTableViewCell *cell);
 
+- (UIView *)viewForOverflowButton;
+
 + (NSString *)identifier;
 + (CGFloat)height;
 

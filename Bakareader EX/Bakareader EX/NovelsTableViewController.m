@@ -171,6 +171,10 @@
     [actionSheet addAction:downloadAction];
     [actionSheet addAction:cancelAction];
     
+    BRTableViewCell *cell =  (BRTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    actionSheet.popoverPresentationController.sourceView = cell.viewForOverflowButton;
+    actionSheet.popoverPresentationController.sourceRect = cell.viewForOverflowButton.frame;
+    
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
@@ -190,7 +194,8 @@
     
     NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
     novelDetailViewController.delegate = self;
-    [self.navigationController pushViewController:novelDetailViewController animated:YES];
+//    [self.navigationController pushViewController:novelDetailViewController animated:YES];
+    [self.splitViewController showDetailViewController:novelDetailViewController sender:nil];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;

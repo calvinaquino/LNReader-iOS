@@ -150,5 +150,8 @@
     }
 }
 
+- (UIView *)viewForOverflowButton {
+    return self.isOverflowEnabled ? self.overflowButton : nil;
+}
 
 @end

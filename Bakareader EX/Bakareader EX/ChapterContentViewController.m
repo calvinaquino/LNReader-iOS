@@ -42,6 +42,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveState) name:UIApplicationWillTerminateNotification object:nil];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"moreWhite"] style:UIBarButtonItemStyleDone target:self action:@selector(showActionSheet)];
+    
     self.webView = [[UIWebView alloc] init];
     self.webView.backgroundColor = [UIColor backgroundColor];
     self.webView.opaque = NO;
@@ -81,6 +83,10 @@
     [super viewWillLayoutSubviews];
     
     self.webView.frame = self.view.frame;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -199,6 +205,29 @@
 
 
 #pragma mark - Private Methods
+
+- (void)showActionSheet {
+    __weak typeof(self) weakSelf = self;
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:self.chapter.title message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *previousAction = [UIAlertAction actionWithTitle:@"Go to previous" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf previousChapterIfPossible];
+    }];
+    
+    UIAlertAction *nextAction = [UIAlertAction actionWithTitle:@"Go to next" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf nextChapterIfPossible];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [actionSheet addAction:previousAction];
+    [actionSheet addAction:nextAction];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
 
 - (NSString *)chapterContent {
     NSString *backgroundColor = [[UIColor backgroundColor] hexString];
