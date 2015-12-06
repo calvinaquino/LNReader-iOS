@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AD8A4D242C9EEAC2B81688DA7128B93047075688",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AD8A4D242C9EEAC2B81688DA7128B93047075688" : 0,
+    "DC071F3407DD5BB20DCFE047265CFE84450C6713" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3DBCD89A-57B8-4538-9A76-CB9226F1E955",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AD8A4D242C9EEAC2B81688DA7128B93047075688" : "LNReader-iOS",
+    "DC071F3407DD5BB20DCFE047265CFE84450C6713" : "LNReader-iOS\/PKRevealController"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Bakareader EX",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Bakareader EX\/Bakareader EX.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:calvinaquino\/LNReader-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AD8A4D242C9EEAC2B81688DA7128B93047075688"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/pkluz\/PKRevealController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DC071F3407DD5BB20DCFE047265CFE84450C6713"
+    }
+  ]
+}

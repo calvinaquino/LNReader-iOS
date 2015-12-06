@@ -35,6 +35,11 @@
     }
 }
 
+//- (UIImage *)imageFromDisk {
+//    NSData *imageData = [NSData dataWithContentsOfFile:self.fileUrl];
+//    return [UIImage imageWithData:imageData];
+//}
+
 + (void)saveImageData:(NSData *)imageData forImage:(Image *)image {
     [image saveImageOnDiskWithData:imageData];
 }

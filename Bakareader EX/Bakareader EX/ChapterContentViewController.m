@@ -305,7 +305,7 @@
     }
     
     //is image
-    if ([requestUrl containsString:@".jpg"] || [requestUrl containsString:@".png"]) {
+    if ([requestUrl containsString:@".jpg"] || [requestUrl containsString:@".jpeg"] || [requestUrl containsString:@".png"]) {
         Image *image = [self.chapter imageForUrl:requestUrl];
         ImageViewerController *imageViewerController = [[ImageViewerController alloc] initWithImage:image];
         self.fullScreen = NO;

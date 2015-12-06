@@ -211,7 +211,7 @@
 }
 
 - (void)updateNovelCover {
-    if (self.novel.cover) {
+    if (self.novel.cover.fileUrl && !self.novel.cover.fetchedValue) {
         __weak typeof(self) weakSelf = self;
         [self.novel.cover fetchImageIfNeededWithCompletion:^(UIImage *image) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -219,6 +219,8 @@
                 [weakSelf updateHeaderSize];
             }];
         }];
+    } else {
+        self.coverView.image = [self.novel.cover imageFromDisk];
     }
 }
 

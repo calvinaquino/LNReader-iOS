@@ -23,10 +23,10 @@ static CGFloat const kFontSizeSmall = 12.0;
 static NSString *const kNoChapterNameError = @"NO_CHAPTER_NAME_FOUND";
 
 //URLs
-static NSString *const kBTBaseUrl = @"http://www.baka-tsuki.org";
-static NSString *const kBakaTsukiBaseUrl = @"http://www.baka-tsuki.org";
-static NSString *const kBakaTsukiMainPageUrl = @"http://www.baka-tsuki.org/project/index.php?title=Main_Page";
-static NSString *const kBakaTsukiMainUrlEnglish = @"http://www.baka-tsuki.org/project/index.php?action=render&title=Category:Light_novel_(English)";
+static NSString *const kBTBaseUrl = @"https://www.baka-tsuki.org";
+static NSString *const kBakaTsukiBaseUrl = @"https://www.baka-tsuki.org";
+static NSString *const kBakaTsukiMainPageUrl = @"https://www.baka-tsuki.org/project/index.php?title=Main_Page";
+static NSString *const kBakaTsukiMainUrlEnglish = @"https://www.baka-tsuki.org/project/index.php?action=render&title=Category:Light_novel_(English)";
 
 static NSString *const kXPATHMainNovelList = @"//*[@id='mw-pages']/div/table/tr/td/ul/li";
 static NSString *const kXPATHNovelContent = @"//html/body/div[@class='mw-body']/div[@id='bodyContent']/div[@id='mw-content-text']";

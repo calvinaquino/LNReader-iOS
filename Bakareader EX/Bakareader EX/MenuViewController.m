@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "NovelsTableViewController.h"
+#import "SettingsViewController.h"
 #import "BRTableViewCell.h"
 
 @interface MenuViewController ()
@@ -75,14 +76,17 @@
 //        [self.splitViewController showViewController:novelsTableViewController sender:self];
     } else if (indexPath.row == 1) {
         NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initWithFavorites];
-        [self.navigationController pushViewController:novelsTableViewController animated:YES];
-//        [self.splitViewController showViewController:novelsTableViewController sender:self];
+//        [self.navigationController pushViewController:novelsTableViewController animated:YES];
+        [self.splitViewController showViewController:novelsTableViewController sender:self];
     } else if (indexPath.row == 2) {
         if ([CoreDataController user].lastChapterRead != nil) {
             NovelsTableViewController *novelsTableViewController = [[NovelsTableViewController alloc] initResuminngChapter];
-            [self.navigationController pushViewController:novelsTableViewController animated:YES];
-//            [self.splitViewController showViewController:novelsTableViewController sender:self];
+//            [self.navigationController pushViewController:novelsTableViewController animated:YES];
+            [self.splitViewController showViewController:novelsTableViewController sender:self];
         }
+    } else if (indexPath.row == 6) { //change to something more readable
+        SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+        [self.navigationController showViewController:settingsViewController sender:self];
     } else {
         NSString *selectedOption = self.options[indexPath.row];
         NSString *alertMessage = [NSString stringWithFormat:@"The option %@ is not yet implemented :(", selectedOption];

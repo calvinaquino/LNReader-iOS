@@ -73,7 +73,8 @@
         
         NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initResumingChapter];
         novelDetailViewController.delegate = self;
-        [self.navigationController pushViewController:novelDetailViewController animated:YES];
+        [self.splitViewController showDetailViewController:novelDetailViewController sender:self];
+        
         self.resumingChapter = NO;
     }
 }
@@ -194,8 +195,7 @@
     
     NovelDetailViewController *novelDetailViewController = [[NovelDetailViewController alloc] initWithNovel:novel];
     novelDetailViewController.delegate = self;
-//    [self.navigationController pushViewController:novelDetailViewController animated:YES];
-    [self.splitViewController showDetailViewController:novelDetailViewController sender:nil];
+    [self.splitViewController showDetailViewController:novelDetailViewController sender:self];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
@@ -218,8 +218,8 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//}
 
 //- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    __weak typeof(self) weakSelf = self;

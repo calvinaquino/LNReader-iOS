@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		980E1DF91C1420CD00FB852F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980E1DF81C1420CD00FB852F /* LaunchScreen.storyboard */; };
 		9826FEBC1AB0A1A3006719EA /* ChaptersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */; };
 		983A075119FC2F400056D0A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075019FC2F400056D0A9 /* main.m */; };
 		983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A075319FC2F400056D0A9 /* AppDelegate.m */; };
@@ -47,6 +48,7 @@
 		98D487A91B4842A5007B5EE9 /* UIFont+BakaReader_EX.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487A81B4842A5007B5EE9 /* UIFont+BakaReader_EX.m */; };
 		98D487AC1B4855EF007B5EE9 /* UIView+UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D487AB1B4855EF007B5EE9 /* UIView+UIHelper.m */; };
 		98D487B01B48686B007B5EE9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98D487AF1B48686B007B5EE9 /* Images.xcassets */; };
+		98D90D231B8A44E90078DC79 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D90D221B8A44E90078DC79 /* SettingsViewController.m */; };
 		EC563E494273D0255C2D9140 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 995CCF184DA755E2AB4291FA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		5D8EF5B06181F0D40C09702C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		980E1DF81C1420CD00FB852F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9826FEBA1AB0A1A3006719EA /* ChaptersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersTableViewController.h; sourceTree = "<group>"; };
 		9826FEBB1AB0A1A3006719EA /* ChaptersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersTableViewController.m; sourceTree = "<group>"; };
 		983A074B19FC2F400056D0A9 /* Bakareader EX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bakareader EX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +145,8 @@
 		98D487AB1B4855EF007B5EE9 /* UIView+UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UIHelper.m"; sourceTree = "<group>"; };
 		98D487AF1B48686B007B5EE9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		98D487B11B486CA3007B5EE9 /* BakaReaderTableViewCellPrivateInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BakaReaderTableViewCellPrivateInterface.h; sourceTree = "<group>"; };
+		98D90D211B8A44E90078DC79 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		98D90D221B8A44E90078DC79 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		995CCF184DA755E2AB4291FA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		99991A53F28FF1D914552F40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +221,7 @@
 		983A074E19FC2F400056D0A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				980E1DF81C1420CD00FB852F /* LaunchScreen.storyboard */,
 				98D487AF1B48686B007B5EE9 /* Images.xcassets */,
 				983A074F19FC2F400056D0A9 /* Info.plist */,
 				983A075019FC2F400056D0A9 /* main.m */,
@@ -250,6 +256,8 @@
 				98C175571AB62A6500A1737C /* Novel Detail */,
 				98C175561AB62A5200A1737C /* Chapter List */,
 				98C175551AB62A4400A1737C /* Chapter Content */,
+				98D90D211B8A44E90078DC79 /* SettingsViewController.h */,
+				98D90D221B8A44E90078DC79 /* SettingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -437,6 +445,7 @@
 				983A074819FC2F400056D0A9 /* Frameworks */,
 				983A074919FC2F400056D0A9 /* Resources */,
 				54AB84157DB2DC6A81273DDC /* Copy Pods Resources */,
+				F25205F3D7EF4729B1BFF51C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -471,11 +480,12 @@
 		983A074319FC2F400056D0A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Erakk;
 				TargetAttributes = {
 					983A074A19FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 5F35F2ZNFF;
 					};
 					983A076619FC2F400056D0A9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -508,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98D487B01B48686B007B5EE9 /* Images.xcassets in Resources */,
+				980E1DF91C1420CD00FB852F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +562,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F25205F3D7EF4729B1BFF51C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -561,6 +587,7 @@
 				985955D41B439F16007D761A /* _User.m in Sources */,
 				983A075419FC2F400056D0A9 /* AppDelegate.m in Sources */,
 				985955CB1B436FAB007D761A /* Image.m in Sources */,
+				98D90D231B8A44E90078DC79 /* SettingsViewController.m in Sources */,
 				9881F8D71A3361DB00DEC7ED /* UILabel+SizeUtils.m in Sources */,
 				98D487A31B483CE7007B5EE9 /* BRTableViewCell.m in Sources */,
 				98C1754E1AB3167900A1737C /* ChapterContentViewController.m in Sources */,
@@ -635,6 +662,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -698,6 +726,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -709,7 +738,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.erakk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -721,6 +752,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bakareader EX/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -732,7 +764,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.erakk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -751,6 +785,7 @@
 				);
 				INFOPLIST_FILE = "Bakareader EXTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.erakk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bakareader EX.app/Bakareader EX";
 			};
@@ -766,6 +801,7 @@
 				);
 				INFOPLIST_FILE = "Bakareader EXTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.erakk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bakareader EX.app/Bakareader EX";
 			};
